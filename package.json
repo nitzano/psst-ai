@@ -4,6 +4,9 @@
 	"bin": {
 		"psst-ai": "./dist/cli.js"
 	},
+	"files": [
+		"dist"		
+	],
 	"version": "0.0.0-development",
 	"author": "Nitzan Ohana <16689354+nitzano@users.noreply.github.com>",
 	"dependencies": {
