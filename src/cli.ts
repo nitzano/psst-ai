@@ -2,30 +2,7 @@
 
 import path from 'node:path';
 import process from 'node:process';
-import {logger} from './logger.js';
-
-/**
- * Scanner class to handle scanning a directory
- */
-class Scanner {
-	private readonly logger = logger.getLogger('Scanner');
-
-	/**
-	 * Constructor for Scanner
-	 * @param pathToScan Path to scan (defaults to current directory)
-	 */
-	constructor(private readonly pathToScan: string) {
-		this.logger.debug(`Scanner initialized with path: ${this.pathToScan}`);
-	}
-
-	/**
-	 * Run the scanner
-	 */
-	public async run(): Promise<void> {
-		this.logger.debug(`Scanning directory: ${this.pathToScan}`);
-		// Future implementation of scanning logic
-	}
-}
+import {Scanner} from './scanners/scanner.js';
 
 /**
  * Main function to handle CLI execution
