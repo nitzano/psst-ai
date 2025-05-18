@@ -1,7 +1,7 @@
 import {existsSync} from 'node:fs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import {Category, type Recommendation} from '../types.js';
+import {Category, type AIRule} from '../types.js';
 import {BaseScanner} from './base-scanner.js';
 
 /**
@@ -11,7 +11,7 @@ export class PackageManagerScanner extends BaseScanner {
 	/**
 	 * Scan the project to determine which package manager is used
 	 */
-	public async scan(): Promise<Recommendation[]> {
+	public async scan(): Promise<AIRule[]> {
 		this.logger.debug('Scanning for package manager');
 
 		try {
@@ -22,9 +22,7 @@ export class PackageManagerScanner extends BaseScanner {
 				return [
 					{
 						category: Category.PackageManager,
-						recommendations: [
-							`Use ${packageManagerFromJson} as the package manager.`,
-						],
+						rules: [`Use ${packageManagerFromJson} as the package manager.`],
 					},
 				];
 			}
@@ -34,7 +32,7 @@ export class PackageManagerScanner extends BaseScanner {
 				return [
 					{
 						category: Category.PackageManager,
-						recommendations: ['Use pnpm as the package manager.'],
+						rules: ['Use pnpm as the package manager.'],
 					},
 				];
 			}
@@ -43,7 +41,7 @@ export class PackageManagerScanner extends BaseScanner {
 				return [
 					{
 						category: Category.PackageManager,
-						recommendations: ['Use yarn as the package manager.'],
+						rules: ['Use yarn as the package manager.'],
 					},
 				];
 			}
@@ -52,7 +50,7 @@ export class PackageManagerScanner extends BaseScanner {
 				return [
 					{
 						category: Category.PackageManager,
-						recommendations: ['Use npm as the package manager.'],
+						rules: ['Use npm as the package manager.'],
 					},
 				];
 			}
@@ -61,7 +59,7 @@ export class PackageManagerScanner extends BaseScanner {
 			return [
 				{
 					category: Category.PackageManager,
-					recommendations: ['Use npm as the package manager.'],
+					rules: ['Use npm as the package manager.'],
 				},
 			];
 		} catch (error) {

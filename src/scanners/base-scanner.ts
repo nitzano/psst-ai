@@ -1,5 +1,5 @@
 import {logger} from '../services/logger.js';
-import type {Recommendation} from '../types.js';
+import type {AIRule} from '../types.js';
 
 /**
  * Base scanner class that all scanners should extend
@@ -20,5 +20,5 @@ export abstract class BaseScanner {
 	/**
 	 * Run the scanner and return recommendations
 	 */
-	public abstract scan(): Promise<Recommendation[]>;
+	public abstract scan(): Promise<AIRule[]>;
 }

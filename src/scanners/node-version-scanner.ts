@@ -1,6 +1,7 @@
+// Filepath: /home/nitzano/work/psst-ai/src/scanners/node-version-scanner.ts
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import {Category, type Recommendation} from '../types.js';
+import {Category, type AIRule} from '../types.js';
 import {BaseScanner} from './base-scanner.js';
 
 /**
@@ -10,7 +11,7 @@ export class NodeVersionScanner extends BaseScanner {
 	/**
 	 * Scan the project to determine which Node.js version is used
 	 */
-	public async scan(): Promise<Recommendation[]> {
+	public async scan(): Promise<AIRule[]> {
 		this.logger.debug('Scanning for Node.js version');
 
 		try {
@@ -37,7 +38,7 @@ export class NodeVersionScanner extends BaseScanner {
 					return [
 						{
 							category: Category.NodeVersion,
-							recommendations: [
+							rules: [
 								`Use Node.js version ${nodeVersion} as specified in package.json.`,
 							],
 						},
@@ -49,7 +50,7 @@ export class NodeVersionScanner extends BaseScanner {
 			return [
 				{
 					category: Category.NodeVersion,
-					recommendations: ['Use the latest LTS version of Node.js.'],
+					rules: ['Use the latest LTS version of Node.js.'],
 				},
 			];
 		} catch (error) {

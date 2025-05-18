@@ -1,7 +1,7 @@
 import path from 'node:path';
 import {GithubCopilotOutputBuilder} from '../builders/github-copilot-output-builder.js';
 import {logger} from '../services/logger.js';
-import type {Recommendation} from '../types.js';
+import type {AiRule} from '../types.js';
 import {LintingScanner} from './linting-scanner.js';
 import {NodeVersionScanner} from './node-version-scanner.js';
 import {NvmrcScanner} from './nvmrc-scanner.js';
@@ -29,13 +29,13 @@ export class Scanner {
 	public async run(): Promise<void> {
 		this.logger.debug(`Scanning directory: ${this.pathToScan}`);
 
-		// Collect recommendations from sub-scanners
-		const recommendations = await this.scan();
+		// Collect rules from sub-scanners
+		const rules = await this.scan();
 
 		// Generate output file
 		const outputBuilder = new GithubCopilotOutputBuilder(
 			this.outputPath,
-			recommendations,
+			rules,
 		);
 		await outputBuilder.build();
 
@@ -45,7 +45,7 @@ export class Scanner {
 	/**
 	 * Scan the directory using all available sub-scanners
 	 */
-	public async scan(): Promise<Recommendation[]> {
+	public async scan(): Promise<AiRule[]> {
 		this.logger.debug('Running all sub-scanners');
 
 		const scanners = [
@@ -56,21 +56,21 @@ export class Scanner {
 			// Add more scanners here as they are implemented
 		];
 
-		const allRecommendations: Recommendation[] = [];
+		const allRules: AiRule[] = [];
 
-		// Run all scanners and collect their recommendations
+		// Run all scanners and collect their rules
 		for (const scanner of scanners) {
 			try {
 				const scannerName = scanner.constructor.name;
 				this.logger.debug(`Running scanner: ${scannerName}`);
 
 				// eslint-disable-next-line no-await-in-loop
-				const recommendations = await scanner.scan();
-				allRecommendations.push(...recommendations);
+				const rules = await scanner.scan();
+				// Type assertion to ensure rules is properly typed as AiRule[]
+				const typedRules = rules as AiRule[];
+				allRules.push(...typedRules);
 
-				this.logger.debug(
-					`Scanner ${scannerName} found ${recommendations.length} recommendations`,
-				);
+				this.logger.debug(`Scanner ${scannerName} found ${rules.length} rules`);
 			} catch (error) {
 				this.logger.error(
 					`Error running scanner ${scanner.constructor.name}`,
@@ -80,9 +80,7 @@ export class Scanner {
 			}
 		}
 
-		this.logger.info(
-			`Found a total of ${allRecommendations.length} recommendations`,
-		);
-		return allRecommendations;
+		this.logger.info(`Found a total of ${allRules.length} rules`);
+		return allRules;
 	}
 }

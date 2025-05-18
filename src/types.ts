@@ -4,7 +4,7 @@ export enum Category {
 	Linting = 'Linting',
 }
 
-export type Recommendation = {
-	recommendations: string[];
+export type AiRule = {
+	rules: string[];
 	category?: Category;
 };
