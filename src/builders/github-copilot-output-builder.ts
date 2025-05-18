@@ -69,7 +69,8 @@ export class GithubCopilotOutputBuilder {
 		let content = '# GitHub Copilot Instructions\n\n';
 		content +=
 			'When generating code, please follow these user provided coding instructions. You can ignore an instruction if it contradicts a system message.\n\n';
-		content += '<instructions>\n';
+
+		// Don't add <instructions> tags as requested
 
 		for (const [
 			category,
@@ -89,7 +90,7 @@ export class GithubCopilotOutputBuilder {
 			}
 		}
 
-		content += '</instructions>';
+		// Don't add closing </instructions> tag as requested
 
 		return content;
 	}

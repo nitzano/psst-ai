@@ -11,7 +11,8 @@
 	"scripts": {
 		"dev": "tsx --watch src/cli.ts",
 		"build": "tsc",
-		"clean": "rimraf dist",
+		"clean": "rimraf dist ouput",
+		"dev:gen": "rimraf output && tsx src/cli.ts",
 		"lint": "xo",
 		"test": "vitest run",
 		"test:watch": "vitest watch",
