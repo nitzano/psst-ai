@@ -8,12 +8,6 @@ import {BaseScanner} from './base-scanner.js';
  * Scanner to detect which package manager is used in the project
  */
 export class PackageManagerScanner extends BaseScanner {
-	private readonly packageManagerFiles = {
-		npm: 'package-lock.json',
-		yarn: 'yarn.lock',
-		pnpm: 'pnpm-lock.yaml',
-	};
-
 	/**
 	 * Scan the project to determine which package manager is used
 	 */
@@ -22,51 +16,43 @@ export class PackageManagerScanner extends BaseScanner {
 
 		try {
 			// First check if package.json has packageManager field
-			const packageJsonPath = path.join(this.rootPath, 'package.json');
-			const packageJsonExists = existsSync(packageJsonPath);
-
-			if (packageJsonExists) {
-				const packageJsonContent = await fs.readFile(packageJsonPath, 'utf8');
-				const packageJson = JSON.parse(packageJsonContent) as Record<
-					string,
-					unknown
-				>;
-
-				if (
-					packageJson.packageManager &&
-					typeof packageJson.packageManager === 'string'
-				) {
-					const packageManagerName = packageJson.packageManager.split('@')[0];
-					return [
-						{
-							category: 'Package Manager',
-							recommendations: [
-								`Use ${packageManagerName} as the package manager.`,
-							],
-						},
-					];
-				}
-			}
-
-			// If no packageManager field, check for lock files
-			const lockFileEntries = Object.entries(this.packageManagerFiles);
-
-			// Check all lock files in parallel
-			const lockFileChecks = lockFileEntries.map(([managerName, lockFile]) => {
-				const lockFilePath = path.join(this.rootPath, lockFile);
-				const exists = existsSync(lockFilePath);
-				return {managerName, exists};
-			});
-
-			// Find the first lock file that exists
-			const foundManager = lockFileChecks.find((check) => check.exists);
-			if (foundManager) {
+			const packageManagerFromJson =
+				await this.getPackageManagerFromPackageJson();
+			if (packageManagerFromJson) {
 				return [
 					{
 						category: 'Package Manager',
 						recommendations: [
-							`Use ${foundManager.managerName} as the package manager.`,
+							`Use ${packageManagerFromJson} as the package manager.`,
 						],
+					},
+				];
+			}
+
+			// If no packageManager field, check for lock files
+			if (this.isPnpm()) {
+				return [
+					{
+						category: 'Package Manager',
+						recommendations: ['Use pnpm as the package manager.'],
+					},
+				];
+			}
+
+			if (this.isYarn()) {
+				return [
+					{
+						category: 'Package Manager',
+						recommendations: ['Use yarn as the package manager.'],
+					},
+				];
+			}
+
+			if (this.isNpm()) {
+				return [
+					{
+						category: 'Package Manager',
+						recommendations: ['Use npm as the package manager.'],
 					},
 				];
 			}
@@ -82,5 +68,62 @@ export class PackageManagerScanner extends BaseScanner {
 			this.logger.error('Error scanning for package manager', error);
 			return [];
 		}
+	}
+
+	/**
+	 * Check if npm is used based on lock file presence
+	 */
+	private isNpm(): boolean {
+		const lockFilePath = path.join(this.rootPath, 'package-lock.json');
+		return existsSync(lockFilePath);
+	}
+
+	/**
+	 * Check if yarn is used based on lock file presence
+	 */
+	private isYarn(): boolean {
+		const lockFilePath = path.join(this.rootPath, 'yarn.lock');
+		return existsSync(lockFilePath);
+	}
+
+	/**
+	 * Check if pnpm is used based on lock file presence
+	 */
+	private isPnpm(): boolean {
+		const lockFilePath = path.join(this.rootPath, 'pnpm-lock.yaml');
+		return existsSync(lockFilePath);
+	}
+
+	/**
+	 * Check if package.json has packageManager field and return the name
+	 */
+	private async getPackageManagerFromPackageJson(): Promise<
+		string | undefined
+	> {
+		const packageJsonPath = path.join(this.rootPath, 'package.json');
+		const packageJsonExists = existsSync(packageJsonPath);
+
+		if (!packageJsonExists) {
+			return undefined;
+		}
+
+		try {
+			const packageJsonContent = await fs.readFile(packageJsonPath, 'utf8');
+			const packageJson = JSON.parse(packageJsonContent) as Record<
+				string,
+				unknown
+			>;
+
+			if (
+				packageJson.packageManager &&
+				typeof packageJson.packageManager === 'string'
+			) {
+				return packageJson.packageManager.split('@')[0];
+			}
+		} catch (error) {
+			this.logger.error('Error reading package.json', error);
+		}
+
+		return undefined;
 	}
 }
