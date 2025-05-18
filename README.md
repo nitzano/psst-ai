@@ -103,27 +103,7 @@ Currently, psst-ai can detect:
 | Linting Tools | ESLint, XO, StandardJS |
 | Testing Frameworks | Jest, Vitest, Mocha |
 
-## 🛠️ Development
 
-psst-ai is a pure CLI tool with TypeScript support. To contribute:
-
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/psst-ai.git
-cd psst-ai
-
-# Install dependencies
-pnpm install
-
-# Run in development mode
-pnpm dev
-
-# Build the project
-pnpm build
-
-# Run the built version
-pnpm start
-```
 
 ## 📝 License
 
