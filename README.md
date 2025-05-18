@@ -1,6 +1,16 @@
 <h1 align="center">🤫 psst-ai</h1>
 <h2 align="center">Whisper AI instructions from your codebase</h2>
 
+<div align="center">
+
+[![npm](https://img.shields.io/npm/v/prisma-openapi)](https://www.npmjs.com/package/psst-ai)
+[![GitHub Repo stars](https://img.shields.io/github/stars/nitzano/psst-ai?style=flat)](https://github.com/nitzano/psst-ai/stargazers)
+![npm](https://img.shields.io/npm/dw/psst-ai)
+![GitHub License](https://img.shields.io/github/license/nitzano/psst-ai)
+[![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo)
+
+</div>
+
 
 Automatically extract coding conventions and preferences from your project and generate tailored instructions for AI code assistants like GitHub Copilot, Cursor, and more.
 
