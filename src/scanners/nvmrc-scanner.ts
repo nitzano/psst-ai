@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import {Category, type Recommendation} from '../types.js';
+import {Category, type AiRule} from '../types.js';
 import {BaseScanner} from './base-scanner.js';
 
 /**
@@ -10,7 +10,7 @@ export class NvmrcScanner extends BaseScanner {
 	/**
 	 * Scan the project to determine if .nvmrc is used
 	 */
-	public async scan(): Promise<Recommendation[]> {
+	public async scan(): Promise<AiRule[]> {
 		this.logger.debug('Scanning for .nvmrc file');
 
 		try {
@@ -22,7 +22,7 @@ export class NvmrcScanner extends BaseScanner {
 				return [
 					{
 						category: Category.NodeVersion,
-						recommendations: [
+						rules: [
 							`Use the nodejs version specified in the .nvmrc file (${nodeVersion}).`,
 						],
 					},
