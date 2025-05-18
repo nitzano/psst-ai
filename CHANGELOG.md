@@ -1,5 +1,11 @@
 # psst-ai
 
+## 1.0.2
+
+### Patch Changes
+
+- af794d3: docs
+
 ## 1.0.1
 
 ### Patch Changes
