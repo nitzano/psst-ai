@@ -24,7 +24,7 @@ export class Scanner {
 	}
 
 	/**
-	 * Run the scanner
+	 * Run the scanner and write output to file
 	 */
 	public async run(): Promise<void> {
 		this.logger.debug(`Scanning directory: ${this.pathToScan}`);
@@ -40,6 +40,24 @@ export class Scanner {
 		await outputBuilder.build();
 
 		this.logger.info('Scan completed successfully');
+	}
+
+	/**
+	 * Run the scanner and return the formatted output content
+	 */
+	public async getOutput(): Promise<string> {
+		this.logger.debug(`Scanning directory: ${this.pathToScan}`);
+
+		// Collect rules from sub-scanners
+		const rules = await this.scan();
+
+		// Generate output content
+		const outputBuilder = new GithubCopilotOutputBuilder(
+			this.outputPath,
+			rules,
+		);
+
+		return outputBuilder.generateOutputContent();
 	}
 
 	/**

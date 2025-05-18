@@ -34,7 +34,12 @@ async function main(): Promise<void> {
 	cliLogger.info(`Starting scan of directory: ${absolutePath}`);
 
 	const scanner = new Scanner(absolutePath);
-	await scanner.run();
+	const output = await scanner.getOutput();
+
+	// Print the output to the console
+	console.log('\n--- 🤫 psst-ai Generated Instructions ---\n');
+	console.log(output);
+	console.log('\n--- End of Generated Instructions ---\n');
 
 	cliLogger.info('Scan completed');
 }

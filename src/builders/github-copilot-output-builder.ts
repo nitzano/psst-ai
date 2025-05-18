@@ -49,8 +49,9 @@ export class GithubCopilotOutputBuilder {
 
 	/**
 	 * Generate the content for the output file
+	 * @returns Formatted markdown content with recommendations
 	 */
-	private generateOutputContent(): string {
+	public generateOutputContent(): string {
 		// Group recommendations by category
 		const categorizedRecommendations = new Map<string, string[]>();
 
