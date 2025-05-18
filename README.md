@@ -63,11 +63,11 @@ npx psst-ai /path/to/your/project
 That's it! The tool will:
 1. Scan your project files and configuration
 2. Detect coding conventions and preferences 
-3. Generate an `output/copilot-instructions.md` file with AI-ready instructions
+3. Print the AI-ready instructions directly to your terminal
 
 ## 📄 Generated Instructions Format
 
-After running the tool, you'll get a markdown file with clear instructions based on your project's conventions:
+After running the tool, you'll see instructions printed to your terminal based on your project's conventions:
 
 ```markdown
 ## Package Manager
@@ -85,7 +85,7 @@ Use vitest testing framework.
 
 ## 🔧 How to Use the Generated Instructions
 
-1. **Copy** the contents of `.github/copilot-instructions.md`
+1. **Copy** the output from your terminal
 2. **Paste** into your AI assistant's instructions panel:
    - GitHub Copilot: Chat instructions
    - Cursor: Workspace instructions
