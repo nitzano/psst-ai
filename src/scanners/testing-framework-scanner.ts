@@ -211,6 +211,43 @@ export class TestingFrameworkScanner extends BaseScanner {
 	}
 
 	/**
+	 * Detect frameworks from a test script command
+	 */
+	private detectFrameworksFromScript(
+		scriptValue: string,
+		detectedFrameworks: string[],
+	): void {
+		// Check if script contains any of our known test frameworks
+		for (const framework of this.testFrameworks) {
+			if (framework.name === 'chai' || framework.name === 'supertest') {
+				// Skip assertion libraries, they wouldn't be in scripts
+				continue;
+			}
+
+			if (
+				scriptValue.includes(framework.name) &&
+				!detectedFrameworks.includes(framework.name)
+			) {
+				this.logger.debug(`Detected ${framework.name} from test script`);
+				detectedFrameworks.push(framework.name);
+			}
+		}
+
+		// Match against some common test runner command patterns
+		if (/ts-jest/i.test(scriptValue) && !detectedFrameworks.includes('jest')) {
+			detectedFrameworks.push('jest');
+		}
+
+		if (
+			/tsx?-node-test/i.test(scriptValue) &&
+			!detectedFrameworks.includes('node:test')
+		) {
+			// Node.js built-in test runner
+			detectedFrameworks.push('node:test');
+		}
+	}
+
+	/**
 	 * Check test scripts in package.json for testing framework clues
 	 */
 	private async checkTestScripts(detectedFrameworks: string[]): Promise<void> {
@@ -240,43 +277,14 @@ export class TestingFrameworkScanner extends BaseScanner {
 						key === 'test' || key.includes('test:') || key.startsWith('test'),
 				);
 
+				// Process each test script
 				for (const scriptKey of testScriptKeys) {
 					const scriptValue = scripts[scriptKey];
 					this.logger.debug(
 						`Found test script: ${scriptKey} -> ${scriptValue}`,
 					);
 
-					// Check if script contains any of our known test frameworks
-					for (const framework of this.testFrameworks) {
-						if (framework.name === 'chai' || framework.name === 'supertest') {
-							// Skip assertion libraries, they wouldn't be in scripts
-							continue;
-						}
-
-						if (
-							scriptValue.includes(framework.name) &&
-							!detectedFrameworks.includes(framework.name)
-						) {
-							this.logger.debug(`Detected ${framework.name} from test script`);
-							detectedFrameworks.push(framework.name);
-						}
-					}
-
-					// Match against some common test runner command patterns
-					if (
-						/ts-jest/i.test(scriptValue) &&
-						!detectedFrameworks.includes('jest')
-					) {
-						detectedFrameworks.push('jest');
-					}
-
-					if (
-						/tsx?-node-test/i.test(scriptValue) &&
-						!detectedFrameworks.includes('node:test')
-					) {
-						// Node.js built-in test runner
-						detectedFrameworks.push('node:test');
-					}
+					this.detectFrameworksFromScript(scriptValue, detectedFrameworks);
 				}
 			}
 		} catch (error) {
