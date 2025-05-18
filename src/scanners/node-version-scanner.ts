@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import type {Recommendation} from '../types.js';
+import {Category, type Recommendation} from '../types.js';
 import {BaseScanner} from './base-scanner.js';
 
 /**
@@ -21,7 +21,7 @@ export class NodeVersionScanner extends BaseScanner {
 				const nodeVersion = nvmrcContent.trim();
 				return [
 					{
-						category: 'Node.js Version',
+						category: Category.NodeVersion,
 						recommendations: [
 							`Use the nodejs version specified in the .nvmrc file (${nodeVersion}).`,
 						],
@@ -49,7 +49,7 @@ export class NodeVersionScanner extends BaseScanner {
 
 					return [
 						{
-							category: 'Node.js Version',
+							category: Category.NodeVersion,
 							recommendations: [
 								`Use Node.js version ${nodeVersion} as specified in package.json.`,
 							],
@@ -61,7 +61,7 @@ export class NodeVersionScanner extends BaseScanner {
 			// If no version specified, recommend using LTS
 			return [
 				{
-					category: 'Node.js Version',
+					category: Category.NodeVersion,
 					recommendations: ['Use the latest LTS version of Node.js.'],
 				},
 			];

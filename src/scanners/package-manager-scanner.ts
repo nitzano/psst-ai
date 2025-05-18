@@ -1,7 +1,7 @@
 import {existsSync} from 'node:fs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import type {Recommendation} from '../types.js';
+import {Category, type Recommendation} from '../types.js';
 import {BaseScanner} from './base-scanner.js';
 
 /**
@@ -21,7 +21,7 @@ export class PackageManagerScanner extends BaseScanner {
 			if (packageManagerFromJson) {
 				return [
 					{
-						category: 'Package Manager',
+						category: Category.PackageManager,
 						recommendations: [
 							`Use ${packageManagerFromJson} as the package manager.`,
 						],
@@ -33,7 +33,7 @@ export class PackageManagerScanner extends BaseScanner {
 			if (this.isPnpm()) {
 				return [
 					{
-						category: 'Package Manager',
+						category: Category.PackageManager,
 						recommendations: ['Use pnpm as the package manager.'],
 					},
 				];
@@ -42,7 +42,7 @@ export class PackageManagerScanner extends BaseScanner {
 			if (this.isYarn()) {
 				return [
 					{
-						category: 'Package Manager',
+						category: Category.PackageManager,
 						recommendations: ['Use yarn as the package manager.'],
 					},
 				];
@@ -51,7 +51,7 @@ export class PackageManagerScanner extends BaseScanner {
 			if (this.isNpm()) {
 				return [
 					{
-						category: 'Package Manager',
+						category: Category.PackageManager,
 						recommendations: ['Use npm as the package manager.'],
 					},
 				];
@@ -60,7 +60,7 @@ export class PackageManagerScanner extends BaseScanner {
 			// If no lock file found, assume npm
 			return [
 				{
-					category: 'Package Manager',
+					category: Category.PackageManager,
 					recommendations: ['Use npm as the package manager.'],
 				},
 			];
