@@ -1,3 +1,4 @@
+import {existsSync} from 'node:fs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import type {Recommendation} from '../types.js';
@@ -22,7 +23,7 @@ export class PackageManagerScanner extends BaseScanner {
 		try {
 			// First check if package.json has packageManager field
 			const packageJsonPath = path.join(this.rootPath, 'package.json');
-			const packageJsonExists = await this.fileExists(packageJsonPath);
+			const packageJsonExists = existsSync(packageJsonPath);
 
 			if (packageJsonExists) {
 				const packageJsonContent = await fs.readFile(packageJsonPath, 'utf8');
@@ -51,13 +52,11 @@ export class PackageManagerScanner extends BaseScanner {
 			const lockFileEntries = Object.entries(this.packageManagerFiles);
 
 			// Check all lock files in parallel
-			const lockFileChecks = await Promise.all(
-				lockFileEntries.map(async ([managerName, lockFile]) => {
-					const lockFilePath = path.join(this.rootPath, lockFile);
-					const exists = await this.fileExists(lockFilePath);
-					return {managerName, exists};
-				}),
-			);
+			const lockFileChecks = lockFileEntries.map(([managerName, lockFile]) => {
+				const lockFilePath = path.join(this.rootPath, lockFile);
+				const exists = existsSync(lockFilePath);
+				return {managerName, exists};
+			});
 
 			// Find the first lock file that exists
 			const foundManager = lockFileChecks.find((check) => check.exists);
@@ -82,18 +81,6 @@ export class PackageManagerScanner extends BaseScanner {
 		} catch (error) {
 			this.logger.error('Error scanning for package manager', error);
 			return [];
-		}
-	}
-
-	/**
-	 * Helper method to check if a file exists
-	 */
-	private async fileExists(filePath: string): Promise<boolean> {
-		try {
-			await fs.access(filePath);
-			return true;
-		} catch {
-			return false;
 		}
 	}
 }
