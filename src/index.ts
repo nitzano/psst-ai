@@ -1,1 +1,1 @@
-export const helo = "world";
+export const helo = 'world';
