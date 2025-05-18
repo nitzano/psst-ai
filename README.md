@@ -105,6 +105,3 @@ Currently, psst-ai can detect:
 
 
 
-## 📝 License
-
-AGPL
