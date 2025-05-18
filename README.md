@@ -1,5 +1,5 @@
 <h1 align="center">🤫 psst-ai</h1>
-<h2 align="center">Whisper AI instructions from your codebase</h2>
+<h2 align="center"> Whisper AI code instructions from codebase to editor</h2>
 
 <div align="center">
 
