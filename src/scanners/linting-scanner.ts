@@ -1,7 +1,7 @@
 import {existsSync} from 'node:fs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import {Category, type Recommendation} from '../types.js';
+import {Category, type AiRule} from '../types.js';
 import {BaseScanner} from './base-scanner.js';
 
 /**
@@ -11,7 +11,7 @@ export class LintingScanner extends BaseScanner {
 	/**
 	 * Scan the project to determine which linting tool is used
 	 */
-	public async scan(): Promise<Recommendation[]> {
+	public async scan(): Promise<AiRule[]> {
 		this.logger.debug('Scanning for linting tools');
 
 		try {
@@ -20,7 +20,7 @@ export class LintingScanner extends BaseScanner {
 				return [
 					{
 						category: Category.Linting,
-						recommendations: ['Use xo for linting.'],
+						rules: ['Use xo for linting.'],
 					},
 				];
 			}
@@ -30,7 +30,7 @@ export class LintingScanner extends BaseScanner {
 				return [
 					{
 						category: Category.Linting,
-						recommendations: ['Use eslint for linting.'],
+						rules: ['Use eslint for linting.'],
 					},
 				];
 			}
@@ -40,7 +40,7 @@ export class LintingScanner extends BaseScanner {
 				return [
 					{
 						category: Category.Linting,
-						recommendations: ['Use tslint for linting.'],
+						rules: ['Use tslint for linting.'],
 					},
 				];
 			}
