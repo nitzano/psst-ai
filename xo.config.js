@@ -18,6 +18,7 @@ const xoConfig = {
 	// Disable specific rules
 	rules: {
 		'@typescript-eslint/consistent-type-assertions': 'warn',
+		"@typescript-eslint/no-unsafe-assignment": 'warn',
 	},
 };
 
