@@ -6,6 +6,7 @@ export {GithubCopilotOutputBuilder} from './builders/github-copilot-output-build
 
 // Export scanners
 export {BaseScanner} from './scanners/base-scanner.js';
+export {LintingScanner} from './scanners/linting-scanner.js';
 export {NodeVersionScanner} from './scanners/node-version-scanner.js';
 export {PackageManagerScanner} from './scanners/package-manager-scanner.js';
 export {Scanner} from './scanners/scanner.js';
