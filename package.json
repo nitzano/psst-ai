@@ -1,8 +1,9 @@
 {
 	"name": "psst-ai",
 	"type": "module",
-	"exports": "./dist/index.js",
-	"types": "./dist/index.d.ts",
+	"bin": {
+		"psst-ai": "./dist/cli.js"
+	},
 	"version": "0.0.0-development",
 	"author": "Nitzan Ohana <16689354+nitzano@users.noreply.github.com>",
 	"dependencies": {
@@ -17,7 +18,8 @@
 		"test": "vitest run",
 		"test:watch": "vitest watch",
 		"test:coverage": "vitest run --coverage",
-		"prepare": "husky"
+		"prepare": "husky",
+		"start": "node dist/cli.js"
 	},
 	"lint-staged": {
 		"*.ts": "xo --fix"

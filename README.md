@@ -19,6 +19,7 @@ Automatically extract coding conventions and preferences from your project and g
 - **Consistency**: Ensure all team members give the same instructions to AI assistants
 - **Time Saver**: Automatically detect project conventions without manual effort
 - **Project Onboarding**: Help new team members understand coding standards through AI
+- **Lightweight & Fast**: Focused CLI design means quick installation and execution
 
 ## 📦 Installation
 
@@ -33,12 +34,9 @@ npm install -g psst-ai
 yarn global add psst-ai
 ```
 
-## 🚀 Quick Start
+## 🚀 Usage
 
 ```bash
-# Install globally
-pnpm add -g psst-ai
-
 # Run in your project root directory
 psst-ai
 
@@ -51,9 +49,9 @@ That's it! The tool will:
 2. Detect coding conventions and preferences 
 3. Generate an `output/copilot-instructions.md` file with AI-ready instructions
 
-## 📄 Generated Instructions
+## 📄 Generated Instructions Format
 
-After running the tool, you'll get a markdown file with clear instructions based on your project:
+After running the tool, you'll get a markdown file with clear instructions based on your project's conventions:
 
 ```markdown
 ## Package Manager
@@ -69,7 +67,7 @@ Use xo for linting.
 Use vitest testing framework.
 ```
 
-### How to Use the Generated Instructions
+## 🔧 How to Use the Generated Instructions
 
 1. **Copy** the contents of `output/copilot-instructions.md`
 2. **Paste** into your AI assistant's instructions panel:
@@ -88,6 +86,45 @@ Currently, psst-ai can detect:
 | Node.js Versions | From .nvmrc file |
 | Linting Tools | ESLint, XO, StandardJS |
 | Testing Frameworks | Jest, Vitest, Mocha |
+
+## 🛠️ Development
+
+psst-ai is a pure CLI tool with TypeScript support. To contribute:
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/psst-ai.git
+cd psst-ai
+
+# Install dependencies
+pnpm install
+
+# Run in development mode
+pnpm dev
+
+# Build the project
+pnpm build
+
+# Run the built version
+pnpm start
+```
+
+## 🧪 Advanced Usage: Programmatic Access
+
+While psst-ai is primarily designed as a CLI tool, you can also import its components for advanced use cases:
+
+```typescript
+// Import the scanner
+import { Scanner } from 'psst-ai/dist/cli.js';
+
+// Create a scanner instance
+const scanner = new Scanner('/path/to/project');
+
+// Run the scanner
+await scanner.run();
+```
+
+This can be useful for integrating psst-ai into your own tools or workflows.
 
 ## 📝 License
 
