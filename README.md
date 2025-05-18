@@ -1,6 +1,6 @@
-# 🤫 psst-ai
+<h1 align="center">🤫 psst-ai</h1>
+<h2 align="center">Whisper AI instructions from your codebase</h2>
 
-> CLI tool that generates AI instructions from your codebase
 
 Automatically extract coding conventions and preferences from your project and generate tailored instructions for AI code assistants like GitHub Copilot, Cursor, and more.
 
@@ -12,7 +12,8 @@ Automatically extract coding conventions and preferences from your project and g
 - 🧹 **Recognizes Linting Tools**: Detects ESLint, XO, and other linting configurations
 - 🧪 **Identifies Testing Frameworks**: Recognizes Jest, Vitest, and other testing setups
 - 📝 **Generates Instructions**: Creates a markdown file with AI-ready instructions
-
+- And more...
+- 
 ## 💡 Why Use psst-ai?
 
 - **No More Repetition**: Stop typing the same instructions every time you chat with AI
@@ -69,7 +70,7 @@ Use vitest testing framework.
 
 ## 🔧 How to Use the Generated Instructions
 
-1. **Copy** the contents of `output/copilot-instructions.md`
+1. **Copy** the contents of `.github/copilot-instructions.md`
 2. **Paste** into your AI assistant's instructions panel:
    - GitHub Copilot: Chat instructions
    - Cursor: Workspace instructions
@@ -108,23 +109,6 @@ pnpm build
 # Run the built version
 pnpm start
 ```
-
-## 🧪 Advanced Usage: Programmatic Access
-
-While psst-ai is primarily designed as a CLI tool, you can also import its components for advanced use cases:
-
-```typescript
-// Import the scanner
-import { Scanner } from 'psst-ai/dist/cli.js';
-
-// Create a scanner instance
-const scanner = new Scanner('/path/to/project');
-
-// Run the scanner
-await scanner.run();
-```
-
-This can be useful for integrating psst-ai into your own tools or workflows.
 
 ## 📝 License
 
