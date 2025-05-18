@@ -70,7 +70,7 @@ export class GithubCopilotOutputBuilder {
 			}
 		}
 
-		// Create plain text format without markdown headers
+		// Create markdown format with headers for each category
 		let content = '';
 
 		// Don't add <instructions> tags as requested
@@ -83,9 +83,16 @@ export class GithubCopilotOutputBuilder {
 			const uniqueRecommendations = [...new Set(recommendations)];
 
 			if (uniqueRecommendations.length > 0) {
+				// Add category header
+				content += `## ${category}\n`;
+
+				// Add each recommendation under the category
 				for (const recommendation of uniqueRecommendations) {
-					content += `${recommendation}\n\n`;
+					content += `${recommendation}\n`;
 				}
+
+				// Add an extra newline after each category
+				content += '\n';
 			}
 		}
 
