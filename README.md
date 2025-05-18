@@ -7,7 +7,6 @@
 [![GitHub Repo stars](https://img.shields.io/github/stars/nitzano/psst-ai?style=flat)](https://github.com/nitzano/psst-ai/stargazers)
 ![npm](https://img.shields.io/npm/dw/psst-ai)
 ![GitHub License](https://img.shields.io/github/license/nitzano/psst-ai)
-[![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo)
 
 </div>
 
