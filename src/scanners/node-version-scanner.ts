@@ -14,20 +14,7 @@ export class NodeVersionScanner extends BaseScanner {
 		this.logger.debug('Scanning for Node.js version');
 
 		try {
-			// Check for .nvmrc file
-			const nvmrcPath = path.join(this.rootPath, '.nvmrc');
-			if (await this.fileExists(nvmrcPath)) {
-				const nvmrcContent = await fs.readFile(nvmrcPath, 'utf8');
-				const nodeVersion = nvmrcContent.trim();
-				return [
-					{
-						category: Category.NodeVersion,
-						recommendations: [
-							`Use the nodejs version specified in the .nvmrc file (${nodeVersion}).`,
-						],
-					},
-				];
-			}
+			// Note: .nvmrc check is now handled by NvmrcScanner
 
 			// Check package.json for engines field
 			const packageJsonPath = path.join(this.rootPath, 'package.json');

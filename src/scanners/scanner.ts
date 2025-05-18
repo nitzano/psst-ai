@@ -4,6 +4,7 @@ import {logger} from '../services/logger.js';
 import type {Recommendation} from '../types.js';
 import {LintingScanner} from './linting-scanner.js';
 import {NodeVersionScanner} from './node-version-scanner.js';
+import {NvmrcScanner} from './nvmrc-scanner.js';
 import {PackageManagerScanner} from './package-manager-scanner.js';
 
 /**
@@ -50,6 +51,7 @@ export class Scanner {
 		const scanners = [
 			new PackageManagerScanner(this.pathToScan),
 			new NodeVersionScanner(this.pathToScan),
+			new NvmrcScanner(this.pathToScan),
 			new LintingScanner(this.pathToScan),
 			// Add more scanners here as they are implemented
 		];
