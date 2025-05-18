@@ -1,5 +1,5 @@
 // Export types
-export type {Recommendation} from './types.js';
+export type {AiRule, Category} from './types.js';
 
 // Export builders
 export {GithubCopilotOutputBuilder} from './builders/github-copilot-output-builder.js';
