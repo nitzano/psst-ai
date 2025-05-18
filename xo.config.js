@@ -8,17 +8,27 @@ const xoConfig = {
 	extensions: ['ts'],
 	// Ignore the compiled output
 	ignores: ['dist'],
-	// Configure TypeScript parser
-	parser: '@typescript-eslint/parser',
-	parserOptions: {
-		ecmaVersion: 'latest',
-		sourceType: 'module',
-	},
-	plugins: ['@typescript-eslint'],
-	// Disable specific rules
+	// Configure TypeScript parser and options for TS files
+	overrides: [
+		{
+			files: ['**/*.ts'],
+			parser: '@typescript-eslint/parser',
+			parserOptions: {
+				ecmaVersion: 'latest',
+				sourceType: 'module',
+				project: './tsconfig.json',
+			},
+			plugins: ['@typescript-eslint'],
+			// TypeScript-specific rules
+			rules: {
+				'@typescript-eslint/consistent-type-assertions': 'warn',
+				'@typescript-eslint/no-unsafe-assignment': 'warn',
+			},
+		},
+	],
+	// Global rules (applied to both JS and TS)
 	rules: {
-		'@typescript-eslint/consistent-type-assertions': 'warn',
-		"@typescript-eslint/no-unsafe-assignment": 'warn',
+		'max-depth': ['warn', 4],
 	},
 };
 
