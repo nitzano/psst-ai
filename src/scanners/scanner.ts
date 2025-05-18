@@ -4,7 +4,6 @@ import {logger} from '../services/logger.js';
 import type {AiRule} from '../types.js';
 import {LintingScanner} from './linting-scanner.js';
 import {NodeVersionScanner} from './node-version-scanner.js';
-import {NvmrcScanner} from './nvmrc-scanner.js';
 import {PackageManagerScanner} from './package-manager-scanner.js';
 
 /**
@@ -51,7 +50,6 @@ export class Scanner {
 		const scanners = [
 			new PackageManagerScanner(this.pathToScan),
 			new NodeVersionScanner(this.pathToScan),
-			new NvmrcScanner(this.pathToScan),
 			new LintingScanner(this.pathToScan),
 			// Add more scanners here as they are implemented
 		];
@@ -67,7 +65,7 @@ export class Scanner {
 				// eslint-disable-next-line no-await-in-loop
 				const rules = await scanner.scan();
 				// Type assertion to ensure rules is properly typed as AiRule[]
-				const typedRules = rules as AiRule[];
+				const typedRules = rules;
 				allRules.push(...typedRules);
 
 				this.logger.debug(`Scanner ${scannerName} found ${rules.length} rules`);
