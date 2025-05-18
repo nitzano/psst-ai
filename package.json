@@ -5,6 +5,12 @@
 	"bin": {
 		"psst-ai": "./dist/cli.js"
 	},
+	"keywords": [
+		"ai",
+		"github copilot",
+		"copilot",
+		"cursor"
+	],
 	"files": [
 		"dist"
 	],
