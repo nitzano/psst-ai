@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {logger} from '../services/logger.js';
-import type {Recommendation} from '../types.js';
+import type {AiRule} from '../types.js';
 
 /**
  * Builder class to generate GitHub Copilot instructions from recommendations
@@ -16,7 +16,7 @@ export class GithubCopilotOutputBuilder {
 	 */
 	constructor(
 		private readonly outputPath: string,
-		private readonly recommendations: Recommendation[],
+		private readonly recommendations: AiRule[],
 	) {
 		this.logger.debug(
 			`GithubCopilotOutputBuilder initialized with ${recommendations.length} recommendations`,
@@ -60,9 +60,14 @@ export class GithubCopilotOutputBuilder {
 				categorizedRecommendations.set(category, []);
 			}
 
-			categorizedRecommendations
-				.get(category)
-				?.push(...recommendation.recommendations);
+			// Ensure recommendation.rules is an array before spreading
+			if (Array.isArray(recommendation.rules)) {
+				categorizedRecommendations.get(category)?.push(...recommendation.rules);
+			} else {
+				this.logger.warn(
+					`Skipping recommendation with invalid rules: ${JSON.stringify(recommendation)}`,
+				);
+			}
 		}
 
 		// Create plain text format without markdown headers

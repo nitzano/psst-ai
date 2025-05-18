@@ -1,7 +1,7 @@
 // Filepath: /home/nitzano/work/psst-ai/src/scanners/node-version-scanner.ts
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import {Category, type AIRule} from '../types.js';
+import {Category, type AiRule} from '../types.js';
 import {BaseScanner} from './base-scanner.js';
 
 /**
@@ -11,7 +11,7 @@ export class NodeVersionScanner extends BaseScanner {
 	/**
 	 * Scan the project to determine which Node.js version is used
 	 */
-	public async scan(): Promise<AIRule[]> {
+	public async scan(): Promise<AiRule[]> {
 		this.logger.debug('Scanning for Node.js version');
 
 		try {
