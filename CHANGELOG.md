@@ -1,5 +1,11 @@
 # psst-ai
 
+## 1.0.1
+
+### Patch Changes
+
+- d304a45: added keywords to docs
+
 ## 1.0.0
 
 ### Major Changes
