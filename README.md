@@ -22,7 +22,7 @@ Automatically extract coding conventions and preferences from your project and g
 - 🧪 **Identifies Testing Frameworks**: Recognizes Jest, Vitest, and other testing setups
 - 📝 **Generates Instructions**: Creates a markdown file with AI-ready instructions
 - And more...
-- 
+
 ## 💡 Why Use psst-ai?
 
 - **No More Repetition**: Stop typing the same instructions every time you chat with AI
@@ -31,7 +31,7 @@ Automatically extract coding conventions and preferences from your project and g
 - **Project Onboarding**: Help new team members understand coding standards through AI
 - **Lightweight & Fast**: Focused CLI design means quick installation and execution
 
-## 📦 Installation
+## 📦 Setup
 
 ```bash
 # Install globally with pnpm (recommended)
@@ -47,11 +47,17 @@ yarn global add psst-ai
 ## 🚀 Usage
 
 ```bash
-# Run in your project root directory
-psst-ai
+# Run using npx without installing
+npx psst-ai
 
-# Or specify a custom directory to scan
-psst-ai /path/to/your/project
+# Or with pnpm
+pnpm dlx psst-ai
+
+# Or with yarn
+yarn dlx psst-ai
+
+# Specify a custom directory to scan
+npx psst-ai /path/to/your/project
 ```
 
 That's it! The tool will:
