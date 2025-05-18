@@ -22,7 +22,8 @@
 		"test:watch": "vitest watch",
 		"test:coverage": "vitest run --coverage",
 		"prepare": "husky",
-		"start": "node dist/cli.js"
+		"start": "node dist/cli.js",
+		"ver": "changeset version"
 	},
 	"lint-staged": {
 		"*.ts": "xo --fix"
