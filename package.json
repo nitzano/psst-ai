@@ -1,6 +1,7 @@
 {
 	"name": "psst-ai",
 	"type": "module",
+	"repository": "git@github.com:nitzano/psst-ai.git",
 	"bin": {
 		"psst-ai": "./dist/cli.js"
 	},
