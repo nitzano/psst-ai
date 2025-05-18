@@ -294,43 +294,17 @@ export class TestingFrameworkScanner extends BaseScanner {
 
 		const rules: string[] = [];
 
-		// Main testing framework recommendation
+		// Main testing framework detection
 		const mainFramework = this.getMainTestingFramework(detectedFrameworks);
 		if (mainFramework) {
-			rules.push(`Use ${mainFramework} for testing.`);
+			rules.push(`Use ${mainFramework} testing framework.`);
 		}
 
-		// Additional recommendations based on specific frameworks
-		if (detectedFrameworks.includes('jest')) {
-			rules.push(
-				'Write tests with the describe/it pattern.',
-				"Use Jest's snapshot testing for UI components.",
-			);
-		} else if (detectedFrameworks.includes('mocha')) {
-			if (detectedFrameworks.includes('chai')) {
-				rules.push(
-					'Write tests with the describe/it pattern.',
-					'Use chai for assertions in mocha tests.',
-				);
-			} else {
-				rules.push('Write tests with the describe/it pattern.');
+		// Report all detected testing frameworks
+		for (const framework of detectedFrameworks) {
+			if (framework !== mainFramework) {
+				rules.push(`Detected testing tool: ${framework}`);
 			}
-		} else if (detectedFrameworks.includes('vitest')) {
-			rules.push(
-				'Write tests with the describe/it pattern.',
-				"Use vitest's built-in snapshot capabilities.",
-			);
-		}
-
-		// UI testing specific recommendations
-		if (
-			detectedFrameworks.includes('cypress') ||
-			detectedFrameworks.includes('playwright')
-		) {
-			const uiTestFramework = detectedFrameworks.includes('cypress')
-				? 'Cypress'
-				: 'Playwright';
-			rules.push(`Use ${uiTestFramework} for end-to-end testing.`);
 		}
 
 		return [
