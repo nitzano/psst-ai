@@ -65,7 +65,7 @@ export class GithubCopilotOutputBuilder {
 				?.push(...recommendation.recommendations);
 		}
 
-		// Convert to markdown format
+		// Create plain text format without markdown headers
 		let content = '';
 
 		// Don't add <instructions> tags as requested
@@ -78,15 +78,14 @@ export class GithubCopilotOutputBuilder {
 			const uniqueRecommendations = [...new Set(recommendations)];
 
 			if (uniqueRecommendations.length > 0) {
-				content += `## ${category}\n`;
-
 				for (const recommendation of uniqueRecommendations) {
-					content += `${recommendation}\n`;
+					content += `${recommendation}\n\n`;
 				}
-
-				content += '\n';
 			}
 		}
+
+		// Trim trailing whitespace
+		content = content.trim();
 
 		// Don't add closing </instructions> tag as requested
 
