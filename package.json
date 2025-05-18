@@ -8,7 +8,7 @@
 	"files": [
 		"dist"
 	],
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"author": "Nitzan Ohana <16689354+nitzano@users.noreply.github.com>",
 	"dependencies": {
 		"winston": "^3.17.0"

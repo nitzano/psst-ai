@@ -1,5 +1,11 @@
 # psst-ai
 
+## 1.0.0
+
+### Major Changes
+
+- 3fc8517: bump major
+
 ## 0.0.1
 
 ### Patch Changes
