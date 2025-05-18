@@ -66,9 +66,7 @@ export class GithubCopilotOutputBuilder {
 		}
 
 		// Convert to markdown format
-		let content = '# GitHub Copilot Instructions\n\n';
-		content +=
-			'When generating code, please follow these user provided coding instructions. You can ignore an instruction if it contradicts a system message.\n\n';
+		let content = '';
 
 		// Don't add <instructions> tags as requested
 
