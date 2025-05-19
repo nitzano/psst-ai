@@ -17,6 +17,7 @@
 	"version": "1.0.2",
 	"author": "Nitzan Ohana <16689354+nitzano@users.noreply.github.com>",
 	"dependencies": {
+		"commander": "^14.0.0",
 		"winston": "^3.17.0"
 	},
 	"scripts": {
