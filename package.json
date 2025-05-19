@@ -2,6 +2,7 @@
 	"name": "psst-ai",
 	"type": "module",
 	"repository": "git@github.com:nitzano/psst-ai.git",
+	"license": "AGPL-3.0-only",
 	"bin": {
 		"psst-ai": "./dist/cli.js"
 	},
