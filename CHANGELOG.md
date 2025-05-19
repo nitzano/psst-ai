@@ -1,5 +1,11 @@
 # psst-ai
 
+## 1.0.3
+
+### Patch Changes
+
+- d2e4fe0: use cli lib instead of manual
+
 ## 1.0.2
 
 ### Patch Changes
