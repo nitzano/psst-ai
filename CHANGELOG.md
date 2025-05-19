@@ -1,5 +1,11 @@
 # psst-ai
 
+## 1.0.4
+
+### Patch Changes
+
+- c4ee14e: fix license
+
 ## 1.0.3
 
 ### Patch Changes
