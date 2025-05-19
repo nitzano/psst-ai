@@ -21,7 +21,8 @@
 		"winston": "^3.17.0"
 	},
 	"scripts": {
-		"dev": "tsx --watch src/cli.ts",
+		"dev": "tsx src/cli.ts",
+		"dev:watch": "pnpm run dev -- --watch",
 		"build": "tsc",
 		"clean": "rimraf dist ouput",
 		"dev:gen": "rimraf output && tsx src/cli.ts",
