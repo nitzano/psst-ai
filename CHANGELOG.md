@@ -1,5 +1,19 @@
 # psst-ai
 
+## 1.1.0
+
+### Minor Changes
+
+- 07f2ae1: added prettier scanner
+- ccc45c7: allow to use magic placeholers in rule files
+
+### Patch Changes
+
+- 895793e: fix rules for editors
+- ad24fa2: changes rules to be singular instead of plural
+- 23ecefe: add -f flag to flat rules without any categories
+- 97a33ad: sort categories alphabetically
+
 ## 1.0.4
 
 ### Patch Changes
