@@ -23,17 +23,19 @@
 	},
 	"scripts": {
 		"dev": "tsx src/cli.ts",
+		"dev:gen": "rimraf output && tsx src/cli.ts",
 		"dev:watch": "pnpm run dev -- --watch",
 		"build": "tsc",
 		"clean": "rimraf dist ouput",
-		"dev:gen": "rimraf output && tsx src/cli.ts",
 		"lint": "xo",
+		"lint:fix": "xo --fix",
 		"test": "vitest run",
 		"test:watch": "vitest watch",
 		"test:coverage": "vitest run --coverage",
 		"prepare": "husky",
 		"start": "node dist/cli.js",
-		"ver": "changeset"
+		"ver": "changeset",
+		"psst": "pnpm run dev"
 	},
 	"lint-staged": {
 		"*.ts": "xo --fix"

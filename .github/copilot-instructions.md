@@ -1,7 +1,7 @@
 ## General Guidelines
 
 - Use pnpm as the package manager.
-- Run xo to lint the codese with pnpm lint
+- Run xo to lint the codese with pnpm lint:fix
 - Use the nodejs version specified in the .nvmrc file.
 - Use async/await for asynchronous operations.
 - Use named exports for functions and classes.

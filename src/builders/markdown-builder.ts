@@ -75,10 +75,11 @@ export class MarkdownBuilder {
 	): string {
 		let content = '';
 
-		for (const [
-			category,
-			recommendations,
-		] of categorizedRecommendations.entries()) {
+		// Sort categories alphabetically
+		const sortedCategories = [...categorizedRecommendations.keys()].sort();
+
+		for (const category of sortedCategories) {
+			const recommendations = categorizedRecommendations.get(category) ?? [];
 			// Add unique recommendations (avoid duplicates)
 			const uniqueRecommendations = [...new Set(recommendations)];
 
