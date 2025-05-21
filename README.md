@@ -69,7 +69,7 @@ npx psst-ai --editor github
 - `-q, --quiet` - Suppress console output
 - `-v, --verbose` - Show verbose output
 - `--no-header` - Flatten output without category headers
-- `-e, --editor <type>` - Generate or update instructions for specific editor (vscode, cursor, windsurf, github)
+- `-f, --file <path>` - Load file with sections to update
 
 That's it! The tool will:
 1. Scan your project files and configuration
@@ -104,15 +104,9 @@ Use vitest testing framework.
    - VS Code AI Assistant: Custom instructions
    - Other AI coding tools: Custom prompts section
 
-### Method 2: Automatic Editor Integration
-You can use psst-ai to automatically update editor-specific instruction files:
+### Method 2: Automatic File Updates
 
-```bash
-# Update GitHub Copilot instructions
-npx psst-ai --editor github
-```
-
-Insert the start and end tags `<!-- PSST-AI-INSTRUCTIONS-START -->` and `<!-- PSST-AI-INSTRUCTIONS-END -->` in your `.github/copilot-instructions.md` file, and psst-ai will replace the content between these tags with the generated instructions.
+Insert the start and end tags `<!-- PSST-AI-INSTRUCTIONS-START -->` and `<!-- PSST-AI-INSTRUCTIONS-END -->` in your instruction file, and psst-ai will replace the content between these tags with the generated instructions.
 
 ```markdown
 # Coding Guidelines for This Project
@@ -125,7 +119,26 @@ Insert the start and end tags `<!-- PSST-AI-INSTRUCTIONS-START -->` and `<!-- PS
 ...
 ```
 
-Support for other editors (vscode, cursor, windsurf) will be added in future updates.
+## 🧰 Editors Integration
+
+
+### VSCode
+For VS Code's GitHub Copilot Chat, place your instructions file in `.github/copilot-instructions.md` and run:
+```bash
+npx psst-ai -f ./.github/copilot-instructions.md
+```
+
+### Cursor
+For Cursor AI, place your instructions file in `.cursor/rules/ai-instructions.mdc` and run:
+```bash
+npx psst-ai -f ./.cursor/ai-settings.json
+```
+
+### Windsurf
+For Windsurf AI, place your instructions file in `.windsurf/rules/ai-instructions.md` and run:
+```bash
+npx psst-ai -f ./.windsurf/ai-instructions.md
+```
 
 ## 🧩 What's Detected?
 
