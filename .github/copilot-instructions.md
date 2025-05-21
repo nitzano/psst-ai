@@ -10,6 +10,7 @@
 - Use PascalCase for enum names and snake_case for enum values.
 
 ## Typescript
+
 - Prefer implements over extends
 
 ## Scanners
@@ -27,4 +28,5 @@
 - Examples folder name should start with the scanner name and should be in lowercase
 - Each scanner can have more than one example codebase
 
-<!-- PSST-AI-INSTRUCTIONS -->
+<!-- PSST-AI-INSTRUCTIONS-START -->
+<!-- PSST-AI-INSTRUCTIONS-END -->
