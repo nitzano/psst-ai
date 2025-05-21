@@ -6,6 +6,8 @@
 - Use async/await for asynchronous operations.
 - Use named exports for functions and classes.
 - Add tests in a tests directory relative to the file being tested.
+- Place every enum in a separate file.
+- Use PascalCase for enum names and snake_case for enum values.
 
 ## Scanners
 
