@@ -4,6 +4,7 @@ import {Category} from '../types.js';
  * Maps each Category enum value to its display title
  */
 const categoryDisplayTitles: Record<Category, string> = {
+	[Category.General]: 'General Guidelines',
 	[Category.Prettier]: 'Prettier',
 	[Category.PackageManager]: 'Package Manager',
 	[Category.NodeVersion]: 'Node Version',

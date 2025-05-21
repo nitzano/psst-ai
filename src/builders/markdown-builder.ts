@@ -1,5 +1,5 @@
 import {logger} from '../services/logger.js';
-import type {AiRule} from '../types.js';
+import {Category, type AiRule} from '../types.js';
 import {formatCategoryTitle} from '../utils/category-formatter.js';
 
 /**
@@ -38,10 +38,8 @@ export class MarkdownBuilder {
 		const categorizedRecommendations = new Map<string, string[]>();
 
 		for (const recommendation of this.recommendations) {
-			const categoryValue = recommendation.category ?? 'general';
-			const displayCategory = recommendation.category
-				? formatCategoryTitle(recommendation.category)
-				: 'General';
+			const categoryValue = recommendation.category ?? Category.General;
+			const displayCategory = formatCategoryTitle(categoryValue);
 
 			if (!categorizedRecommendations.has(displayCategory)) {
 				categorizedRecommendations.set(displayCategory, []);
