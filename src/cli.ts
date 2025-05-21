@@ -73,7 +73,7 @@ export class CliHandler {
 			.option('-o, --output <path>', 'Save output to a file')
 			.option('-q, --quiet', 'Suppress console output')
 			.option('-v, --verbose', 'Show verbose output')
-			.option('-f, --flat', 'Flatten output without category headers')
+			.option('--no-header', 'Flatten output without category headers')
 			.option(
 				'-e, --editor <type>',
 				`Generate or update instructions for specific editor (${Object.values(EditorType).join(', ')})`,
@@ -106,7 +106,7 @@ export class CliHandler {
 			}
 
 			const scanner = new CodebaseScanner(absolutePath);
-			const output = await scanner.getOutput(validatedOptions?.flat);
+			const output = await scanner.getOutput(!validatedOptions?.header);
 
 			// Print the output to the console if not in quiet mode
 			if (!validatedOptions?.quiet) {

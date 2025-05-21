@@ -35,12 +35,12 @@ export class VscodeBuilder extends AiRuleBuilder implements RuleDetector {
 
 	/**
 	 * Generate output content as markdown
-	 * @param flat If true, flatten the output without categories
+	 * @param noHeader If true, flatten the output without category headers
 	 * @returns Formatted markdown string
 	 */
-	public generateOutputContent(flat?: boolean): string {
+	public generateOutputContent(noHeader?: boolean): string {
 		const markdownBuilder = new MarkdownBuilder(this.recommendations);
-		return markdownBuilder.buildMarkdown(flat);
+		return markdownBuilder.buildMarkdown(noHeader);
 	}
 
 	/**

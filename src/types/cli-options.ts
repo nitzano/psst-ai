@@ -22,7 +22,7 @@ export type CliOptions = {
 	output?: string;
 	quiet?: boolean;
 	verbose?: boolean;
-	flat?: boolean;
+	header?: boolean;
 	editor?: EditorType | undefined;
 };
 
@@ -33,7 +33,7 @@ export const cliOptionsSchema = z.object({
 	output: z.string().optional(),
 	quiet: z.boolean().optional(),
 	verbose: z.boolean().optional(),
-	flat: z.boolean().optional(),
+	header: z.boolean().optional(),
 	editor: editorTypeSchema,
 });
 

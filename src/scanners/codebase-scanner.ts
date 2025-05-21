@@ -42,9 +42,9 @@ export class CodebaseScanner {
 
 	/**
 	 * Run the scanner and return the formatted output content
-	 * @param flat If true, flatten the output without categories
+	 * @param noHeader If true, flatten the output without category headers
 	 */
-	public async getOutput(flat?: boolean): Promise<string> {
+	public async getOutput(noHeader?: boolean): Promise<string> {
 		this.logger.debug(`Scanning directory: ${this.pathToScan}`);
 
 		// Collect rules from sub-scanners
@@ -53,7 +53,7 @@ export class CodebaseScanner {
 		// Generate output content
 		const outputBuilder = new VscodeBuilder(this.outputPath, rules);
 
-		return outputBuilder.generateOutputContent(flat);
+		return outputBuilder.generateOutputContent(noHeader);
 	}
 
 	/**

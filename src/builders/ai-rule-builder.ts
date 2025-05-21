@@ -43,10 +43,10 @@ export abstract class AiRuleBuilder {
 
 	/**
 	 * Generate the output content for the output file
-	 * @param flat If true, flatten the output without categories
+	 * @param noHeader If true, flatten the output without category headers
 	 * @returns Formatted output content with recommendations
 	 */
-	public abstract generateOutputContent(flat?: boolean): string;
+	public abstract generateOutputContent(noHeader?: boolean): string;
 
 	/**
 	 * Update file instructions by replacing content between start and end tags

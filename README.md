@@ -68,7 +68,7 @@ npx psst-ai --editor github
 - `-o, --output <path>` - Save output to a file
 - `-q, --quiet` - Suppress console output
 - `-v, --verbose` - Show verbose output
-- `-f, --flat` - Flatten output without category headers
+- `--no-header` - Flatten output without category headers
 - `-e, --editor <type>` - Generate or update instructions for specific editor (vscode, cursor, windsurf, github)
 
 That's it! The tool will:

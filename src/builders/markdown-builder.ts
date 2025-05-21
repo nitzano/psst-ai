@@ -34,11 +34,11 @@ export class MarkdownBuilder {
 
 	/**
 	 * Build markdown content from the recommendations
-	 * @param flat If true, all rules will be flattened without category headers
+	 * @param noHeader If true, all rules will be flattened without category headers
 	 * @returns Formatted markdown string
 	 */
-	public buildMarkdown(flat?: boolean): string {
-		if (flat) {
+	public buildMarkdown(noHeader?: boolean): string {
+		if (noHeader) {
 			return this.formatFlatMarkdown();
 		}
 
@@ -52,10 +52,10 @@ export class MarkdownBuilder {
 	/**
 	 * Insert markdown content between start and end tags in an existing file
 	 * @param fileContent Original file content
-	 * @param flat If true, flatten the output without categories
+	 * @param noHeader If true, flatten the output without category headers
 	 * @returns File content with recommendations inserted between tags
 	 */
-	public insertBetweenTags(fileContent: string, flat?: boolean): string {
+	public insertBetweenTags(fileContent: string, noHeader?: boolean): string {
 		const startIndex = fileContent.indexOf(this.startTag);
 		const endIndex = fileContent.indexOf(this.endTag);
 
@@ -64,7 +64,7 @@ export class MarkdownBuilder {
 			return fileContent;
 		}
 
-		const markdownContent = this.buildMarkdown(flat);
+		const markdownContent = this.buildMarkdown(noHeader);
 
 		return (
 			fileContent.slice(0, startIndex + this.startTag.length) +
