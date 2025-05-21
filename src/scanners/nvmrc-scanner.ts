@@ -22,9 +22,7 @@ export class NvmrcScanner extends BaseScanner {
 				return [
 					{
 						category: Category.NodeVersion,
-						rules: [
-							`Use the nodejs version specified in the .nvmrc file (${nodeVersion}).`,
-						],
+						rule: `Use the nodejs version specified in the .nvmrc file (${nodeVersion}).`,
 					},
 				];
 			}
