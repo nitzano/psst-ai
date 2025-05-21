@@ -106,7 +106,10 @@ export class CliHandler {
 				const markdownBuilder = new MarkdownBuilder(rules);
 
 				// Update the specified file with AI instructions
-				await markdownBuilder.updateFileInstructions(filePath);
+				await markdownBuilder.updateFileInstructions(
+					filePath,
+					!validatedOptions?.header,
+				);
 
 				if (validatedOptions?.verbose) {
 					cliLogger.info(`Updated AI instructions in file: ${filePath}`);

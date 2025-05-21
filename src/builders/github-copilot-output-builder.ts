@@ -55,9 +55,13 @@ export class VscodeBuilder extends AiRuleBuilder implements RuleDetector {
 	 * Update GitHub Copilot instructions in .github/copilot-instructions.md file
 	 * by replacing the content between start and end tags with generated content
 	 * @param projectPath The absolute path to the project
+	 * @param noHeader If true, flatten the output without category headers
 	 * @returns Promise that resolves when the file is updated or rejects with an error
 	 */
-	public async updateGitHubInstructions(projectPath: string): Promise<void> {
+	public async updateGitHubInstructions(
+		projectPath: string,
+		noHeader?: boolean,
+	): Promise<void> {
 		try {
 			const githubFilePath = path.join(
 				projectPath,
@@ -70,7 +74,7 @@ export class VscodeBuilder extends AiRuleBuilder implements RuleDetector {
 				await fs.access(githubFilePath);
 
 				// Update file using the parent class method
-				await this.updateFileInstructions(githubFilePath);
+				await this.updateFileInstructions(githubFilePath, noHeader);
 
 				this.logger.info(
 					`Updated GitHub Copilot instructions at ${githubFilePath}`,

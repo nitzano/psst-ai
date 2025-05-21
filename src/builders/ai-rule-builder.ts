@@ -51,8 +51,12 @@ export abstract class AiRuleBuilder {
 	/**
 	 * Update file instructions by replacing content between start and end tags
 	 * @param filePath Path to the file to update
+	 * @param noHeader If true, flatten the output without category headers
 	 */
-	protected async updateFileInstructions(filePath: string): Promise<void> {
+	protected async updateFileInstructions(
+		filePath: string,
+		noHeader?: boolean,
+	): Promise<void> {
 		try {
 			// Read the file
 			const fileContent = await fs.readFile(filePath, 'utf8');
@@ -67,7 +71,7 @@ export abstract class AiRuleBuilder {
 			}
 
 			// Generate the new content
-			const contentToInsert = this.generateOutputContent(true);
+			const contentToInsert = this.generateOutputContent(noHeader);
 
 			// Build the new file content
 			const newContent =

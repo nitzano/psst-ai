@@ -83,8 +83,12 @@ export class MarkdownBuilder {
 	/**
 	 * Update file instructions by replacing content between start and end tags
 	 * @param filePath Path to the file to update
+	 * @param noHeader If true, flatten the output without category headers
 	 */
-	public async updateFileInstructions(filePath: string): Promise<void> {
+	public async updateFileInstructions(
+		filePath: string,
+		noHeader?: boolean,
+	): Promise<void> {
 		try {
 			// Read the file
 			const fileContent = await fs.readFile(filePath, 'utf8');
@@ -98,8 +102,8 @@ export class MarkdownBuilder {
 				return;
 			}
 
-			// Generate the new content (flatten the output without category headers)
-			const contentToInsert = this.buildMarkdown(true);
+			// Generate the new content with optional headers
+			const contentToInsert = this.buildMarkdown(noHeader);
 
 			// Build the new file content
 			const newContent =
