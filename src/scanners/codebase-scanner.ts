@@ -2,11 +2,11 @@ import path from 'node:path';
 import {GithubCopilotOutputBuilder} from '../builders/github-copilot-output-builder.js';
 import {logger} from '../services/logger.js';
 import type {AiRule} from '../types.js';
+import {TestingFrameworkScanner} from './base/testers/testing-framework-scanner.js';
 import {LintingScanner} from './linters/linting-scanner.js';
 import {NodeVersionScanner} from './node-version-scanner.js';
 import {PackageManagerScanner} from './package-manager-scanner.js';
 import {PrettierScanner} from './prettier-scanner.js';
-import {TestingFrameworkScanner} from './testing-framework-scanner.js';
 
 /**
  * Scanner class to handle scanning a directory
