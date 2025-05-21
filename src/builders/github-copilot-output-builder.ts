@@ -3,6 +3,7 @@ import path from 'node:path';
 import {logger} from '../services/logger.js';
 import type {AiRule} from '../types.js';
 import {formatCategoryTitle} from '../utils/category-formatter.js';
+import {MarkdownBuilder} from './markdown-builder.js';
 
 /**
  * Builder class to generate GitHub Copilot instructions from recommendations
@@ -53,62 +54,8 @@ export class GithubCopilotOutputBuilder {
 	 * @returns Formatted markdown content with recommendations
 	 */
 	public generateOutputContent(): string {
-		// Group recommendations by category
-		const categorizedRecommendations = new Map<string, string[]>();
-
-		for (const recommendation of this.recommendations) {
-			const categoryValue = recommendation.category ?? 'general';
-			const displayCategory = recommendation.category
-				? formatCategoryTitle(recommendation.category)
-				: 'General';
-
-			if (!categorizedRecommendations.has(displayCategory)) {
-				categorizedRecommendations.set(displayCategory, []);
-			}
-
-			// Add the individual rule to the recommendations
-			if (recommendation.rule) {
-				categorizedRecommendations
-					.get(displayCategory)
-					?.push(recommendation.rule);
-			} else {
-				this.logger.warn(
-					`Skipping recommendation with missing rule: ${JSON.stringify(recommendation)}`,
-				);
-			}
-		}
-
-		// Create markdown format with headers for each category
-		let content = '';
-
-		// Don't add <instructions> tags as requested
-
-		for (const [
-			category,
-			recommendations,
-		] of categorizedRecommendations.entries()) {
-			// Add unique recommendations (avoid duplicates)
-			const uniqueRecommendations = [...new Set(recommendations)];
-
-			if (uniqueRecommendations.length > 0) {
-				// Add category header with a blank line after it
-				content += `## ${category}\n\n`;
-
-				// Add each recommendation as a bullet point under the category
-				for (const recommendation of uniqueRecommendations) {
-					content += `- ${recommendation}\n`;
-				}
-
-				// Add an extra newline after each category
-				content += '\n';
-			}
-		}
-
-		// Trim trailing whitespace
-		content = content.trim();
-
-		// Don't add closing </instructions> tag as requested
-
-		return content;
+		// Use the MarkdownBuilder to generate the output content
+		const markdownBuilder = new MarkdownBuilder(this.recommendations);
+		return markdownBuilder.buildMarkdown();
 	}
 }
