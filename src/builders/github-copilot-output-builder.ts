@@ -1,33 +1,13 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import {logger} from '../services/logger.js';
 import type {AiRule} from '../types.js';
+import {AiRuleBuilder} from './ai-rule-builder.js';
 import {MarkdownBuilder} from './markdown-builder.js';
 
 /**
  * Builder class to generate GitHub Copilot instructions from recommendations
  */
-export class GithubCopilotOutputBuilder {
-	private readonly logger = logger.getLogger('GithubCopilotOutputBuilder');
-
-	private get magicPlaceholder() {
-		return '<!-- PSST-AI-INSTRUCTIONS -->';
-	}
-
-	/**
-	 * Constructor for GithubCopilotOutputBuilder
-	 * @param outputPath Path to output directory
-	 * @param recommendations List of recommendations collected from scanners
-	 */
-	constructor(
-		private readonly outputPath: string,
-		private readonly recommendations: AiRule[],
-	) {
-		this.logger.debug(
-			`GithubCopilotOutputBuilder initialized with ${recommendations.length} recommendations`,
-		);
-	}
-
+export class GithubCopilotOutputBuilder extends AiRuleBuilder {
 	/**
 	 * Build the output file with all recommendations
 	 */
@@ -46,8 +26,8 @@ export class GithubCopilotOutputBuilder {
 			await fs.writeFile(outputFilePath, outputContent, 'utf8');
 
 			this.logger.info(`Copilot instructions written to ${outputFilePath}`);
-		} catch (error) {
-			this.logger.error('Error building copilot instructions', error);
+		} catch (error: unknown) {
+			this.logger.error('Error building copilot instructions', error as Error);
 			throw error;
 		}
 	}
@@ -104,15 +84,18 @@ export class GithubCopilotOutputBuilder {
 						`Magic placeholder "${this.magicPlaceholder}" not found in ${githubFilePath}`,
 					);
 				}
-			} catch (error) {
+			} catch (error: unknown) {
 				this.logger.warn(
 					`Could not process GitHub Copilot instructions at ${githubFilePath}`,
-					error,
+					error as Error,
 				);
 				throw error;
 			}
-		} catch (error) {
-			this.logger.error(`Error updating GitHub Copilot instructions`, error);
+		} catch (error: unknown) {
+			this.logger.error(
+				`Error updating GitHub Copilot instructions`,
+				error as Error,
+			);
 			throw error;
 		}
 	}
