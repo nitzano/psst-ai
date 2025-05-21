@@ -125,28 +125,27 @@ export class PrettierScanner extends BaseScanner {
 		configFile: string | undefined,
 		hasDependency: boolean,
 	): AiRule[] {
-		const rules: string[] = [];
+		const recommendations: AiRule[] = [];
 
 		// Only add rules directly related to Prettier configuration
 		if (configFile && hasDependency) {
-			rules.push(
-				'Use Prettier for code formatting.',
-				`Prettier configuration found in: ${configFile}`,
+			recommendations.push(
+				{
+					category: Category.Prettier,
+					rule: 'Use Prettier for code formatting.',
+				},
+				{
+					category: Category.Prettier,
+					rule: `Prettier configuration found in: ${configFile}`,
+				},
 			);
 		} else if (hasDependency) {
-			rules.push('Use Prettier for code formatting.');
-		}
-
-		// If no rules were generated, don't return anything
-		if (rules.length === 0) {
-			return [];
-		}
-
-		return [
-			{
+			recommendations.push({
 				category: Category.Prettier,
-				rules,
-			},
-		];
+				rule: 'Use Prettier for code formatting.',
+			});
+		}
+
+		return recommendations;
 	}
 }
