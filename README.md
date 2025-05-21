@@ -22,6 +22,8 @@
   - [VSCode](#vscode)
   - [Cursor](#cursor)
   - [Windsurf](#windsurf)
+- [Command Options](#command-options)
+- [🧩 What's Detected?](#-whats-detected)
 
 
 
@@ -133,14 +135,14 @@ npx psst-ai -f ./.github/copilot-instructions.md
 ### Cursor
 For Cursor AI, place your instructions file in `.cursor/rules/ai-instructions.mdc` and run:
 ```bash
-npx psst-ai -f ./.cursor/ai-settings.json
+npx psst-ai -f ./.cursor/rules/ai-instructions.json
 ```
 
 ### Windsurf
 For Windsurf AI, place your instructions file in `.windsurf/rules/ai-instructions.md` and run:
 ```bash
 npx psst-ai -f ./.windsurf/ai-instructions.md
-
+```
 
 ## Command Options
 
