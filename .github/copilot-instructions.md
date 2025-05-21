@@ -11,6 +11,9 @@ Use named exports for functions and classes.
 - Each Scanner can contain to multiple categories, if needed add more enums to Category enums
 - Nest similar scanners in a folder
 - Scanners should be direct to what they do, and not be too generic
+
+## Examples
+
 - For every scanner, create example codebase in the `examples` directory
 - Examples folder name should start with the scanner name and should be in lowercase
 - Each scanner can have more than one example codebase
