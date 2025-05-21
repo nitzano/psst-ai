@@ -1,0 +1,12 @@
+{
+  "name": "example-prettier",
+  "version": "1.0.0",
+  "description": "Example project with Prettier configuration",
+  "main": "index.js",
+  "scripts": {
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "prettier": "^3.0.0"
+  }
+}

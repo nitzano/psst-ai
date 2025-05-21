@@ -36,20 +36,13 @@ export class PrettierScanner extends BaseScanner {
 			// Check if Prettier is a dependency
 			const hasDependency = await this.hasPrettierDependency();
 
-			// Check for integration with other tools
-			const integrations = await this.checkIntegrations();
-
 			// If no Prettier configuration found, don't return any recommendation
 			if (!configFile && !hasDependency) {
 				return [];
 			}
 
 			// Generate recommendations based on the findings
-			return this.generateRecommendations(
-				configFile,
-				hasDependency,
-				integrations,
-			);
+			return this.generateRecommendations(configFile, hasDependency);
 		} catch (error) {
 			this.logger.error('Error scanning for Prettier configuration', error);
 			return [];
@@ -81,7 +74,7 @@ export class PrettierScanner extends BaseScanner {
 			}
 		}
 
-		return null;
+		return undefined;
 	}
 
 	/**
@@ -109,81 +102,27 @@ export class PrettierScanner extends BaseScanner {
 	}
 
 	/**
-	 * Check for integrations with other tools (ESLint, etc.)
-	 */
-	private async checkIntegrations(): Promise<string[]> {
-		const integrations: string[] = [];
-		const packageJsonPath = path.join(this.rootPath, 'package.json');
-
-		if (existsSync(packageJsonPath)) {
-			try {
-				const packageJsonContent = await fs.readFile(packageJsonPath, 'utf8');
-				const packageJson = JSON.parse(packageJsonContent);
-
-				const allDependencies = {
-					...packageJson.dependencies,
-					...packageJson.devDependencies,
-				};
-
-				// Check for ESLint integration
-				if (
-					'eslint-plugin-prettier' in allDependencies ||
-					'eslint-config-prettier' in allDependencies
-				) {
-					integrations.push('eslint');
-				}
-
-				// Check for Stylelint integration
-				if ('stylelint-config-prettier' in allDependencies) {
-					integrations.push('stylelint');
-				}
-			} catch (error) {
-				this.logger.error('Error parsing package.json', error);
-			}
-		}
-
-		return integrations;
-	}
-
-	/**
 	 * Generate recommendations based on Prettier findings
 	 */
 	private generateRecommendations(
 		configFile: string | undefined,
 		hasDependency: boolean,
-		integrations: string[],
 	): AiRule[] {
 		const rules: string[] = [];
 
-		// Main rule about using Prettier
-		rules.push('Use Prettier for code formatting.');
-
-		// Add specific configuration file info if found
-		if (configFile) {
-			rules.push(`Prettier configuration found in: ${configFile}`);
+		// Only add rules directly related to Prettier configuration
+		if (configFile && hasDependency) {
+			rules.push(
+				'Use Prettier for code formatting.',
+				`Prettier configuration found in: ${configFile}`,
+			);
 		} else if (hasDependency) {
-			// If we have the dependency but no config, suggest adding a config
-			rules.push('Add a Prettier configuration file like .prettierrc.');
+			rules.push('Use Prettier for code formatting.');
 		}
 
-		// Mention integrations
-		if (integrations.length > 0) {
-			rules.push(`Prettier is integrated with: ${integrations.join(', ')}.`);
-		}
-
-		// If using ESLint but no integration found, suggest adding it
-		if (!integrations.includes('eslint')) {
-			const eslintConfigPath = path.join(this.rootPath, '.eslintrc');
-			const hasEslint =
-				existsSync(eslintConfigPath) ||
-				existsSync(path.join(this.rootPath, '.eslintrc.js')) ||
-				existsSync(path.join(this.rootPath, '.eslintrc.json'));
-
-			if (hasEslint) {
-				rules.push(
-					'Consider adding eslint-config-prettier to avoid conflicts between ESLint and Prettier.',
-				);
-			}
+		// If no rules were generated, don't return anything
+		if (rules.length === 0) {
+			return [];
 		}
 
 		return [
