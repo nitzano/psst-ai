@@ -2,10 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {logger} from '../services/logger.js';
 import type {AiRule} from '../types.js';
-import {
-	formatCategoryTitle,
-	formatToDisplayTitle,
-} from '../utils/category-formatter.js';
+import {formatCategoryTitle} from '../utils/category-formatter.js';
 
 /**
  * Builder class to generate GitHub Copilot instructions from recommendations
@@ -94,12 +91,12 @@ export class GithubCopilotOutputBuilder {
 			const uniqueRecommendations = [...new Set(recommendations)];
 
 			if (uniqueRecommendations.length > 0) {
-				// Add category header
-				content += `## ${category}\n`;
+				// Add category header with a blank line after it
+				content += `## ${category}\n\n`;
 
-				// Add each recommendation under the category
+				// Add each recommendation as a bullet point under the category
 				for (const recommendation of uniqueRecommendations) {
-					content += `${recommendation}\n`;
+					content += `- ${recommendation}\n`;
 				}
 
 				// Add an extra newline after each category
