@@ -1,3 +1,4 @@
+import fs from 'node:fs/promises';
 import {logger} from '../services/logger.js';
 import {Category, type AiRule} from '../types.js';
 import {formatCategoryTitle} from '../utils/category-formatter.js';
@@ -25,8 +26,12 @@ export class MarkdownBuilder {
 	/**
 	 * Constructor for MarkdownBuilder
 	 * @param recommendations List of recommendations collected from scanners
+	 * @param outputPath Optional output path
 	 */
-	constructor(private readonly recommendations: AiRule[]) {
+	constructor(
+		private readonly recommendations: AiRule[],
+		private readonly outputPath = '',
+	) {
 		this.logger.debug(
 			`MarkdownBuilder initialized with ${recommendations.length} recommendations`,
 		);
@@ -73,6 +78,45 @@ export class MarkdownBuilder {
 			'\n' +
 			fileContent.slice(endIndex)
 		);
+	}
+
+	/**
+	 * Update file instructions by replacing content between start and end tags
+	 * @param filePath Path to the file to update
+	 */
+	public async updateFileInstructions(filePath: string): Promise<void> {
+		try {
+			// Read the file
+			const fileContent = await fs.readFile(filePath, 'utf8');
+
+			// Find the start and end tags
+			const startIndex = fileContent.indexOf(this.startTag);
+			const endIndex = fileContent.indexOf(this.endTag);
+
+			if (startIndex === -1 || endIndex === -1) {
+				this.logger.warn(`Could not find start or end tags in ${filePath}`);
+				return;
+			}
+
+			// Generate the new content (flatten the output without category headers)
+			const contentToInsert = this.buildMarkdown(true);
+
+			// Build the new file content
+			const newContent =
+				fileContent.slice(0, startIndex + this.startTag.length) +
+				'\n' +
+				contentToInsert +
+				'\n' +
+				fileContent.slice(endIndex);
+
+			// Write the updated content back to the file
+			await fs.writeFile(filePath, newContent, 'utf8');
+
+			this.logger.info(`Updated AI instructions in ${filePath}`);
+		} catch (error: unknown) {
+			this.logger.error(`Error updating file instructions`, error as Error);
+			throw error;
+		}
 	}
 
 	/**

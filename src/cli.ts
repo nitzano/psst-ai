@@ -3,14 +3,13 @@
 import path from 'node:path';
 import process from 'node:process';
 import {Command} from 'commander';
-import {VscodeBuilder} from './builders/github-copilot-output-builder.js';
 import {CodebaseScanner} from './scanners/codebase-scanner.js';
 import {logger} from './services/logger.js';
 import {packageInfo} from './services/package-info.js';
-import {type CliOptions, EditorType, validateCliOptions} from './types.js';
+import {type CliOptions, validateCliOptions} from './types.js';
+import {MarkdownBuilder} from './builders/markdown-builder.js';
 
 // Export types (for programmatic access when installed as dependency)
-export {EditorType} from './types.js';
 export type {AiRule, Category, CliOptions} from './types.js';
 
 // Export builders
@@ -68,10 +67,7 @@ export class CliHandler {
 			.option('-q, --quiet', 'Suppress console output')
 			.option('-v, --verbose', 'Show verbose output')
 			.option('--no-header', 'Flatten output without category headers')
-			.option(
-				'-e, --editor <type>',
-				`Generate or update instructions for specific editor (${Object.values(EditorType).join(', ')})`,
-			)
+			.option('-f, --file <path>', 'File path to update with AI instructions')
 			.action(async (directory?: string, options?: CliOptions) => {
 				await this.runScan(directory, options);
 			});
@@ -100,33 +96,42 @@ export class CliHandler {
 			}
 
 			const scanner = new CodebaseScanner(absolutePath);
-			const output = await scanner.getOutput(!validatedOptions?.header);
 
-			// Print the output to the console if not in quiet mode
-			if (!validatedOptions?.quiet) {
-				console.log('\n--- 🤫 psst-ai Generated Instructions ---\n');
-				console.log(output);
-				console.log('\n--- End of Generated Instructions ---\n');
-			}
+			// If file option is specified, update that file with AI instructions
+			if (validatedOptions?.file) {
+				const rules = await scanner.scan();
+				const filePath = path.resolve(validatedOptions.file);
 
-			// Save output to file if specified
-			if (validatedOptions?.output) {
-				const fs = await import('node:fs/promises');
-				const outputPath = path.resolve(validatedOptions.output);
-				await fs.writeFile(outputPath, output, 'utf8');
+				// Create a markdown builder for the rules
+				const markdownBuilder = new MarkdownBuilder(rules);
+
+				// Update the specified file with AI instructions
+				await markdownBuilder.updateFileInstructions(filePath);
 
 				if (validatedOptions?.verbose) {
-					cliLogger.info(`Output saved to: ${outputPath}`);
+					cliLogger.info(`Updated AI instructions in file: ${filePath}`);
 				}
-			}
+			} else {
+				// Get the formatted output
+				const output = await scanner.getOutput(!validatedOptions?.header);
 
-			// Handle editor-specific processing
-			if (validatedOptions?.editor) {
-				await this.processEditorInstructions(
-					absolutePath,
-					validatedOptions.editor,
-					output,
-				);
+				// Print the output to the console if not in quiet mode
+				if (!validatedOptions?.quiet) {
+					console.log('\n--- 🤫 psst-ai Generated Instructions ---\n');
+					console.log(output);
+					console.log('\n--- End of Generated Instructions ---\n');
+				}
+
+				// Save output to file if specified
+				if (validatedOptions?.output) {
+					const fs = await import('node:fs/promises');
+					const outputPath = path.resolve(validatedOptions.output);
+					await fs.writeFile(outputPath, output, 'utf8');
+
+					if (validatedOptions?.verbose) {
+						cliLogger.info(`Output saved to: ${outputPath}`);
+					}
+				}
 			}
 
 			if (validatedOptions?.verbose) {
@@ -135,48 +140,6 @@ export class CliHandler {
 		} catch (error) {
 			cliLogger.error('Error running psst-ai', error);
 			process.exit(1);
-		}
-	}
-
-	/**
-	 * Process editor-specific instructions
-	 * @param projectPath The absolute path to the project
-	 * @param editorType The editor type (github, vscode, cursor, windsurf)
-	 * @param content The generated instructions content
-	 */
-	private async processEditorInstructions(
-		projectPath: string,
-		editorType: EditorType,
-		content: string,
-	): Promise<void> {
-		try {
-			// Process based on editor type
-			if (editorType === EditorType.Github) {
-				// Get the scanner for rules
-				const scanner = new CodebaseScanner(projectPath);
-				const rules = await scanner.scan();
-
-				// Create a GitHub Copilot output builder
-				const outputBuilder = new VscodeBuilder(
-					path.resolve(projectPath, 'output'),
-					rules,
-				);
-
-				// Update GitHub Copilot instructions
-				await outputBuilder.updateGitHubInstructions(projectPath);
-			} else if (
-				[EditorType.Vscode, EditorType.Cursor, EditorType.Windsurf].includes(
-					editorType,
-				)
-			) {
-				cliLogger.info(
-					`Support for ${editorType} instructions will be added in a future version`,
-				);
-			} else {
-				cliLogger.warn(`Unknown editor type: ${editorType}`);
-			}
-		} catch (error) {
-			cliLogger.error(`Error processing editor instructions`, error);
 		}
 	}
 }

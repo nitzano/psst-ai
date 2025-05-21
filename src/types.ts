@@ -13,8 +13,4 @@ export type AiRule = {
 };
 
 // Re-export CLI options types
-export {
-	type CliOptions,
-	EditorType,
-	validateCliOptions,
-} from './types/cli-options.js';
+export {type CliOptions, validateCliOptions} from './types/cli-options.js';

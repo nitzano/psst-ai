@@ -1,21 +1,6 @@
 import {z} from 'zod';
 
 /**
- * Editor types supported by the CLI
- */
-export enum EditorType {
-	Vscode = 'vscode',
-	Cursor = 'cursor',
-	Windsurf = 'windsurf',
-	Github = 'github',
-}
-
-/**
- * Zod schema for validating editor type
- */
-export const editorTypeSchema = z.nativeEnum(EditorType).optional();
-
-/**
  * CLI options type definition
  */
 export type CliOptions = {
@@ -23,7 +8,7 @@ export type CliOptions = {
 	quiet?: boolean;
 	verbose?: boolean;
 	header?: boolean;
-	editor?: EditorType | undefined;
+	file?: string;
 };
 
 /**
@@ -34,7 +19,7 @@ export const cliOptionsSchema = z.object({
 	quiet: z.boolean().optional(),
 	verbose: z.boolean().optional(),
 	header: z.boolean().optional(),
-	editor: editorTypeSchema,
+	file: z.string().optional(),
 });
 
 /**
