@@ -2,7 +2,6 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {logger} from '../services/logger.js';
 import type {AiRule} from '../types.js';
-import {formatCategoryTitle} from '../utils/category-formatter.js';
 import {MarkdownBuilder} from './markdown-builder.js';
 
 /**
@@ -51,11 +50,12 @@ export class GithubCopilotOutputBuilder {
 
 	/**
 	 * Generate the content for the output file
+	 * @param flat If true, flatten the output without categories
 	 * @returns Formatted markdown content with recommendations
 	 */
-	public generateOutputContent(): string {
+	public generateOutputContent(flat?: boolean): string {
 		// Use the MarkdownBuilder to generate the output content
 		const markdownBuilder = new MarkdownBuilder(this.recommendations);
-		return markdownBuilder.buildMarkdown();
+		return markdownBuilder.buildMarkdown(flat);
 	}
 }

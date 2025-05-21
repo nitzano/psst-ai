@@ -45,8 +45,9 @@ export class CodebaseScanner {
 
 	/**
 	 * Run the scanner and return the formatted output content
+	 * @param flat If true, flatten the output without categories
 	 */
-	public async getOutput(): Promise<string> {
+	public async getOutput(flat?: boolean): Promise<string> {
 		this.logger.debug(`Scanning directory: ${this.pathToScan}`);
 
 		// Collect rules from sub-scanners
@@ -58,7 +59,7 @@ export class CodebaseScanner {
 			rules,
 		);
 
-		return outputBuilder.generateOutputContent();
+		return outputBuilder.generateOutputContent(flat);
 	}
 
 	/**

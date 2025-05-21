@@ -20,9 +20,14 @@ export class MarkdownBuilder {
 
 	/**
 	 * Build markdown content from the recommendations
+	 * @param flat If true, all rules will be flattened without category headers
 	 * @returns Formatted markdown string
 	 */
-	public buildMarkdown(): string {
+	public buildMarkdown(flat?: boolean): string {
+		if (flat) {
+			return this.formatFlatMarkdown();
+		}
+
 		// Group recommendations by category
 		const categorizedRecommendations = this.categorizeRecommendations();
 
@@ -89,6 +94,34 @@ export class MarkdownBuilder {
 				// Add an extra newline after each category
 				content += '\n';
 			}
+		}
+
+		// Trim trailing whitespace
+		return content.trim();
+	}
+
+	/**
+	 * Format recommendations into flat markdown without categories
+	 * @returns Formatted markdown string with all rules flattened
+	 */
+	private formatFlatMarkdown(): string {
+		let content = '';
+		const allRecommendations = new Set<string>();
+
+		// Collect all unique recommendations
+		for (const recommendation of this.recommendations) {
+			if (recommendation.rule) {
+				allRecommendations.add(recommendation.rule);
+			} else {
+				this.logger.warn(
+					`Skipping recommendation with missing rule: ${JSON.stringify(recommendation)}`,
+				);
+			}
+		}
+
+		// Add each unique recommendation as a bullet point
+		for (const recommendation of allRecommendations) {
+			content += `- ${recommendation}\n`;
 		}
 
 		// Trim trailing whitespace

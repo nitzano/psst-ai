@@ -7,6 +7,16 @@ import {CodebaseScanner} from './scanners/codebase-scanner.js';
 import {logger} from './services/logger.js';
 import {packageInfo} from './services/package-info.js';
 
+/**
+ * CLI options type definition
+ */
+export type CliOptions = {
+	output?: string;
+	quiet?: boolean;
+	verbose?: boolean;
+	flat?: boolean;
+};
+
 // Export types (for programmatic access when installed as dependency)
 export type {AiRule, Category} from './types.js';
 
@@ -64,18 +74,10 @@ export class CliHandler {
 			.option('-o, --output <path>', 'Save output to a file')
 			.option('-q, --quiet', 'Suppress console output')
 			.option('-v, --verbose', 'Show verbose output')
-			.action(
-				async (
-					directory?: string,
-					options?: {
-						output?: string;
-						quiet?: boolean;
-						verbose?: boolean;
-					},
-				) => {
-					await this.runScan(directory, options);
-				},
-			);
+			.option('-f, --flat', 'Flatten output without category headers')
+			.action(async (directory?: string, options?: CliOptions) => {
+				await this.runScan(directory, options);
+			});
 	}
 
 	/**
@@ -85,11 +87,7 @@ export class CliHandler {
 	 */
 	private async runScan(
 		directory?: string,
-		options?: {
-			output?: string;
-			quiet?: boolean;
-			verbose?: boolean;
-		},
+		options?: CliOptions,
 	): Promise<void> {
 		try {
 			const pathToScan = directory ?? process.cwd();
@@ -100,7 +98,7 @@ export class CliHandler {
 			}
 
 			const scanner = new CodebaseScanner(absolutePath);
-			const output = await scanner.getOutput();
+			const output = await scanner.getOutput(options?.flat);
 
 			// Print the output to the console if not in quiet mode
 			if (!options?.quiet) {
