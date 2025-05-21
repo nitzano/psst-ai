@@ -9,6 +9,9 @@
 - Place every enum in a separate file.
 - Use PascalCase for enum names and snake_case for enum values.
 
+## Typescript
+- Prefer implements over extends
+
 ## Scanners
 
 - New scanners should be added to the `scanners` directory.
