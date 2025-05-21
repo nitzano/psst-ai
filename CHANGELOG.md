@@ -1,5 +1,11 @@
 # psst-ai
 
+## 1.1.2
+
+### Patch Changes
+
+- f37d262: docs
+
 ## 1.1.1
 
 ### Patch Changes
