@@ -7,17 +7,11 @@ import {VscodeBuilder} from './builders/github-copilot-output-builder.js';
 import {CodebaseScanner} from './scanners/codebase-scanner.js';
 import {logger} from './services/logger.js';
 import {packageInfo} from './services/package-info.js';
-import {
-	type CliOptions,
-	EditorType,
-	validateCliOptions,
-	type AiRule,
-	Category,
-} from './types.js';
+import {type CliOptions, EditorType, validateCliOptions} from './types.js';
 
 // Export types (for programmatic access when installed as dependency)
-export type {AiRule, Category, CliOptions} from './types.js';
 export {EditorType} from './types.js';
+export type {AiRule, Category, CliOptions} from './types.js';
 
 // Export builders
 export {VscodeBuilder as GithubCopilotOutputBuilder} from './builders/github-copilot-output-builder.js';
