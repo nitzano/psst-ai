@@ -7,20 +7,17 @@ import {VscodeBuilder} from './builders/github-copilot-output-builder.js';
 import {CodebaseScanner} from './scanners/codebase-scanner.js';
 import {logger} from './services/logger.js';
 import {packageInfo} from './services/package-info.js';
-
-/**
- * CLI options type definition
- */
-export type CliOptions = {
-	output?: string;
-	quiet?: boolean;
-	verbose?: boolean;
-	flat?: boolean;
-	editor?: string;
-};
+import {
+	type CliOptions,
+	EditorType,
+	validateCliOptions,
+	type AiRule,
+	Category,
+} from './types.js';
 
 // Export types (for programmatic access when installed as dependency)
-export type {AiRule, Category} from './types.js';
+export type {AiRule, Category, CliOptions} from './types.js';
+export {EditorType} from './types.js';
 
 // Export builders
 export {VscodeBuilder as GithubCopilotOutputBuilder} from './builders/github-copilot-output-builder.js';
@@ -79,7 +76,7 @@ export class CliHandler {
 			.option('-f, --flat', 'Flatten output without category headers')
 			.option(
 				'-e, --editor <type>',
-				'Generate or update instructions for specific editor (vscode, cursor, github)',
+				`Generate or update instructions for specific editor (${Object.values(EditorType).join(', ')})`,
 			)
 			.action(async (directory?: string, options?: CliOptions) => {
 				await this.runScan(directory, options);
@@ -96,44 +93,49 @@ export class CliHandler {
 		options?: CliOptions,
 	): Promise<void> {
 		try {
+			// Validate options
+			const validatedOptions = options
+				? validateCliOptions(options)
+				: undefined;
+
 			const pathToScan = directory ?? process.cwd();
 			const absolutePath = path.resolve(pathToScan);
 
-			if (options?.verbose) {
+			if (validatedOptions?.verbose) {
 				cliLogger.info(`Starting scan of directory: ${absolutePath}`);
 			}
 
 			const scanner = new CodebaseScanner(absolutePath);
-			const output = await scanner.getOutput(options?.flat);
+			const output = await scanner.getOutput(validatedOptions?.flat);
 
 			// Print the output to the console if not in quiet mode
-			if (!options?.quiet) {
+			if (!validatedOptions?.quiet) {
 				console.log('\n--- 🤫 psst-ai Generated Instructions ---\n');
 				console.log(output);
 				console.log('\n--- End of Generated Instructions ---\n');
 			}
 
 			// Save output to file if specified
-			if (options?.output) {
+			if (validatedOptions?.output) {
 				const fs = await import('node:fs/promises');
-				const outputPath = path.resolve(options.output);
+				const outputPath = path.resolve(validatedOptions.output);
 				await fs.writeFile(outputPath, output, 'utf8');
 
-				if (options?.verbose) {
+				if (validatedOptions?.verbose) {
 					cliLogger.info(`Output saved to: ${outputPath}`);
 				}
 			}
 
 			// Handle editor-specific processing
-			if (options?.editor) {
+			if (validatedOptions?.editor) {
 				await this.processEditorInstructions(
 					absolutePath,
-					options.editor,
+					validatedOptions.editor,
 					output,
 				);
 			}
 
-			if (options?.verbose) {
+			if (validatedOptions?.verbose) {
 				cliLogger.info('Scan completed');
 			}
 		} catch (error) {
@@ -145,17 +147,17 @@ export class CliHandler {
 	/**
 	 * Process editor-specific instructions
 	 * @param projectPath The absolute path to the project
-	 * @param editorType The editor type (github, vscode, cursor)
+	 * @param editorType The editor type (github, vscode, cursor, windsurf)
 	 * @param content The generated instructions content
 	 */
 	private async processEditorInstructions(
 		projectPath: string,
-		editorType: string,
+		editorType: EditorType,
 		content: string,
 	): Promise<void> {
 		try {
 			// Process based on editor type
-			if (editorType.toLowerCase() === 'github') {
+			if (editorType === EditorType.Github) {
 				// Get the scanner for rules
 				const scanner = new CodebaseScanner(projectPath);
 				const rules = await scanner.scan();
@@ -169,7 +171,9 @@ export class CliHandler {
 				// Update GitHub Copilot instructions
 				await outputBuilder.updateGitHubInstructions(projectPath);
 			} else if (
-				['vscode', 'cursor', 'windsurf'].includes(editorType.toLowerCase())
+				[EditorType.Vscode, EditorType.Cursor, EditorType.Windsurf].includes(
+					editorType,
+				)
 			) {
 				cliLogger.info(
 					`Support for ${editorType} instructions will be added in a future version`,
