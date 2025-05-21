@@ -58,7 +58,18 @@ yarn dlx psst-ai
 
 # Specify a custom directory to scan
 npx psst-ai /path/to/your/project
+
+# Generate instructions and update editor-specific files
+npx psst-ai --editor github
 ```
+
+### Command Options
+
+- `-o, --output <path>` - Save output to a file
+- `-q, --quiet` - Suppress console output
+- `-v, --verbose` - Show verbose output
+- `-f, --flat` - Flatten output without category headers
+- `-e, --editor <type>` - Generate or update instructions for specific editor (vscode, cursor, github)
 
 That's it! The tool will:
 1. Scan your project files and configuration
@@ -85,12 +96,34 @@ Use vitest testing framework.
 
 ## 🔧 How to Use the Generated Instructions
 
+### Method 1: Copy and Paste
 1. **Copy** the output from your terminal
 2. **Paste** into your AI assistant's instructions panel:
    - GitHub Copilot: Chat instructions
    - Cursor: Workspace instructions
    - VS Code AI Assistant: Custom instructions
    - Other AI coding tools: Custom prompts section
+
+### Method 2: Automatic Editor Integration
+You can use psst-ai to automatically update editor-specific instruction files:
+
+```bash
+# Update GitHub Copilot instructions
+npx psst-ai --editor github
+```
+
+Insert the magic placeholder `<!-- PSST-AI-INSTRUCTIONS -->` in your `.github/copilot-instructions.md` file, and psst-ai will replace it with the generated instructions.
+
+```markdown
+# Coding Guidelines for This Project
+
+<!-- PSST-AI-INSTRUCTIONS -->
+
+## Additional Project-Specific Guidelines
+...
+```
+
+Support for other editors (vscode, cursor, windsurf) will be added in future updates.
 
 ## 🧩 What's Detected?
 

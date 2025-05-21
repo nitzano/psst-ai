@@ -3,6 +3,7 @@
 import path from 'node:path';
 import process from 'node:process';
 import {Command} from 'commander';
+import {GithubCopilotOutputBuilder} from './builders/github-copilot-output-builder.js';
 import {CodebaseScanner} from './scanners/codebase-scanner.js';
 import {logger} from './services/logger.js';
 import {packageInfo} from './services/package-info.js';
@@ -15,6 +16,7 @@ export type CliOptions = {
 	quiet?: boolean;
 	verbose?: boolean;
 	flat?: boolean;
+	editor?: string;
 };
 
 // Export types (for programmatic access when installed as dependency)
@@ -75,6 +77,10 @@ export class CliHandler {
 			.option('-q, --quiet', 'Suppress console output')
 			.option('-v, --verbose', 'Show verbose output')
 			.option('-f, --flat', 'Flatten output without category headers')
+			.option(
+				'-e, --editor <type>',
+				'Generate or update instructions for specific editor (vscode, cursor, github)',
+			)
 			.action(async (directory?: string, options?: CliOptions) => {
 				await this.runScan(directory, options);
 			});
@@ -118,12 +124,61 @@ export class CliHandler {
 				}
 			}
 
+			// Handle editor-specific processing
+			if (options?.editor) {
+				await this.processEditorInstructions(
+					absolutePath,
+					options.editor,
+					output,
+				);
+			}
+
 			if (options?.verbose) {
 				cliLogger.info('Scan completed');
 			}
 		} catch (error) {
 			cliLogger.error('Error running psst-ai', error);
 			process.exit(1);
+		}
+	}
+
+	/**
+	 * Process editor-specific instructions
+	 * @param projectPath The absolute path to the project
+	 * @param editorType The editor type (github, vscode, cursor)
+	 * @param content The generated instructions content
+	 */
+	private async processEditorInstructions(
+		projectPath: string,
+		editorType: string,
+		content: string,
+	): Promise<void> {
+		try {
+			// Process based on editor type
+			if (editorType.toLowerCase() === 'github') {
+				// Get the scanner for rules
+				const scanner = new CodebaseScanner(projectPath);
+				const rules = await scanner.scan();
+
+				// Create a GitHub Copilot output builder
+				const outputBuilder = new GithubCopilotOutputBuilder(
+					path.resolve(projectPath, 'output'),
+					rules,
+				);
+
+				// Update GitHub Copilot instructions
+				await outputBuilder.updateGitHubInstructions(projectPath);
+			} else if (
+				['vscode', 'cursor', 'windsurf'].includes(editorType.toLowerCase())
+			) {
+				cliLogger.info(
+					`Support for ${editorType} instructions will be added in a future version`,
+				);
+			} else {
+				cliLogger.warn(`Unknown editor type: ${editorType}`);
+			}
+		} catch (error) {
+			cliLogger.error(`Error processing editor instructions`, error);
 		}
 	}
 }
