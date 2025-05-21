@@ -1,3 +1,5 @@
+## General Guidelines
+
 Use pnpm as the package manager.
 Use xo for linting.
 Use the nodejs version specified in the .nvmrc file.
