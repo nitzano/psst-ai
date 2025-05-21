@@ -135,7 +135,7 @@ npx psst-ai -f ./.github/copilot-instructions.md
 ### Cursor
 For Cursor AI, place your instructions file in `.cursor/rules/ai-instructions.mdc` and run:
 ```bash
-npx psst-ai -f ./.cursor/rules/ai-instructions.json
+npx psst-ai -f ./.cursor/rules/ai-instructions.mdc
 ```
 
 ### Windsurf
