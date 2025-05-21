@@ -13,6 +13,7 @@
 - Each Scanner can contain to multiple categories, if needed add more enums to Category enums
 - Nest similar scanners in a folder
 - Scanners should be direct to what they do, and not be too generic
+- If there are 3rd party which can be use to write a scanner, use them
 
 ## Examples
 
