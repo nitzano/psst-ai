@@ -26,3 +26,5 @@
 - For every scanner, create example codebase in the `examples` directory
 - Examples folder name should start with the scanner name and should be in lowercase
 - Each scanner can have more than one example codebase
+
+<!-- PSST-AI-INSTRUCTIONS -->
