@@ -3,7 +3,7 @@
 import path from 'node:path';
 import process from 'node:process';
 import {Command} from 'commander';
-import {GithubCopilotOutputBuilder} from './builders/github-copilot-output-builder.js';
+import {VscodeBuilder} from './builders/github-copilot-output-builder.js';
 import {CodebaseScanner} from './scanners/codebase-scanner.js';
 import {logger} from './services/logger.js';
 import {packageInfo} from './services/package-info.js';
@@ -23,7 +23,7 @@ export type CliOptions = {
 export type {AiRule, Category} from './types.js';
 
 // Export builders
-export {GithubCopilotOutputBuilder} from './builders/github-copilot-output-builder.js';
+export {VscodeBuilder as GithubCopilotOutputBuilder} from './builders/github-copilot-output-builder.js';
 
 // Export scanners
 export {BaseScanner} from './scanners/base-scanner.js';
@@ -161,7 +161,7 @@ export class CliHandler {
 				const rules = await scanner.scan();
 
 				// Create a GitHub Copilot output builder
-				const outputBuilder = new GithubCopilotOutputBuilder(
+				const outputBuilder = new VscodeBuilder(
 					path.resolve(projectPath, 'output'),
 					rules,
 				);

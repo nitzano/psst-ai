@@ -8,10 +8,7 @@ import type {RuleDetector} from './rule-detector.js';
 /**
  * Builder class to generate GitHub Copilot instructions from recommendations
  */
-export class GithubCopilotOutputBuilder
-	extends AiRuleBuilder
-	implements RuleDetector
-{
+export class VscodeBuilder extends AiRuleBuilder implements RuleDetector {
 	/**
 	 * Build the output file with all recommendations
 	 */
