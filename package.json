@@ -19,7 +19,8 @@
 	"author": "Nitzan Ohana <16689354+nitzano@users.noreply.github.com>",
 	"dependencies": {
 		"commander": "^14.0.0",
-		"winston": "^3.17.0"
+		"winston": "^3.17.0",
+		"zod": "^3.25.17"
 	},
 	"scripts": {
 		"dev": "tsx src/cli.ts",
