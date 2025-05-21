@@ -104,6 +104,8 @@ Use vitest testing framework.
 
 ## 🔧 How to Use the Generated Instructions
 
+
+
 ### Method 1: Copy and Paste
 1. **Copy** the output from your terminal
 2. **Paste** into your AI assistant's instructions panel:
@@ -125,6 +127,9 @@ Insert the start and end tags `<!-- PSST-AI-INSTRUCTIONS-START -->` and `<!-- PS
 ```
 
 ## 🧰 Editors Integration
+
+Before: paste the [instruction tags](#method-2-automatic-file-updates) (including both start and end tags) into your instructions file and run the command in your favorite editor:
+
 
 ### VSCode
 For VS Code's GitHub Copilot Chat, place your instructions file in `.github/copilot-instructions.md` and run:
@@ -161,7 +166,3 @@ Currently, psst-ai can detect:
 | Node.js Versions | From .nvmrc file |
 | Linting Tools | ESLint, XO, StandardJS |
 | Testing Frameworks | Jest, Vitest, Mocha |
-
-
-
-```
