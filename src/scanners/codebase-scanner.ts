@@ -5,6 +5,7 @@ import type {AiRule} from '../types.js';
 import {LintingScanner} from './linting-scanner.js';
 import {NodeVersionScanner} from './node-version-scanner.js';
 import {PackageManagerScanner} from './package-manager-scanner.js';
+import {PrettierScanner} from './prettier-scanner.js';
 import {TestingFrameworkScanner} from './testing-framework-scanner.js';
 
 /**
@@ -71,6 +72,7 @@ export class CodebaseScanner {
 			new NodeVersionScanner(this.pathToScan),
 			new LintingScanner(this.pathToScan),
 			new TestingFrameworkScanner(this.pathToScan),
+			new PrettierScanner(this.pathToScan),
 			// Add more scanners here as they are implemented
 		];
 
