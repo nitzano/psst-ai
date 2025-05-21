@@ -112,12 +112,14 @@ You can use psst-ai to automatically update editor-specific instruction files:
 npx psst-ai --editor github
 ```
 
-Insert the magic placeholder `<!-- PSST-AI-INSTRUCTIONS -->` in your `.github/copilot-instructions.md` file, and psst-ai will replace it with the generated instructions.
+Insert the start and end tags `<!-- PSST-AI-INSTRUCTIONS-START -->` and `<!-- PSST-AI-INSTRUCTIONS-END -->` in your `.github/copilot-instructions.md` file, and psst-ai will replace the content between these tags with the generated instructions.
 
 ```markdown
 # Coding Guidelines for This Project
 
-<!-- PSST-AI-INSTRUCTIONS -->
+<!-- PSST-AI-INSTRUCTIONS-START -->
+<!-- Your AI instructions will be inserted here -->
+<!-- PSST-AI-INSTRUCTIONS-END -->
 
 ## Additional Project-Specific Guidelines
 ...

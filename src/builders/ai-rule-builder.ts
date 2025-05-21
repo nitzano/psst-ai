@@ -9,13 +9,6 @@ export abstract class AiRuleBuilder {
 	protected readonly logger = logger.getLogger(this.constructor.name);
 
 	/**
-	 * Magic placeholder used to identify where AI instructions should be inserted
-	 */
-	protected get magicPlaceholder(): string {
-		return '<!-- PSST-AI-INSTRUCTIONS -->';
-	}
-
-	/**
 	 * Start tag for AI instructions section
 	 */
 	protected get startTag(): string {
