@@ -10,6 +10,18 @@
 
 </div>
 
+- [🌟 Features](#-features)
+- [💡 Why Use psst-ai?](#-why-use-psst-ai)
+- [📦 Setup](#-setup)
+- [🚀 Usage](#-usage)
+- [📄 Generated Instructions Format](#-generated-instructions-format)
+- [🔧 How to Use the Generated Instructions](#-how-to-use-the-generated-instructions)
+  - [Method 1: Copy and Paste](#method-1-copy-and-paste)
+  - [Method 2: Automatic File Updates](#method-2-automatic-file-updates)
+  - [Cursor](#cursor)
+  - [Windsurf](#windsurf)
+
+
 
 Automatically extract coding conventions and preferences from your project and generate tailored instructions for AI code assistants like GitHub Copilot, Cursor, and more.
 
@@ -44,6 +56,8 @@ npm install -g psst-ai
 yarn global add psst-ai
 ```
 
+
+
 ## 🚀 Usage
 
 ```bash
@@ -59,16 +73,7 @@ yarn dlx psst-ai
 # Specify a custom directory to scan
 npx psst-ai /path/to/your/project
 
-# Generate instructions and update editor-specific files
-npx psst-ai --editor github
 ```
-
-### Command Options
-
-- `-o, --output <path>` - Save output to a file
-- `-q, --quiet` - Suppress console output
-- `-v, --verbose` - Show verbose output
-- `--no-header` - Flatten output without category headers
 - `-f, --file <path>` - Load file with sections to update
 
 That's it! The tool will:
@@ -94,6 +99,8 @@ Use xo for linting.
 Use vitest testing framework.
 ```
 
+
+
 ## 🔧 How to Use the Generated Instructions
 
 ### Method 1: Copy and Paste
@@ -115,12 +122,7 @@ Insert the start and end tags `<!-- PSST-AI-INSTRUCTIONS-START -->` and `<!-- PS
 <!-- Your AI instructions will be inserted here -->
 <!-- PSST-AI-INSTRUCTIONS-END -->
 
-## Additional Project-Specific Guidelines
-...
-```
-
 ## 🧰 Editors Integration
-
 
 ### VSCode
 For VS Code's GitHub Copilot Chat, place your instructions file in `.github/copilot-instructions.md` and run:
@@ -138,7 +140,14 @@ npx psst-ai -f ./.cursor/ai-settings.json
 For Windsurf AI, place your instructions file in `.windsurf/rules/ai-instructions.md` and run:
 ```bash
 npx psst-ai -f ./.windsurf/ai-instructions.md
-```
+
+
+## Command Options
+
+- `-o, --output <path>` - Save output to a file
+- `-q, --quiet` - Suppress console output
+- `-v, --verbose` - Show verbose output
+- `--no-header` - Flatten output without category headers
 
 ## 🧩 What's Detected?
 
@@ -153,3 +162,4 @@ Currently, psst-ai can detect:
 
 
 
+```
