@@ -9,6 +9,20 @@ export class MarkdownBuilder {
 	private readonly logger = logger.getLogger('MarkdownBuilder');
 
 	/**
+	 * Start tag for AI instructions section
+	 */
+	public get startTag(): string {
+		return '<!-- PSST-AI-INSTRUCTIONS-START -->';
+	}
+
+	/**
+	 * End tag for AI instructions section
+	 */
+	public get endTag(): string {
+		return '<!-- PSST-AI-INSTRUCTIONS-END -->';
+	}
+
+	/**
 	 * Constructor for MarkdownBuilder
 	 * @param recommendations List of recommendations collected from scanners
 	 */
@@ -33,6 +47,32 @@ export class MarkdownBuilder {
 
 		// Create markdown content
 		return this.formatMarkdown(categorizedRecommendations);
+	}
+
+	/**
+	 * Insert markdown content between start and end tags in an existing file
+	 * @param fileContent Original file content
+	 * @param flat If true, flatten the output without categories
+	 * @returns File content with recommendations inserted between tags
+	 */
+	public insertBetweenTags(fileContent: string, flat?: boolean): string {
+		const startIndex = fileContent.indexOf(this.startTag);
+		const endIndex = fileContent.indexOf(this.endTag);
+
+		if (startIndex === -1 || endIndex === -1) {
+			this.logger.warn('Could not find start or end tags in the file content');
+			return fileContent;
+		}
+
+		const markdownContent = this.buildMarkdown(flat);
+
+		return (
+			fileContent.slice(0, startIndex + this.startTag.length) +
+			'\n' +
+			markdownContent +
+			'\n' +
+			fileContent.slice(endIndex)
+		);
 	}
 
 	/**

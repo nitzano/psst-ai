@@ -3,11 +3,15 @@ import path from 'node:path';
 import type {AiRule} from '../types.js';
 import {AiRuleBuilder} from './ai-rule-builder.js';
 import {MarkdownBuilder} from './markdown-builder.js';
+import type {RuleDetector} from './rule-detector.js';
 
 /**
  * Builder class to generate GitHub Copilot instructions from recommendations
  */
-export class GithubCopilotOutputBuilder extends AiRuleBuilder {
+export class GithubCopilotOutputBuilder
+	extends AiRuleBuilder
+	implements RuleDetector
+{
 	/**
 	 * Build the output file with all recommendations
 	 */
@@ -33,19 +37,26 @@ export class GithubCopilotOutputBuilder extends AiRuleBuilder {
 	}
 
 	/**
-	 * Generate the content for the output file
+	 * Generate output content as markdown
 	 * @param flat If true, flatten the output without categories
-	 * @returns Formatted markdown content with recommendations
+	 * @returns Formatted markdown string
 	 */
 	public generateOutputContent(flat?: boolean): string {
-		// Use the MarkdownBuilder to generate the output content
 		const markdownBuilder = new MarkdownBuilder(this.recommendations);
 		return markdownBuilder.buildMarkdown(flat);
 	}
 
 	/**
+	 * Get the detected AI rules
+	 * @returns List of detected AI rules
+	 */
+	public getDetectedRules(): AiRule[] {
+		return this.recommendations;
+	}
+
+	/**
 	 * Update GitHub Copilot instructions in .github/copilot-instructions.md file
-	 * by replacing the magic placeholder with generated content
+	 * by replacing the content between start and end tags with generated content
 	 * @param projectPath The absolute path to the project
 	 * @returns Promise that resolves when the file is updated or rejects with an error
 	 */
@@ -61,29 +72,12 @@ export class GithubCopilotOutputBuilder extends AiRuleBuilder {
 				// Check if the file exists
 				await fs.access(githubFilePath);
 
-				// Read the file contents
-				const fileContent = await fs.readFile(githubFilePath, 'utf8');
+				// Update file using the parent class method
+				await this.updateFileInstructions(githubFilePath);
 
-				// Check if the magic placeholder exists
-				if (fileContent.includes(this.magicPlaceholder)) {
-					// Generate the content for replacement
-					const outputContent = this.generateOutputContent();
-
-					// Replace the placeholder with the generated content
-					const updatedContent = fileContent.replace(
-						this.magicPlaceholder,
-						outputContent,
-					);
-					await fs.writeFile(githubFilePath, updatedContent, 'utf8');
-
-					this.logger.info(
-						`Updated GitHub Copilot instructions at ${githubFilePath}`,
-					);
-				} else {
-					this.logger.warn(
-						`Magic placeholder "${this.magicPlaceholder}" not found in ${githubFilePath}`,
-					);
-				}
+				this.logger.info(
+					`Updated GitHub Copilot instructions at ${githubFilePath}`,
+				);
 			} catch (error: unknown) {
 				this.logger.warn(
 					`Could not process GitHub Copilot instructions at ${githubFilePath}`,

@@ -36,7 +36,7 @@
 		"prepare": "husky",
 		"start": "node dist/cli.js",
 		"ver": "changeset",
-		"psst": "pnpm run dev --editor vscode"
+		"psst": "pnpm run dev --editor github"
 	},
 	"lint-staged": {
 		"*.ts": "xo --fix"

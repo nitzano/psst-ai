@@ -29,4 +29,8 @@
 - Each scanner can have more than one example codebase
 
 <!-- PSST-AI-INSTRUCTIONS-START -->
+- Use pnpm as the package manager.
+- Use the nodejs version specified in the .nvmrc file (v22.15.1).
+- Use xo for linting.
+- Use vitest testing framework.
 <!-- PSST-AI-INSTRUCTIONS-END -->
