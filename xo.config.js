@@ -7,7 +7,7 @@ const xoConfig = {
 	// Apply XO to TypeScript files
 	extensions: ['ts'],
 	// Ignore the compiled output
-	ignores: ['dist'],
+	ignores: ['dist', 'examples'],
 	// Configure TypeScript parser and options for TS files
 	overrides: [
 		{
