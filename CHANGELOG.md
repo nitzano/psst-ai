@@ -1,5 +1,14 @@
 # psst-ai
 
+## 1.1.1
+
+### Patch Changes
+
+- e730413: added editors keywords
+- 774ab7c: fix readme
+- 34992cd: fix readme
+- 6fd921f: docs updated to editors
+
 ## 1.1.0
 
 ### Minor Changes
