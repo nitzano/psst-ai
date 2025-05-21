@@ -5,6 +5,7 @@
 - Use the nodejs version specified in the .nvmrc file.
 - Use async/await for asynchronous operations.
 - Use named exports for functions and classes.
+- Add tests in a tests directory relative to the file being tested.
 
 ## Scanners
 
