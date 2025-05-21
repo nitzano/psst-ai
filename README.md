@@ -18,8 +18,11 @@
 - [🔧 How to Use the Generated Instructions](#-how-to-use-the-generated-instructions)
   - [Method 1: Copy and Paste](#method-1-copy-and-paste)
   - [Method 2: Automatic File Updates](#method-2-automatic-file-updates)
+- [🧰 Editors Integration](#-editors-integration)
+  - [VSCode](#vscode)
   - [Cursor](#cursor)
   - [Windsurf](#windsurf)
+
 
 
 
@@ -55,8 +58,6 @@ npm install -g psst-ai
 # Or with yarn
 yarn global add psst-ai
 ```
-
-
 
 ## 🚀 Usage
 
@@ -99,8 +100,6 @@ Use xo for linting.
 Use vitest testing framework.
 ```
 
-
-
 ## 🔧 How to Use the Generated Instructions
 
 ### Method 1: Copy and Paste
@@ -121,6 +120,7 @@ Insert the start and end tags `<!-- PSST-AI-INSTRUCTIONS-START -->` and `<!-- PS
 <!-- PSST-AI-INSTRUCTIONS-START -->
 <!-- Your AI instructions will be inserted here -->
 <!-- PSST-AI-INSTRUCTIONS-END -->
+```
 
 ## 🧰 Editors Integration
 
