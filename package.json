@@ -9,8 +9,11 @@
 	"keywords": [
 		"ai",
 		"github copilot",
+		"vscode",
+		"rules",
 		"copilot",
-		"cursor"
+		"cursor",
+		"windsurf"
 	],
 	"files": [
 		"dist"
