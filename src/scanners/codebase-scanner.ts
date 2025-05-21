@@ -10,7 +10,7 @@ import {TestingFrameworkScanner} from './testing-framework-scanner.js';
 /**
  * Scanner class to handle scanning a directory
  */
-export class Scanner {
+export class CodebaseScanner {
 	private readonly logger = logger.getLogger('Scanner');
 	private readonly outputPath: string;
 

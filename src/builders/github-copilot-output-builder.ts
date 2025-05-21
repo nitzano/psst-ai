@@ -2,6 +2,10 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {logger} from '../services/logger.js';
 import type {AiRule} from '../types.js';
+import {
+	formatCategoryTitle,
+	formatToDisplayTitle,
+} from '../utils/category-formatter.js';
 
 /**
  * Builder class to generate GitHub Copilot instructions from recommendations
@@ -56,14 +60,20 @@ export class GithubCopilotOutputBuilder {
 		const categorizedRecommendations = new Map<string, string[]>();
 
 		for (const recommendation of this.recommendations) {
-			const category = recommendation.category ?? 'General';
-			if (!categorizedRecommendations.has(category)) {
-				categorizedRecommendations.set(category, []);
+			const categoryValue = recommendation.category ?? 'general';
+			const displayCategory = recommendation.category
+				? formatCategoryTitle(recommendation.category)
+				: 'General';
+
+			if (!categorizedRecommendations.has(displayCategory)) {
+				categorizedRecommendations.set(displayCategory, []);
 			}
 
 			// Ensure recommendation.rules is an array before spreading
 			if (Array.isArray(recommendation.rules)) {
-				categorizedRecommendations.get(category)?.push(...recommendation.rules);
+				categorizedRecommendations
+					.get(displayCategory)
+					?.push(...recommendation.rules);
 			} else {
 				this.logger.warn(
 					`Skipping recommendation with invalid rules: ${JSON.stringify(recommendation)}`,

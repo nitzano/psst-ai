@@ -3,7 +3,7 @@
 import path from 'node:path';
 import process from 'node:process';
 import {Command} from 'commander';
-import {Scanner} from './scanners/scanner.js';
+import {CodebaseScanner} from './scanners/codebase-scanner.js';
 import {logger} from './services/logger.js';
 import {packageInfo} from './services/package-info.js';
 
@@ -15,10 +15,10 @@ export {GithubCopilotOutputBuilder} from './builders/github-copilot-output-build
 
 // Export scanners
 export {BaseScanner} from './scanners/base-scanner.js';
+export {CodebaseScanner as Scanner} from './scanners/codebase-scanner.js';
 export {LintingScanner} from './scanners/linting-scanner.js';
 export {NodeVersionScanner} from './scanners/node-version-scanner.js';
 export {PackageManagerScanner} from './scanners/package-manager-scanner.js';
-export {Scanner} from './scanners/scanner.js';
 
 // Export services
 export {logger} from './services/logger.js';
@@ -99,7 +99,7 @@ export class CliHandler {
 				cliLogger.info(`Starting scan of directory: ${absolutePath}`);
 			}
 
-			const scanner = new Scanner(absolutePath);
+			const scanner = new CodebaseScanner(absolutePath);
 			const output = await scanner.getOutput();
 
 			// Print the output to the console if not in quiet mode

@@ -1,8 +1,8 @@
 export enum Category {
-	PackageManager = 'Package Manager',
-	NodeVersion = 'Node Version',
-	Linting = 'Linting',
-	Testing = 'Testing',
+	PackageManager = 'package_manager',
+	NodeVersion = 'node_version',
+	Linting = 'linting',
+	Testing = 'testing',
 }
 
 export type AiRule = {

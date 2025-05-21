@@ -40,7 +40,7 @@ export class PackageManagerScanner extends BaseScanner {
 			if (this.isYarn()) {
 				return [
 					{
-						category: Category.PackageManager,
+						category: Category.PACKAGE_MANAGER,
 						rules: ['Use yarn as the package manager.'],
 					},
 				];
@@ -49,7 +49,7 @@ export class PackageManagerScanner extends BaseScanner {
 			if (this.isNpm()) {
 				return [
 					{
-						category: Category.PackageManager,
+						category: Category.PACKAGE_MANAGER,
 						rules: ['Use npm as the package manager.'],
 					},
 				];
@@ -58,7 +58,7 @@ export class PackageManagerScanner extends BaseScanner {
 			// If no lock file found, assume npm
 			return [
 				{
-					category: Category.PackageManager,
+					category: Category.PACKAGE_MANAGER,
 					rules: ['Use npm as the package manager.'],
 				},
 			];
