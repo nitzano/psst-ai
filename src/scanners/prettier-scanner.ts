@@ -1,4 +1,3 @@
-import {existsSync} from 'node:fs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {Category, type AiRule} from '../types.js';
@@ -50,22 +49,40 @@ export class PrettierScanner extends BaseScanner {
 	}
 
 	/**
+	 * Helper method to check if a file exists
+	 */
+	private async fileExists(filePath: string): Promise<boolean> {
+		try {
+			await fs.access(filePath);
+			return true;
+		} catch {
+			return false;
+		}
+	}
+
+	/**
 	 * Find Prettier configuration file in the project
 	 */
 	private async findPrettierConfigFile(): Promise<string | undefined> {
+		// Check for all config files one by one
 		for (const fileName of this.configFileNames) {
 			const filePath = path.join(this.rootPath, fileName);
-			if (existsSync(filePath)) {
+			// eslint-disable-next-line no-await-in-loop
+			const exists = await this.fileExists(filePath);
+			if (exists) {
 				return fileName;
 			}
 		}
 
 		// Also check for a "prettier" key in package.json
 		const packageJsonPath = path.join(this.rootPath, 'package.json');
-		if (existsSync(packageJsonPath)) {
+		if (await this.fileExists(packageJsonPath)) {
 			try {
 				const packageJsonContent = await fs.readFile(packageJsonPath, 'utf8');
-				const packageJson = JSON.parse(packageJsonContent);
+				const packageJson = JSON.parse(packageJsonContent) as Record<
+					string,
+					unknown
+				>;
 				if (packageJson.prettier) {
 					return 'package.json (prettier key)';
 				}
@@ -82,7 +99,7 @@ export class PrettierScanner extends BaseScanner {
 	 */
 	private async hasPrettierDependency(): Promise<boolean> {
 		const packageJsonPath = path.join(this.rootPath, 'package.json');
-		if (existsSync(packageJsonPath)) {
+		if (await this.fileExists(packageJsonPath)) {
 			try {
 				const packageJsonContent = await fs.readFile(packageJsonPath, 'utf8');
 				const packageJson = JSON.parse(packageJsonContent);
