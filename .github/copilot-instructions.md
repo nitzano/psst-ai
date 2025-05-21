@@ -6,12 +6,12 @@
 - Use async/await for asynchronous operations.
 - Use named exports for functions and classes.
 - Add tests in a tests directory relative to the file being tested.
-- Place every enum in a separate file.
 - Use PascalCase for enum names and snake_case for enum values.
 
 ## Typescript
 
 - Prefer implements over extends
+- Place every enum in a separate file.
 
 ## Scanners
 
@@ -29,4 +29,19 @@
 - Each scanner can have more than one example codebase
 
 <!-- PSST-AI-INSTRUCTIONS-START -->
+## Linting
+
+- Use xo for linting.
+
+## Node Version
+
+- Use the nodejs version specified in the .nvmrc file (v22.15.1).
+
+## Package Manager
+
+- Use pnpm as the package manager.
+
+## Testing
+
+- Use vitest testing framework.
 <!-- PSST-AI-INSTRUCTIONS-END -->
