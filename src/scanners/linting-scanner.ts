@@ -20,7 +20,7 @@ export class LintingScanner extends BaseScanner {
 				return [
 					{
 						category: Category.Linting,
-						rules: ['Use xo for linting.'],
+						rule: 'Use xo for linting.',
 					},
 				];
 			}
@@ -30,7 +30,7 @@ export class LintingScanner extends BaseScanner {
 				return [
 					{
 						category: Category.Linting,
-						rules: ['Use eslint for linting.'],
+						rule: 'Use eslint for linting.',
 					},
 				];
 			}
@@ -40,7 +40,7 @@ export class LintingScanner extends BaseScanner {
 				return [
 					{
 						category: Category.Linting,
-						rules: ['Use tslint for linting.'],
+						rule: 'Use tslint for linting.',
 					},
 				];
 			}

@@ -23,9 +23,7 @@ export class NodeVersionScanner extends BaseScanner {
 				return [
 					{
 						category: Category.NodeVersion,
-						rules: [
-							`Use the nodejs version specified in the .nvmrc file (${nodeVersion}).`,
-						],
+						rule: `Use the nodejs version specified in the .nvmrc file (${nodeVersion}).`,
 					},
 				];
 			}
@@ -51,9 +49,7 @@ export class NodeVersionScanner extends BaseScanner {
 					return [
 						{
 							category: Category.NodeVersion,
-							rules: [
-								`Use Node.js version ${nodeVersion} as specified in package.json.`,
-							],
+							rule: `Use Node.js version ${nodeVersion} as specified in package.json.`,
 						},
 					];
 				}
@@ -63,7 +59,7 @@ export class NodeVersionScanner extends BaseScanner {
 			return [
 				{
 					category: Category.NodeVersion,
-					rules: ['Use the latest LTS version of Node.js.'],
+					rule: 'Use the latest LTS version of Node.js.',
 				},
 			];
 		} catch (error) {

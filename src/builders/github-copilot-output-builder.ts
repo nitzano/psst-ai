@@ -69,14 +69,14 @@ export class GithubCopilotOutputBuilder {
 				categorizedRecommendations.set(displayCategory, []);
 			}
 
-			// Ensure recommendation.rules is an array before spreading
-			if (Array.isArray(recommendation.rules)) {
+			// Add the individual rule to the recommendations
+			if (recommendation.rule) {
 				categorizedRecommendations
 					.get(displayCategory)
-					?.push(...recommendation.rules);
+					?.push(recommendation.rule);
 			} else {
 				this.logger.warn(
-					`Skipping recommendation with invalid rules: ${JSON.stringify(recommendation)}`,
+					`Skipping recommendation with missing rule: ${JSON.stringify(recommendation)}`,
 				);
 			}
 		}

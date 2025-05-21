@@ -22,7 +22,7 @@ export class PackageManagerScanner extends BaseScanner {
 				return [
 					{
 						category: Category.PackageManager,
-						rules: [`Use ${packageManagerFromJson} as the package manager.`],
+						rule: `Use ${packageManagerFromJson} as the package manager.`,
 					},
 				];
 			}
@@ -32,7 +32,7 @@ export class PackageManagerScanner extends BaseScanner {
 				return [
 					{
 						category: Category.PackageManager,
-						rules: ['Use pnpm as the package manager.'],
+						rule: 'Use pnpm as the package manager.',
 					},
 				];
 			}
@@ -40,8 +40,8 @@ export class PackageManagerScanner extends BaseScanner {
 			if (this.isYarn()) {
 				return [
 					{
-						category: Category.PACKAGE_MANAGER,
-						rules: ['Use yarn as the package manager.'],
+						category: Category.PackageManager,
+						rule: 'Use yarn as the package manager.',
 					},
 				];
 			}
@@ -49,8 +49,8 @@ export class PackageManagerScanner extends BaseScanner {
 			if (this.isNpm()) {
 				return [
 					{
-						category: Category.PACKAGE_MANAGER,
-						rules: ['Use npm as the package manager.'],
+						category: Category.PackageManager,
+						rule: 'Use npm as the package manager.',
 					},
 				];
 			}
@@ -58,8 +58,8 @@ export class PackageManagerScanner extends BaseScanner {
 			// If no lock file found, assume npm
 			return [
 				{
-					category: Category.PACKAGE_MANAGER,
-					rules: ['Use npm as the package manager.'],
+					category: Category.PackageManager,
+					rule: 'Use npm as the package manager.',
 				},
 			];
 		} catch (error) {

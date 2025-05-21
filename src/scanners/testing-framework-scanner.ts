@@ -300,27 +300,28 @@ export class TestingFrameworkScanner extends BaseScanner {
 			return [];
 		}
 
-		const rules: string[] = [];
+		const result: AiRule[] = [];
 
 		// Main testing framework detection
 		const mainFramework = this.getMainTestingFramework(detectedFrameworks);
 		if (mainFramework) {
-			rules.push(`Use ${mainFramework} testing framework.`);
+			result.push({
+				category: Category.Testing,
+				rule: `Use ${mainFramework} testing framework.`,
+			});
 		}
 
 		// Report all detected testing frameworks
 		for (const framework of detectedFrameworks) {
 			if (framework !== mainFramework) {
-				rules.push(`Detected testing tool: ${framework}`);
+				result.push({
+					category: Category.Testing,
+					rule: `Detected testing tool: ${framework}`,
+				});
 			}
 		}
 
-		return [
-			{
-				category: Category.Testing,
-				rules,
-			},
-		];
+		return result;
 	}
 
 	/**

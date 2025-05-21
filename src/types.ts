@@ -7,6 +7,6 @@ export enum Category {
 }
 
 export type AiRule = {
-	rules: string[];
+	rule: string;
 	category?: Category;
 };
