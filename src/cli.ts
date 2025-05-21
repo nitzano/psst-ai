@@ -13,7 +13,7 @@ import {MarkdownBuilder} from './builders/markdown-builder.js';
 export type {AiRule, Category, CliOptions} from './types.js';
 
 // Export builders
-export {VscodeBuilder as GithubCopilotOutputBuilder} from './builders/github-copilot-output-builder.js';
+export {MarkdownBuilder as GithubCopilotOutputBuilder} from './builders/markdown-builder.js';
 
 // Export scanners
 export {BaseScanner} from './scanners/base-scanner.js';

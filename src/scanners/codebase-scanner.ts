@@ -1,5 +1,5 @@
 import path from 'node:path';
-import {VscodeBuilder} from '../builders/github-copilot-output-builder.js';
+import {MarkdownBuilder} from '../builders/markdown-builder.js';
 import {logger} from '../services/logger.js';
 import type {AiRule} from '../types.js';
 import {TestingFrameworkScanner} from './base/testers/testing-framework-scanner.js';
@@ -34,7 +34,7 @@ export class CodebaseScanner {
 		const rules = await this.scan();
 
 		// Generate output file
-		const outputBuilder = new VscodeBuilder(this.outputPath, rules);
+		const outputBuilder = new MarkdownBuilder(rules, this.outputPath);
 		await outputBuilder.build();
 
 		this.logger.info('Scan completed successfully');
@@ -51,9 +51,9 @@ export class CodebaseScanner {
 		const rules = await this.scan();
 
 		// Generate output content
-		const outputBuilder = new VscodeBuilder(this.outputPath, rules);
+		const outputBuilder = new MarkdownBuilder(rules, this.outputPath);
 
-		return outputBuilder.generateOutputContent(noHeader);
+		return outputBuilder.buildMarkdown(noHeader);
 	}
 
 	/**

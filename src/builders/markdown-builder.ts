@@ -1,12 +1,14 @@
 import fs from 'node:fs/promises';
+import path from 'node:path';
 import {logger} from '../services/logger.js';
 import {Category, type AiRule} from '../types.js';
 import {formatCategoryTitle} from '../utils/category-formatter.js';
+import type {RuleDetector} from './rule-detector.js';
 
 /**
  * Builder class to generate Markdown content from a list of AiRules
  */
-export class MarkdownBuilder {
+export class MarkdownBuilder implements RuleDetector {
 	private readonly logger = logger.getLogger('MarkdownBuilder');
 
 	/**
@@ -52,6 +54,82 @@ export class MarkdownBuilder {
 
 		// Create markdown content
 		return this.formatMarkdown(categorizedRecommendations);
+	}
+
+	/**
+	 * Get the detected AI rules
+	 * @returns List of detected AI rules
+	 */
+	public getDetectedRules(): AiRule[] {
+		return this.recommendations;
+	}
+
+	/**
+	 * Build the output file with all recommendations
+	 */
+	public async build(): Promise<void> {
+		try {
+			const outputContent = this.buildMarkdown();
+			const outputFilePath = path.join(
+				this.outputPath,
+				'copilot-instructions.md',
+			);
+
+			// Ensure the output directory exists
+			await fs.mkdir(this.outputPath, {recursive: true});
+
+			// Write the file
+			await fs.writeFile(outputFilePath, outputContent, 'utf8');
+
+			this.logger.info(`Copilot instructions written to ${outputFilePath}`);
+		} catch (error: unknown) {
+			this.logger.error('Error building copilot instructions', error as Error);
+			throw error;
+		}
+	}
+
+	/**
+	 * Update GitHub Copilot instructions in .github/copilot-instructions.md file
+	 * by replacing the content between start and end tags with generated content
+	 * @param projectPath The absolute path to the project
+	 * @param noHeader If true, flatten the output without category headers
+	 * @returns Promise that resolves when the file is updated or rejects with an error
+	 */
+	public async updateGitHubInstructions(
+		projectPath: string,
+		noHeader?: boolean,
+	): Promise<void> {
+		try {
+			const githubFilePath = path.join(
+				projectPath,
+				'.github',
+				'copilot-instructions.md',
+			);
+
+			try {
+				// Check if the file exists
+				await fs.access(githubFilePath);
+
+				// Update file using the class method
+				await this.updateFileInstructions(githubFilePath, noHeader);
+
+				this.logger.info(
+					`Updated GitHub Copilot instructions at ${githubFilePath}`,
+				);
+			} catch (error: unknown) {
+				this.logger.warn(
+					`Could not process GitHub Copilot instructions at ${githubFilePath}`,
+					error as Error,
+				);
+				throw error;
+			}
+		} catch (error: unknown) {
+			this.logger.error(
+				`Error updating GitHub Copilot instructions`,
+				error as Error,
+			);
+			throw error;
+		}
 	}
 
 	/**
