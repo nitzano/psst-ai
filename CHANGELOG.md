@@ -1,5 +1,15 @@
 # psst-ai
 
+## 1.2.0
+
+### Minor Changes
+
+- ee3b3a7: allow to scan nextjs projects
+
+### Patch Changes
+
+- 80d4f74: updated docs
+
 ## 1.1.2
 
 ### Patch Changes
