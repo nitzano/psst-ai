@@ -3,7 +3,7 @@ export enum Category {
 	PackageManager = 'package_manager',
 	NodeVersion = 'node_version',
 	Linting = 'linting',
-	XoLinting = 'xo_linting',
+	Xo = 'XO',
 	Testing = 'testing',
 	Prettier = 'prettier',
 	NextJs = 'nextjs',
@@ -15,4 +15,4 @@ export type AiRule = {
 };
 
 // Re-export CLI options types
-export {type CliOptions, validateCliOptions} from './types/cli-options.js';
+export {validateCliOptions, type CliOptions} from './types/cli-options.js';

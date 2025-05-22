@@ -11,6 +11,7 @@ const categoryDisplayTitles: Record<Category, string> = {
 	[Category.Linting]: 'Linting',
 	[Category.Testing]: 'Testing',
 	[Category.NextJs]: 'Next.js',
+	[Category.Xo]: 'XO',
 };
 
 /**

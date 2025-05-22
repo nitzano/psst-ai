@@ -1,4 +1,3 @@
-import {existsSync} from 'node:fs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {Category, type AiRule} from '../../types.js';
@@ -90,7 +89,11 @@ export class XoScanner extends BaseScanner {
 		if (await this.fileExists(packageJsonPath)) {
 			try {
 				const packageJsonContent = await fs.readFile(packageJsonPath, 'utf8');
-				const packageJson = JSON.parse(packageJsonContent);
+				const packageJson = JSON.parse(packageJsonContent) as {
+					dependencies?: Record<string, string>;
+					devDependencies?: Record<string, string>;
+					peerDependencies?: Record<string, string>;
+				};
 
 				const allDependencies = {
 					...packageJson.dependencies,
@@ -146,19 +149,19 @@ export class XoScanner extends BaseScanner {
 		// Add main rule for using XO
 		if (hasDependency) {
 			recommendations.push({
-				category: Category.XoLinting,
+				category: Category.Xo,
 				rule: 'Use xo for linting.',
 			});
 
 			// Add rule for configuration location
 			if (configFile) {
 				recommendations.push({
-					category: Category.XoLinting,
+					category: Category.Xo,
 					rule: `XO configuration found in: ${configFile}`,
 				});
 			} else if (packageJsonConfig) {
 				recommendations.push({
-					category: Category.XoLinting,
+					category: Category.Xo,
 					rule: 'XO configuration found in package.json',
 				});
 			}
@@ -188,7 +191,7 @@ export class XoScanner extends BaseScanner {
 					: 'tabs';
 
 			recommendations.push({
-				category: Category.XoLinting,
+				category: Category.Xo,
 				rule: `Use ${indentation} for indentation.`,
 			});
 		}
@@ -197,7 +200,7 @@ export class XoScanner extends BaseScanner {
 		if (config.semicolon !== undefined) {
 			const useSemicolons = Boolean(config.semicolon);
 			recommendations.push({
-				category: Category.XoLinting,
+				category: Category.Xo,
 				rule: `${useSemicolons ? 'Use' : 'Do not use'} semicolons.`,
 			});
 		}
@@ -205,7 +208,7 @@ export class XoScanner extends BaseScanner {
 		// Check for prettier integration
 		if (config.prettier !== undefined) {
 			recommendations.push({
-				category: Category.XoLinting,
+				category: Category.Xo,
 				rule: 'Use XO with Prettier integration.',
 			});
 		}
@@ -215,7 +218,7 @@ export class XoScanner extends BaseScanner {
 			const environments = config.envs as string[];
 			if (environments.length > 0) {
 				recommendations.push({
-					category: Category.XoLinting,
+					category: Category.Xo,
 					rule: `XO configured for environments: ${environments.join(', ')}.`,
 				});
 			}
@@ -224,7 +227,7 @@ export class XoScanner extends BaseScanner {
 		// Check for TypeScript support
 		if (config.typescript !== undefined) {
 			recommendations.push({
-				category: Category.XoLinting,
+				category: Category.Xo,
 				rule: 'Use XO with TypeScript support.',
 			});
 		}
