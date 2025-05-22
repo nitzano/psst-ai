@@ -1,4 +1,6 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Pages Router Example
+
+This is a [Next.js](https://nextjs.org) project that demonstrates the Pages Router pattern. This is the original routing system in Next.js, as opposed to the newer App Router.
 
 ## Getting Started
 
@@ -16,9 +18,19 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You can start editing the page by modifying `src/pages/index.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Pages Router Structure
+
+This project follows the Pages Router structure:
+
+- `src/pages/_app.tsx` - The custom App component
+- `src/pages/_document.tsx` - The custom Document component
+- `src/pages/index.tsx` - The home page
+- `src/styles/globals.css` - Global styles
+- `src/styles/Home.module.css` - Component-level styles
+
+Learn more about the Pages Router in the [Next.js Documentation](https://nextjs.org/docs/pages/building-your-application/routing).
 
 ## Learn More
 
