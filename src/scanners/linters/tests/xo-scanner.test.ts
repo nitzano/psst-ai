@@ -1,11 +1,10 @@
-import path from 'node:path';
-import {describe, expect, it, vi} from 'vitest';
+import {describe, expect, it, vi, beforeEach} from 'vitest';
 import {Category} from '../../../types.js';
 import {XoScanner} from '../xo-scanner.js';
 
 const mockFs = {
-	access: vi.fn(),
-	readFile: vi.fn(),
+	access: vi.fn<[string], Promise<void>>(),
+	readFile: vi.fn<[string, string], Promise<string>>(),
 };
 
 vi.mock('node:fs/promises', () => ({
@@ -26,7 +25,7 @@ describe('XoScanner', () => {
 		// Mock file existence
 		mockFs.access.mockImplementation(async (path: string) => {
 			if (path.includes('xo.config.js')) {
-				return;
+				return undefined;
 			}
 
 			throw new Error('File not found');
@@ -46,11 +45,11 @@ describe('XoScanner', () => {
 
 		expect(rules).toHaveLength(2);
 		expect(rules[0]).toEqual({
-			category: Category.XoLinting,
+			category: Category.Xo,
 			rule: 'Use xo for linting.',
 		});
 		expect(rules[1]).toEqual({
-			category: Category.XoLinting,
+			category: Category.Xo,
 			rule: 'XO configuration found in: xo.config.js',
 		});
 	});
@@ -83,19 +82,19 @@ describe('XoScanner', () => {
 
 		expect(rules).toHaveLength(4);
 		expect(rules[0]).toEqual({
-			category: Category.XoLinting,
+			category: Category.Xo,
 			rule: 'Use xo for linting.',
 		});
 		expect(rules[1]).toEqual({
-			category: Category.XoLinting,
+			category: Category.Xo,
 			rule: 'XO configuration found in package.json',
 		});
 		expect(rules[2]).toEqual({
-			category: Category.XoLinting,
+			category: Category.Xo,
 			rule: 'Use 2 spaces for indentation.',
 		});
 		expect(rules[3]).toEqual({
-			category: Category.XoLinting,
+			category: Category.Xo,
 			rule: 'Do not use semicolons.',
 		});
 	});
