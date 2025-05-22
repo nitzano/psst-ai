@@ -19,6 +19,8 @@
 - Each scanner should be in its own file.
 - Each Scanner can contain to multiple categories, if needed add more enums to Category enums
 - Nest similar scanners in a folder
+- Each scanner should have a boolean method which returns true if the scanner is applicable to the codebase, don't log errors if not
+- Scanner should extract information from the configuration files if possible
 - Scanners should be direct to what they do, and not be too generic
 - If there are 3rd party which can be use to write a scanner, use them
 

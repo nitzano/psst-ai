@@ -5,6 +5,7 @@ export enum Category {
 	Linting = 'linting',
 	Testing = 'testing',
 	Prettier = 'prettier',
+	NextJs = 'nextjs',
 }
 
 export type AiRule = {

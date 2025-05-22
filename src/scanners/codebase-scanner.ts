@@ -3,6 +3,7 @@ import {MarkdownBuilder} from '../builders/markdown-builder.js';
 import {logger} from '../services/logger.js';
 import type {AiRule} from '../types.js';
 import {TestingFrameworkScanner} from './base/testers/testing-framework-scanner.js';
+import {NextjsScanner} from './frameworks/nextjs-scanner.js';
 import {LintingScanner} from './linters/linting-scanner.js';
 import {NodeVersionScanner} from './node-version-scanner.js';
 import {PackageManagerScanner} from './package-manager-scanner.js';
@@ -68,6 +69,7 @@ export class CodebaseScanner {
 			new LintingScanner(this.pathToScan),
 			new TestingFrameworkScanner(this.pathToScan),
 			new PrettierScanner(this.pathToScan),
+			new NextjsScanner(this.pathToScan),
 			// Add more scanners here as they are implemented
 		];
 
