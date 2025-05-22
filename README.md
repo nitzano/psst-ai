@@ -132,10 +132,11 @@ npx psst-ai -f ./.windsurf/ai-instructions.md
 
 ## Command Options
 
-- `-o, --output <path>` - Save output to a file
-- `-q, --quiet` - Suppress console output
-- `-v, --verbose` - Show verbose output
-- `--no-header` - Flatten output without category headers
+```
+  -o, --output <path>  Save output to a file
+  --no-header          Flatten output without category headers
+  -f, --file <path>    File path to update with AI instructions
+```
 
 ## 🧩 What's Detected?
 
