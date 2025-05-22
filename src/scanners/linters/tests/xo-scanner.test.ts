@@ -3,8 +3,8 @@ import {Category} from '../../../types.js';
 import {XoScanner} from '../xo-scanner.js';
 
 const mockFs = {
-	access: vi.fn<[string], Promise<void>>(),
-	readFile: vi.fn<[string, string], Promise<string>>(),
+	access: vi.fn(),
+	readFile: vi.fn(),
 };
 
 vi.mock('node:fs/promises', () => ({
@@ -19,13 +19,16 @@ describe('XoScanner', () => {
 	const testDirectory = '/test/dir';
 
 	beforeEach(() => {
-		vi.resetAllMocks();
+		// Reset mocks individually instead of using resetAllMocks
+		mockFs.access.mockReset();
+		mockFs.readFile.mockReset();
 	});
+
 	it('should detect XO configuration in standalone config file', async () => {
 		// Mock file existence
 		mockFs.access.mockImplementation(async (path: string) => {
 			if (path.includes('xo.config.js')) {
-				return undefined;
+				return;
 			}
 
 			throw new Error('File not found');

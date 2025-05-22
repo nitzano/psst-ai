@@ -32,20 +32,35 @@ export class XoScanner extends BaseScanner {
 			// Check if XO is a dependency
 			const hasDependency = await this.hasXoDependency();
 
-			// If no XO configuration found, don't return any recommendation
+			// If no XO configuration found, don't return any recommendations
 			if (!configFile && !hasDependency) {
 				return [];
 			}
 
-			// Check for XO configuration in package.json
-			const packageJsonConfig = await this.getXoConfigFromPackageJson();
+			// Get config either from package.json or external config file
+			let config: Record<string, unknown> | undefined;
 
-			// Generate recommendations based on the findings
-			return this.generateRecommendations(
-				configFile,
-				hasDependency,
-				packageJsonConfig,
-			);
+			// First try to get from external file
+			if (configFile) {
+				config = await this.readXoConfigFile(configFile);
+			}
+
+			// If no config from file, try package.json
+			config ||= await this.getXoConfigFromPackageJson();
+
+			// Initialize recommendations array
+			const recommendations: AiRule[] = [];
+
+			// Only add the useful rules (not redundant ones)
+			if (hasDependency && config) {
+				// Add essential recommendations that provide actionable information
+				this.detectIndentation(config, recommendations);
+				this.detectSemicolons(config, recommendations);
+				this.detectPrettierIntegration(config, recommendations);
+				this.detectIgnores(config, recommendations);
+			}
+
+			return recommendations;
 		} catch (error) {
 			this.logger.error('Error scanning for XO configuration', error);
 			return [];
@@ -137,52 +152,76 @@ export class XoScanner extends BaseScanner {
 	}
 
 	/**
-	 * Generate recommendations based on XO findings
+	 * Read and parse XO configuration file
 	 */
-	private generateRecommendations(
-		configFile: string | undefined,
-		hasDependency: boolean,
-		packageJsonConfig: Record<string, unknown> | undefined,
-	): AiRule[] {
-		const recommendations: AiRule[] = [];
+	private async readXoConfigFile(
+		configFile: string,
+	): Promise<Record<string, unknown> | undefined> {
+		try {
+			const filePath = path.join(this.rootPath, configFile);
+			const fileContent = await fs.readFile(filePath, 'utf8');
 
-		// Add main rule for using XO
-		if (hasDependency) {
-			recommendations.push({
-				category: Category.Xo,
-				rule: 'Use xo for linting.',
-			});
-
-			// Add rule for configuration location
-			if (configFile) {
-				recommendations.push({
-					category: Category.Xo,
-					rule: `XO configuration found in: ${configFile}`,
-				});
-			} else if (packageJsonConfig) {
-				recommendations.push({
-					category: Category.Xo,
-					rule: 'XO configuration found in package.json',
-				});
+			// For JSON config files
+			if (configFile.endsWith('.json') || configFile === '.xo-config') {
+				return JSON.parse(fileContent) as Record<string, unknown>;
 			}
 
-			// Add rules for specific XO config options
-			if (packageJsonConfig) {
-				this.addConfigRules(packageJsonConfig, recommendations);
+			// For JS files, try to extract content - this is a simplified approach
+			if (
+				configFile.endsWith('.js') ||
+				configFile.endsWith('.cjs') ||
+				configFile.endsWith('.mjs')
+			) {
+				// Simple RegExp to extract common configuration patterns
+				try {
+					// Try to match module.exports pattern
+					const moduleExportsMatch = /module\.exports\s*=\s*({[\s\S]*})/i.exec(
+						fileContent,
+					);
+					if (moduleExportsMatch?.[1]) {
+						// Clean the extracted text to make it valid JSON (basic approach)
+						const cleanedContent = moduleExportsMatch[1]
+							.replaceAll(/\/\/.*$/gm, '') // Remove single line comments
+							.replaceAll(/\/\*[\s\S]*?\*\//g, '') // Remove multi-line comments
+							.replaceAll(/,(\s*[}\]])/g, '$1') // Remove trailing commas
+							.replaceAll(/(\w+):/g, '"$1":') // Quote property names
+							.replaceAll("'", '"'); // Replace single quotes with double quotes
+
+						return JSON.parse(cleanedContent) as Record<string, unknown>;
+					}
+
+					// Try to match export default pattern
+					const exportDefaultMatch = /export\s+default\s*({[\s\S]*})/i.exec(
+						fileContent,
+					);
+					if (exportDefaultMatch?.[1]) {
+						const cleanedContent = exportDefaultMatch[1]
+							.replaceAll(/\/\/.*$/gm, '')
+							.replaceAll(/\/\*[\s\S]*?\*\//g, '')
+							.replaceAll(/,(\s*[}\]])/g, '$1')
+							.replaceAll(/(\w+):/g, '"$1":')
+							.replaceAll("'", '"');
+
+						return JSON.parse(cleanedContent) as Record<string, unknown>;
+					}
+				} catch (error) {
+					this.logger.debug('Error parsing JS config file', error);
+				}
 			}
+		} catch (error) {
+			this.logger.error(`Error reading XO config file: ${configFile}`, error);
 		}
 
-		return recommendations;
+		return undefined;
 	}
 
 	/**
-	 * Add specific rules based on XO configuration
+	 * Detect indentation settings
 	 */
-	private addConfigRules(
+	private detectIndentation(
 		config: Record<string, unknown>,
 		recommendations: AiRule[],
 	): void {
-		// Check for space vs tabs
 		if (config.space !== undefined) {
 			const indentation =
 				config.space === true ||
@@ -195,8 +234,15 @@ export class XoScanner extends BaseScanner {
 				rule: `Use ${indentation} for indentation.`,
 			});
 		}
+	}
 
-		// Check for semicolons setting
+	/**
+	 * Detect semicolon settings
+	 */
+	private detectSemicolons(
+		config: Record<string, unknown>,
+		recommendations: AiRule[],
+	): void {
 		if (config.semicolon !== undefined) {
 			const useSemicolons = Boolean(config.semicolon);
 			recommendations.push({
@@ -204,32 +250,38 @@ export class XoScanner extends BaseScanner {
 				rule: `${useSemicolons ? 'Use' : 'Do not use'} semicolons.`,
 			});
 		}
+	}
 
-		// Check for prettier integration
-		if (config.prettier !== undefined) {
+	/**
+	 * Detect Prettier integration
+	 */
+	private detectPrettierIntegration(
+		config: Record<string, unknown>,
+		recommendations: AiRule[],
+	): void {
+		if (config.prettier === true) {
 			recommendations.push({
 				category: Category.Xo,
 				rule: 'Use XO with Prettier integration.',
 			});
 		}
+	}
 
-		// Check for specific environments
-		if (config.envs && Array.isArray(config.envs)) {
-			const environments = config.envs as string[];
-			if (environments.length > 0) {
+	/**
+	 * Detect ignores configuration
+	 */
+	private detectIgnores(
+		config: Record<string, unknown>,
+		recommendations: AiRule[],
+	): void {
+		if (config.ignores && Array.isArray(config.ignores)) {
+			const ignores = config.ignores as string[];
+			if (ignores.length > 0) {
 				recommendations.push({
 					category: Category.Xo,
-					rule: `XO configured for environments: ${environments.join(', ')}.`,
+					rule: `Use ignores to exclude files: ${ignores.join(', ')}.`,
 				});
 			}
-		}
-
-		// Check for TypeScript support
-		if (config.typescript !== undefined) {
-			recommendations.push({
-				category: Category.Xo,
-				rule: 'Use XO with TypeScript support.',
-			});
 		}
 	}
 }
