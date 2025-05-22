@@ -77,7 +77,6 @@ yarn dlx psst-ai
 npx psst-ai /path/to/your/project
 
 ```
-- `-f, --file <path>` - Load file with sections to update
 
 That's it! The tool will:
 1. Scan your project files and configuration
