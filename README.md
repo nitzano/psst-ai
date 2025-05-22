@@ -10,24 +10,6 @@
 
 </div>
 
-- [🌟 Features](#-features)
-- [💡 Why Use psst-ai?](#-why-use-psst-ai)
-- [📦 Setup](#-setup)
-- [🚀 Usage](#-usage)
-- [📄 Generated Instructions Format](#-generated-instructions-format)
-- [🔧 How to Use the Generated Instructions](#-how-to-use-the-generated-instructions)
-  - [Method 1: Copy and Paste](#method-1-copy-and-paste)
-  - [Method 2: Automatic File Updates](#method-2-automatic-file-updates)
-- [🧰 Editors Integration](#-editors-integration)
-  - [VSCode](#vscode)
-  - [Cursor](#cursor)
-  - [Windsurf](#windsurf)
-- [Command Options](#command-options)
-- [🧩 What's Detected?](#-whats-detected)
-
-
-
-
 Automatically extract coding conventions and preferences from your project and generate tailored instructions for AI code assistants like GitHub Copilot, Cursor, and more.
 
 ## 🌟 Features
