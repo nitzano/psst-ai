@@ -1,0 +1,31 @@
+{
+  "name": "xo-example-2",
+  "version": "1.0.0",
+  "description": "Second example project for testing XO scanner with package.json configuration",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "lint": "xo",
+    "lint:fix": "xo --fix"
+  },
+  "keywords": ["xo", "linting", "example"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "vitest": "^0.32.0",
+    "xo": "^0.54.0"
+  },
+  "xo": {
+    "space": false,
+    "semicolon": false,
+    "typescript": true,
+    "prettier": true,
+    "envs": ["node", "browser", "es2022"],
+    "rules": {
+      "unicorn/no-null": "off",
+      "unicorn/prevent-abbreviations": "off"
+    }
+  }
+}

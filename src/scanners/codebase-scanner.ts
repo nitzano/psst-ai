@@ -4,7 +4,7 @@ import {logger} from '../services/logger.js';
 import type {AiRule} from '../types.js';
 import {TestingFrameworkScanner} from './base/testers/testing-framework-scanner.js';
 import {NextjsScanner} from './frameworks/nextjs-scanner.js';
-import {LintingScanner} from './linters/linting-scanner.js';
+import {LintingScanner, XoScanner} from './linters/index.js';
 import {NodeVersionScanner} from './node-version-scanner.js';
 import {PackageManagerScanner} from './package-manager-scanner.js';
 import {PrettierScanner} from './prettier-scanner.js';
@@ -67,6 +67,7 @@ export class CodebaseScanner {
 			new PackageManagerScanner(this.pathToScan),
 			new NodeVersionScanner(this.pathToScan),
 			new LintingScanner(this.pathToScan),
+			new XoScanner(this.pathToScan),
 			new TestingFrameworkScanner(this.pathToScan),
 			new PrettierScanner(this.pathToScan),
 			new NextjsScanner(this.pathToScan),

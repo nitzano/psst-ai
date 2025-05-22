@@ -3,6 +3,7 @@ export enum Category {
 	PackageManager = 'package_manager',
 	NodeVersion = 'node_version',
 	Linting = 'linting',
+	XoLinting = 'xo_linting',
 	Testing = 'testing',
 	Prettier = 'prettier',
 	NextJs = 'nextjs',
