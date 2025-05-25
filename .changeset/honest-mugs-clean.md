@@ -1,5 +1,0 @@
----
-"psst-ai": patch
----
-
-docs
