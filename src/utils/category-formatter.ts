@@ -13,6 +13,7 @@ const categoryDisplayTitles: Record<Category, string> = {
 	[Category.NextJs]: 'Next.js',
 	[Category.Xo]: 'XO',
 	[Category.Ava]: 'AVA',
+	[Category.Vue]: 'Vue.js',
 };
 
 /**

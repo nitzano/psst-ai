@@ -8,6 +8,7 @@ export enum Category {
 	Prettier = 'prettier',
 	NextJs = 'nextjs',
 	Ava = 'ava',
+	Vue = 'vue',
 }
 
 export type AiRule = {
