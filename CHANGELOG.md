@@ -1,5 +1,13 @@
 # psst-ai
 
+## 1.3.1
+
+### Patch Changes
+
+- bb1b4df: docs
+- d0d6add: docs
+- de832f1: docs
+
 ## 1.3.0
 
 ### Minor Changes
