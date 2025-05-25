@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import {Category, type AiRule} from '../types.js';
-import {BaseScanner} from './base-scanner.js';
+import {Category, type AiRule} from '../../types.js';
+import {BaseScanner} from '../base-scanner.js';
 
 /**
  * Scanner to detect if the project uses .nvmrc for Node.js version management

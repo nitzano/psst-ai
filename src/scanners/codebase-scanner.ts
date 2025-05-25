@@ -5,9 +5,9 @@ import type {AiRule} from '../types.js';
 import {TestingFrameworkScanner} from './base/testers/testing-framework-scanner.js';
 import {NextjsScanner} from './frameworks/nextjs-scanner.js';
 import {LintingScanner, XoScanner} from './linters/index.js';
-import {NodeVersionScanner} from './node-version-scanner.js';
 import {PackageManagerScanner} from './package-manager-scanner.js';
 import {PrettierScanner} from './linters/prettier-scanner.js';
+import {NodeVersionScanner} from './node/node-version-scanner.js';
 
 /**
  * Scanner class to handle scanning a directory
