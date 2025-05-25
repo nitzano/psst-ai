@@ -31,23 +31,10 @@ Automatically extract coding conventions and preferences from your project and g
 - **Project Onboarding**: Help new team members understand coding standards through AI
 - **Lightweight & Fast**: Focused CLI design means quick installation and execution
 
-## 📦 Setup
+## 🚀 Quick Start
 
 ```bash
-# Install globally with pnpm (recommended)
-pnpm add -g psst-ai
-
-# Or with npm
-npm install -g psst-ai
-
-# Or with yarn
-yarn global add psst-ai
-```
-
-## 🚀 Usage
-
-```bash
-# Run using npx without installing
+# Run directly without installing (recommended)
 npx psst-ai
 
 # Or with pnpm
@@ -58,7 +45,11 @@ yarn dlx psst-ai
 
 # Specify a custom directory to scan
 npx psst-ai /path/to/your/project
+```
 
+**Want to install globally?**
+```bash
+pnpm add -g psst-ai    # or npm install -g psst-ai
 ```
 
 That's it! The tool will:
