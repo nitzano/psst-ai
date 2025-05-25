@@ -6,7 +6,7 @@ import {NextjsScanner} from './frameworks/nextjs-scanner.js';
 import {LintingScanner, XoScanner} from './linters/index.js';
 import {PrettierScanner} from './linters/prettier-scanner.js';
 import {NodeVersionScanner} from './node/node-version-scanner.js';
-import {PackageManagerScanner} from './package-manager-scanner.js';
+import {PackageManagerScanner} from './node/package-manager-scanner.js';
 import {TestingFrameworkScanner} from './test/testing-framework-scanner.js';
 
 /**

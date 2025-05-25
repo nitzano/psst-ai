@@ -3,11 +3,11 @@
 import path from 'node:path';
 import process from 'node:process';
 import {Command} from 'commander';
+import {MarkdownBuilder} from './builders/markdown-builder.js';
 import {CodebaseScanner} from './scanners/codebase-scanner.js';
 import {logger} from './services/logger.js';
 import {packageInfo} from './services/package-info.js';
 import {type CliOptions, validateCliOptions} from './types.js';
-import {MarkdownBuilder} from './builders/markdown-builder.js';
 
 // Export types (for programmatic access when installed as dependency)
 export type {AiRule, Category, CliOptions} from './types.js';
@@ -20,7 +20,7 @@ export {BaseScanner} from './scanners/base-scanner.js';
 export {CodebaseScanner as Scanner} from './scanners/codebase-scanner.js';
 export {LintingScanner} from './scanners/linters/linting-scanner.js';
 export {NodeVersionScanner} from './scanners/node-version-scanner.js';
-export {PackageManagerScanner} from './scanners/package-manager-scanner.js';
+export {PackageManagerScanner} from './scanners/node/package-manager-scanner.js';
 
 // Export services
 export {logger} from './services/logger.js';
