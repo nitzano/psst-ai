@@ -16,6 +16,7 @@
 # AI rule
 - AI Rule is a set of rules that AI Code Editor can use to write better code.
 - AI Rules are created by Scanners.
+- We prefer less rules but more accurate rules.
 
 ## Scanners
 
