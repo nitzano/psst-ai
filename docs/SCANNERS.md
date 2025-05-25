@@ -1,10 +1,4 @@
 - [List of scanners](#list-of-scanners)
-  - [Package Management](#package-management)
-  - [Node.js Environment](#nodejs-environment)
-  - [Frameworks](#frameworks)
-  - [Linters](#linters)
-  - [Test Frameworks](#test-frameworks)
-  - [Database](#database)
 - [Coming Soon](#coming-soon)
 
 
@@ -12,57 +6,20 @@ Total Scanners: 12
 
 # List of scanners
 
-## Package Management
-
-1. **PackageManagerScanner** - Detects which package manager is used in the project (npm, yarn, pnpm).
-   - Examples: Various project examples using different package managers
-
-## Node.js Environment
-
-1. **NodeVersionScanner** - Identifies Node.js version specifications in the project.
-   
-2. **NvmrcScanner** - Extracts Node.js version information from .nvmrc files.
-
-## Frameworks
-
-1. **NextjsScanner** - Analyzes Next.js configuration patterns in projects:
-   - App Router vs Pages Router usage
-   - React strict mode settings
-   - Internationalization configuration
-   - Output mode settings
-
-2. **VueScanner** - Detects Vue.js version and configuration patterns:
-   - Vue 2.x vs Vue 3.x detection
-   - Vue CLI, Vite, or Nuxt.js setup detection
-   - Composition API usage
-   - Vue Router and state management (Vuex/Pinia)
-   - TypeScript integration
-   - Examples: `examples/vue-1`
-
-## Linters
-1. **XoScanner** - Identifies XO linting configuration patterns including indentation, semicolons, and prettier integration.
-   - Examples: `examples/xo-1`, `examples/xo-2`
-   
-2. **PrettierScanner** - Identifies Prettier configuration in projects.
-   - Examples: `examples/prettier`
-   
-3. **LintingScanner** - Determines which linting tools are used in projects.
-
-## Test Frameworks
-
-1. **TestingFrameworkScanner** - Identifies testing frameworks used in projects.
-   - Supported frameworks: jest, mocha, vitest, ava, jasmine, karma, tape, qunit, cypress, playwright, and more
-
-2. **AvaScanner** - Analyzes AVA test runner configuration patterns including file patterns, concurrency, timeout, TypeScript support, and Babel integration.
-   - Examples: `examples/ava-1`, `examples/ava-2`
-
-3. **JestScanner** - Analyzes Jest configuration patterns in projects including test environment, setup files, transforms, coverage, and module mapping.
-   - Examples: `examples/jest`
-
-## Database
-
-1. **PrismaScanner** - Analyzes Prisma schema and configuration patterns including database providers, relations, enums, indexes, and migration settings.
-   - Examples: `examples/prisma`
+| Scanner Name | Description | Category | Examples |
+|-------------|-------------|----------|----------|
+| PackageManagerScanner | Detects which package manager is used in the project (npm, yarn, pnpm) | Package Management | Various project examples using different package managers |
+| NodeVersionScanner | Identifies Node.js version specifications in the project | Node.js Environment | - |
+| NvmrcScanner | Extracts Node.js version information from .nvmrc files | Node.js Environment | - |
+| NextjsScanner | Analyzes Next.js configuration patterns in projects (App Router vs Pages Router usage, React strict mode settings, Internationalization configuration, Output mode settings) | Frameworks | - |
+| VueScanner | Detects Vue.js version and configuration patterns (Vue 2.x vs Vue 3.x detection, Vue CLI/Vite/Nuxt.js setup detection, Composition API usage, Vue Router and state management, TypeScript integration) | Frameworks | `examples/vue-1` |
+| XoScanner | Identifies XO linting configuration patterns including indentation, semicolons, and prettier integration | Linters | `examples/xo-1`, `examples/xo-2` |
+| PrettierScanner | Identifies Prettier configuration in projects | Linters | `examples/prettier` |
+| LintingScanner | Determines which linting tools are used in projects | Linters | - |
+| TestingFrameworkScanner | Identifies testing frameworks used in projects (jest, mocha, vitest, ava, jasmine, karma, tape, qunit, cypress, playwright, and more) | Test Frameworks | - |
+| AvaScanner | Analyzes AVA test runner configuration patterns including file patterns, concurrency, timeout, TypeScript support, and Babel integration | Test Frameworks | `examples/ava-1`, `examples/ava-2` |
+| JestScanner | Analyzes Jest configuration patterns in projects including test environment, setup files, transforms, coverage, and module mapping | Test Frameworks | `examples/jest` |
+| PrismaScanner | Analyzes Prisma schema and configuration patterns including database providers, relations, enums, indexes, and migration settings | Database | `examples/prisma` |
 
 # Coming Soon
 
