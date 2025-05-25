@@ -16,7 +16,7 @@
   - [Accessibility](#accessibility)
 
 
-Total Scanners: 25
+Total Scanners: 9
 
 # List of scanners
 
