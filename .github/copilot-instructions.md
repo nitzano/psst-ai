@@ -13,6 +13,10 @@
 - Prefer implements over extends
 - Place every enum in a separate file.
 
+# AI rule
+- AI Rule is a set of rules that AI Code Editor can use to write better code.
+- AI Rules are created by Scanners.
+
 ## Scanners
 
 - A Scanner is a module that detects specific configurations or patterns in a codebase and creates rules based on those configurations that AI Code editor can operate better and write better code.
