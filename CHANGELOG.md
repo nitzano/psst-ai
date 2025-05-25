@@ -1,5 +1,21 @@
 # psst-ai
 
+## 1.2.0
+
+### Minor Changes
+
+- ee3b3a7: allow to scan nextjs projects
+- 6a72b61: Added a new scanner: PrismaScanner - Analyzes Prisma schema and configuration patterns including database providers, relations, enums, indexes, and migration settings
+- 0da15fc: add ava scanner
+- 18a478b: Added a new scanner: JestScanner - Analyzes Jest configuration patterns in projects including test environment, setup files, transforms, coverage, and module mapping
+- 178c5a5: add vue scanner
+
+### Patch Changes
+
+- 376bcfb: docs
+- 65a4e1e: docs
+- 80d4f74: updated docs
+
 ## 1.1.2
 
 ### Patch Changes
