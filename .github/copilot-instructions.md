@@ -16,12 +16,12 @@
 ## Scanners
 
 - New scanners should be added to the `scanners` directory.
-- Each scanner should be in its own file.
+- Each scanner should be in its own file, if there are multiple files for a scanner, they should be in a folder with the scanner name.
 - Each Scanner can create rules to multiple existing categories.
 - Each scanner should add a new category for itself. choose simple names as possible.
-- When adding a new category, update categoryDisplayTitles in src/utils/category-formmatter.ts
-- focus on extracting recommendations based on the configuration file related to the scanner specific things in the codebase
-- For every rule or rules find by the scanner, there should be a single method in the class to be used by scan()
+- When adding a new category, update categoryDisplayTitles in src/utils/category-formatter.ts
+- focus on extracting recommendations based on the configuration files related to the scanner directly.
+- There should a method in the scanner that returns specific rule or rules.
 - If there are 3rd party which can be use to be used to extract information by the scanners, use them.
 - Nest similar scanners in a folder
 
