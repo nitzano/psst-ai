@@ -16,7 +16,7 @@
   - [Accessibility](#accessibility)
 
 
-Total Scanners: 9
+Total Scanners: 10
 
 # List of scanners
 
@@ -38,6 +38,14 @@ Total Scanners: 9
    - React strict mode settings
    - Internationalization configuration
    - Output mode settings
+
+2. **VueScanner** - Detects Vue.js version and configuration patterns:
+   - Vue 2.x vs Vue 3.x detection
+   - Vue CLI, Vite, or Nuxt.js setup detection
+   - Composition API usage
+   - Vue Router and state management (Vuex/Pinia)
+   - TypeScript integration
+   - Examples: `examples/vue-1`
 
 ## Linters
 1. **XoScanner** - Identifies XO linting configuration patterns including indentation, semicolons, and prettier integration.
@@ -75,10 +83,7 @@ Total Scanners: 9
 ## Frameworks
 
 
-1. **VueScanner** - Detects Vue.js version and configuration patterns.
-   - Examples: `examples/vue`
-   
-2. **SvelteScanner** - Analyzes Svelte configuration and usage patterns.
+1. **SvelteScanner** - Analyzes Svelte configuration and usage patterns.
    - Examples: `examples/svelte`
 
 ## Linters
