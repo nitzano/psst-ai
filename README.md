@@ -83,6 +83,11 @@ Use xo for linting.
 Use vitest testing framework.
 ```
 
+## 🧩 What's Detected?
+
+Currently, psst-ai can detect:
+See [our scanners documentation](./docs/SCANNERS.md) for a complete list of everything psst-ai can detect.
+
 ## 🔧 How to Use the Generated Instructions
 
 
@@ -138,7 +143,3 @@ npx psst-ai -f ./.windsurf/ai-instructions.md
   -f, --file <path>    File path to update with AI instructions
 ```
 
-## 🧩 What's Detected?
-
-Currently, psst-ai can detect:
-See [our scanners documentation](./docs/SCANNERS.md) for a complete list of everything psst-ai can detect.
