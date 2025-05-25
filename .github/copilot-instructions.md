@@ -24,6 +24,7 @@
 - There should a method in the scanner that returns specific rule or rules.
 - If there are 3rd party which can be use to be used to extract information by the scanners, use them.
 - Place similar scanners in a folder
+- Update docs/SCANNERS.md with the new scanner information.
 
 ## Examples
 
