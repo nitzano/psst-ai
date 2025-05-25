@@ -38,7 +38,7 @@
   - don't put too much effort in the example codebase, just enough to demonstrate the scanner's functionality.
   - If there is a specific cli builder for the scanner, use it to create the example codebase.
   - test the scanner by running `pnpm dev <examples_folder>` from the root directory.
-- After adding a new scanner, run pnpm changeset to add a new minor version change. use the "[SCANNER] [NAME]: [DESCRIPTION]" format.
+- After adding a new scanner, run pnpm changeset to add a new minor version change. use the "[SCANNER] " prefix and the scanner name in the changeset title + description.
 
 ## Examples
 
