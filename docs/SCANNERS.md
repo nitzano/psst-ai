@@ -28,11 +28,8 @@ Total Scanners: 8
    - React strict mode settings
    - Internationalization configuration
    - Output mode settings
-   - Examples: `examples/nextjs`, `examples/nextjs-app-router`, `examples/nextjs-pages`, `examples/nextjs-pages-router`,
-     `examples/next-app-router`, `examples/next-pages-router`
 
 ## Linters
-
 1. **XoScanner** - Identifies XO linting configuration patterns including indentation, semicolons, and prettier integration.
    - Examples: `examples/xo-1`, `examples/xo-2`
    
