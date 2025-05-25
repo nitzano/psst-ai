@@ -58,6 +58,16 @@ Total Scanners: 14
 | RestApiScanner | Identifies REST API patterns and OpenAPI specifications (endpoint structure, validation, documentation) | API |
 | ReduxScanner | Analyzes Redux state management patterns (store configuration, middleware, toolkit usage, DevTools) | State Management |
 | PiniaScanner | Identifies Pinia store patterns for Vue applications (store definition, composition API usage, plugins) | State Management |
+| PythonVersionScanner | Detects Python version requirements and virtual environment configurations (pyproject.toml, requirements.txt, .python-version) | Python Environment |
+| PipScanner | Analyzes pip package management patterns (requirements files, constraints, pip configuration) | Python Environment |
+| PoetryScanner | Identifies Poetry dependency management configuration (pyproject.toml structure, dependency groups, scripts) | Python Environment |
+| FlaskScanner | Detects Flask web framework patterns (app factory, blueprints, configuration, extensions) | Python Frameworks |
+| DjangoScanner | Analyzes Django project structure and configuration (settings, models, views, URL patterns, middleware) | Python Frameworks |
+| PytestScanner | Identifies pytest testing configuration and patterns (conftest.py, fixtures, markers, plugins) | Python Testing |
+| GoModScanner | Analyzes Go module configuration and dependency management (go.mod, go.sum, module versioning) | Go Environment |
+| GoVersionScanner | Detects Go version requirements and build constraints (go.mod version, build tags) | Go Environment |
+| GinScanner | Identifies Gin web framework patterns (routing, middleware, handlers, templates) | Go Frameworks |
+| GoTestScanner | Analyzes Go testing patterns (test files, benchmarks, examples, table-driven tests) | Go Testing |
 | MaterialUIScanner | Analyzes Material-UI/MUI usage and theming patterns (theme customization, component overrides, styling approaches) | UI Libraries |
 | AntDesignScanner | Detects Ant Design configuration and customization patterns (theme variables, component modifications, locale) | UI Libraries |
 | ChakraUIScanner | Identifies Chakra UI setup and theming (custom themes, component variants, responsive design patterns) | UI Libraries |
