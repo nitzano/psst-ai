@@ -1,5 +1,5 @@
-import {logger} from '../services/logger.js';
-import type {AiRule} from '../types.js';
+import {logger} from '../../services/logger.js';
+import type {AiRule} from '../../types.js';
 
 /**
  * Base scanner class that all scanners should extend
