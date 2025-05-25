@@ -15,6 +15,7 @@
 
 ## Scanners
 
+- A Scanner is a module that detects specific configurations or patterns in a codebase and creates rules based on those configurations that AI Code editor can operate better and write better code.
 - New scanners should be added to the `scanners` directory.
 - Each scanner should be in its own file, if there are multiple files for a scanner, they should be in a folder with the scanner name.
 - Each Scanner can create rules to multiple existing categories.
