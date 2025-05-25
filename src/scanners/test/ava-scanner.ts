@@ -5,7 +5,7 @@ import {Category, type AiRule} from '../../types.js';
 import {BaseScanner} from '../base/base-scanner.js';
 
 /**
- * Scanner to detect AVA configuration in a project
+ * Scanner to detect AVA configuration in a project and generate helpful AI recommendations
  */
 export class AvaScanner extends BaseScanner {
 	/**
@@ -49,18 +49,28 @@ export class AvaScanner extends BaseScanner {
 			// Initialize recommendations array
 			const recommendations: AiRule[] = [];
 
-			// Only add useful rules when AVA is actually configured
+			// Add general AVA test writing guidelines
+			recommendations.push({
+				category: Category.Ava,
+				rule: 'Import test from "ava" and use descriptive test names. Use t.is() for equality, t.true()/t.false() for booleans, t.throws() for error testing.',
+			});
+
+			// Only add configuration-specific rules when AVA is actually configured
 			if (hasDependency && config) {
 				// Add essential recommendations based on configuration
 				this.detectFilePattern(config, recommendations);
-				this.detectConcurrency(config, recommendations);
-				this.detectTimeout(config, recommendations);
+				this.detectTestTypes(config, recommendations);
+				this.detectAsync(config, recommendations);
 				this.detectTypeScript(config, recommendations);
 				this.detectRequire(config, recommendations);
-				this.detectBabel(config, recommendations);
 				this.detectMatch(config, recommendations);
-				this.detectVerbose(config, recommendations);
-				this.detectWatchMode(config, recommendations);
+				this.detectTimeouts(config, recommendations);
+			} else if (hasDependency) {
+				// Basic recommendations when AVA is a dependency but no config
+				recommendations.push({
+					category: Category.Ava,
+					rule: 'Place test files in test/ directory or alongside source files with .test.js or .spec.js suffix.',
+				});
 			}
 
 			return recommendations;
@@ -228,7 +238,7 @@ export class AvaScanner extends BaseScanner {
 	}
 
 	/**
-	 * Detect file pattern settings
+	 * Detect file pattern settings and provide helpful guidance
 	 */
 	private detectFilePattern(
 		config: Record<string, unknown>,
@@ -237,57 +247,100 @@ export class AvaScanner extends BaseScanner {
 		if (config.files && Array.isArray(config.files)) {
 			const files = config.files as string[];
 			if (files.length > 0) {
-				recommendations.push({
-					category: Category.Ava,
-					rule: `Configure test file patterns: ${files.join(', ')}.`,
-				});
+				const includePatterns = files.filter(
+					(pattern) => !pattern.startsWith('!'),
+				);
+				const excludePatterns = files.filter((pattern) =>
+					pattern.startsWith('!'),
+				);
+
+				if (includePatterns.length > 0) {
+					recommendations.push({
+						category: Category.Ava,
+						rule: `Place test files in: ${includePatterns.join(', ')}. Use descriptive filenames ending with .test.js or .spec.js.`,
+					});
+				}
+
+				if (excludePatterns.length > 0) {
+					recommendations.push({
+						category: Category.Ava,
+						rule: `Avoid placing test files in: ${excludePatterns.map((p) => p.slice(1)).join(', ')}. These directories are excluded from test discovery.`,
+					});
+				}
 			}
+		} else {
+			// Default AVA patterns
+			recommendations.push({
+				category: Category.Ava,
+				rule: 'Place test files in test/ directory or alongside source files with .test.js or .spec.js suffix.',
+			});
 		}
 	}
 
 	/**
-	 * Detect concurrency settings
+	 * Detect test types based on match patterns
 	 */
-	private detectConcurrency(
+	private detectTestTypes(
 		config: Record<string, unknown>,
 		recommendations: AiRule[],
 	): void {
-		if (config.concurrency !== undefined) {
-			const concurrency = config.concurrency;
-			if (typeof concurrency === 'number') {
+		if (config.match && Array.isArray(config.match)) {
+			const matches = config.match as string[];
+			const includePatterns = matches.filter((m) => !m.startsWith('!'));
+			const excludePatterns = matches.filter((m) => m.startsWith('!'));
+
+			if (includePatterns.some((p) => p.includes('integration'))) {
 				recommendations.push({
 					category: Category.Ava,
-					rule: `Set test concurrency to ${concurrency}.`,
+					rule: 'Write integration tests that test multiple components working together. Use "integration" in test names or filenames.',
 				});
-			} else if (concurrency === false) {
+			}
+
+			if (includePatterns.some((p) => p.includes('unit'))) {
 				recommendations.push({
 					category: Category.Ava,
-					rule: 'Disable test concurrency (run tests serially).',
+					rule: 'Write unit tests that test individual functions or components in isolation. Use "unit" in test names or filenames.',
+				});
+			}
+
+			if (excludePatterns.some((p) => p.includes('unit'))) {
+				recommendations.push({
+					category: Category.Ava,
+					rule: 'Focus on integration tests rather than unit tests. Avoid "unit" in test names based on current configuration.',
+				});
+			}
+
+			if (
+				includePatterns.some(
+					(p) => p.includes('e2e') || p.includes('end-to-end'),
+				)
+			) {
+				recommendations.push({
+					category: Category.Ava,
+					rule: 'Write end-to-end tests that test complete user workflows. Use "e2e" or "end-to-end" in test names.',
 				});
 			}
 		}
 	}
 
 	/**
-	 * Detect timeout settings
+	 * Detect async/await patterns
 	 */
-	private detectTimeout(
+	private detectAsync(
 		config: Record<string, unknown>,
 		recommendations: AiRule[],
 	): void {
-		if (config.timeout !== undefined) {
-			const timeout = config.timeout;
-			if (typeof timeout === 'string' || typeof timeout === 'number') {
-				recommendations.push({
-					category: Category.Ava,
-					rule: `Set test timeout to ${timeout}.`,
-				});
-			}
+		// Check for timeout configuration which suggests async tests
+		if (config.timeout) {
+			recommendations.push({
+				category: Category.Ava,
+				rule: 'Use async/await for asynchronous tests. AVA automatically handles promise-based tests. Consider using t.timeout() for individual test timeouts.',
+			});
 		}
 	}
 
 	/**
-	 * Detect TypeScript configuration
+	 * Detect TypeScript configuration and provide guidance
 	 */
 	private detectTypeScript(
 		config: Record<string, unknown>,
@@ -296,24 +349,22 @@ export class AvaScanner extends BaseScanner {
 		if (config.typescript && typeof config.typescript === 'object') {
 			const tsConfig = config.typescript as Record<string, unknown>;
 
+			recommendations.push({
+				category: Category.Ava,
+				rule: 'Write tests in TypeScript. Import type ExecutionContext from "ava" for test context typing: test("name", (t: ExecutionContext) => { ... }).',
+			});
+
 			if (tsConfig.rewritePaths && typeof tsConfig.rewritePaths === 'object') {
 				recommendations.push({
 					category: Category.Ava,
-					rule: 'Configure TypeScript path rewriting for AVA.',
-				});
-			}
-
-			if (tsConfig.compile !== false) {
-				recommendations.push({
-					category: Category.Ava,
-					rule: 'Enable TypeScript compilation for AVA tests.',
+					rule: 'Import from source paths (e.g., src/) in tests - AVA will automatically rewrite paths to compiled JavaScript.',
 				});
 			}
 		}
 	}
 
 	/**
-	 * Detect require configuration
+	 * Detect require configuration for setup files
 	 */
 	private detectRequire(
 		config: Record<string, unknown>,
@@ -324,33 +375,30 @@ export class AvaScanner extends BaseScanner {
 			if (requires.length > 0) {
 				recommendations.push({
 					category: Category.Ava,
-					rule: `Configure required modules: ${requires.join(', ')}.`,
+					rule: `Setup files are automatically loaded: ${requires.join(', ')}. Use these for global test setup, mocks, or environment configuration.`,
 				});
 			}
 		}
 	}
 
 	/**
-	 * Detect Babel configuration
+	 * Detect timeout configuration
 	 */
-	private detectBabel(
+	private detectTimeouts(
 		config: Record<string, unknown>,
 		recommendations: AiRule[],
 	): void {
-		if (config.babel && typeof config.babel === 'object') {
-			const babelConfig = config.babel as Record<string, unknown>;
-
-			if (babelConfig.testOptions || babelConfig.extensions) {
-				recommendations.push({
-					category: Category.Ava,
-					rule: 'Configure Babel for AVA tests.',
-				});
-			}
+		if (config.timeout !== undefined) {
+			const timeout = config.timeout;
+			recommendations.push({
+				category: Category.Ava,
+				rule: `Default test timeout is ${String(timeout)}. For longer-running tests, use t.timeout(ms) to override individual test timeouts.`,
+			});
 		}
 	}
 
 	/**
-	 * Detect match configuration
+	 * Detect match configuration for test selection
 	 */
 	private detectMatch(
 		config: Record<string, unknown>,
@@ -358,51 +406,21 @@ export class AvaScanner extends BaseScanner {
 	): void {
 		if (config.match && Array.isArray(config.match)) {
 			const matches = config.match as string[];
-			if (matches.length > 0) {
+			const includePatterns = matches.filter((m) => !m.startsWith('!'));
+			const excludePatterns = matches.filter((m) => m.startsWith('!'));
+
+			if (includePatterns.length > 0) {
 				recommendations.push({
 					category: Category.Ava,
-					rule: `Configure test matching patterns: ${matches.join(', ')}.`,
+					rule: `Tests must match patterns: ${includePatterns.join(', ')}. Include these keywords in test names to ensure they run.`,
 				});
 			}
-		}
-	}
 
-	/**
-	 * Detect verbose mode
-	 */
-	private detectVerbose(
-		config: Record<string, unknown>,
-		recommendations: AiRule[],
-	): void {
-		if (config.verbose === true) {
-			recommendations.push({
-				category: Category.Ava,
-				rule: 'Enable verbose test output in AVA.',
-			});
-		}
-	}
-
-	/**
-	 * Detect watch mode configuration
-	 */
-	private detectWatchMode(
-		config: Record<string, unknown>,
-		recommendations: AiRule[],
-	): void {
-		if (config.watchMode && typeof config.watchMode === 'object') {
-			const watchConfig = config.watchMode as Record<string, unknown>;
-
-			if (
-				watchConfig.ignoreChanges &&
-				Array.isArray(watchConfig.ignoreChanges)
-			) {
-				const ignored = watchConfig.ignoreChanges as string[];
-				if (ignored.length > 0) {
-					recommendations.push({
-						category: Category.Ava,
-						rule: `Configure watch mode to ignore: ${ignored.join(', ')}.`,
-					});
-				}
+			if (excludePatterns.length > 0) {
+				recommendations.push({
+					category: Category.Ava,
+					rule: `Avoid these patterns in test names: ${excludePatterns.map((p) => p.slice(1)).join(', ')}. Tests matching these patterns will be skipped.`,
+				});
 			}
 		}
 	}
