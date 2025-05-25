@@ -1,5 +1,12 @@
 # psst-ai
 
+## 1.3.0
+
+### Minor Changes
+
+- 2725852: TailwindScanner: Analyzes Tailwind CSS configuration and usage patterns including config customization, plugin usage, theme extensions, and dark mode setup
+- 137b70c: [SCANNER] ZustandScanner - Add Zustand state management scanner with comprehensive pattern detection for stores, middleware, TypeScript integration, and async operations
+
 ## 1.2.0
 
 ### Minor Changes
