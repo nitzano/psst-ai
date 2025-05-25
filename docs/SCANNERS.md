@@ -4,16 +4,8 @@
   - [Frameworks](#frameworks)
   - [Linters](#linters)
   - [Test Frameworks](#test-frameworks)
-- [Coming Soon](#coming-soon)
-  - [Package Management](#package-management-1)
-  - [Node.js Environment](#nodejs-environment-1)
-  - [Frameworks](#frameworks-1)
-  - [Linters](#linters-1)
-  - [Test Frameworks](#test-frameworks-1)
-  - [Build Tools](#build-tools)
   - [Database](#database)
-  - [Security](#security)
-  - [Accessibility](#accessibility)
+- [Coming Soon](#coming-soon)
 
 
 Total Scanners: 12
@@ -74,75 +66,33 @@ Total Scanners: 12
 
 # Coming Soon
 
-## Package Management
-
-   
-1. **MonorepoScanner** - Identifies monorepo structures and tools (Lerna, Nx, pnpm workspaces, etc.).
-   - Examples: `examples/monorepo`
-
-## Node.js Environment
-
-1. **NodeRuntimeScanner** - Analyzes runtime settings and flags used in Node.js projects.
-   - Examples: `examples/node-runtime`
-   
-2. **TypeScriptConfigScanner** - Identifies TypeScript configuration settings.
-   - Examples: `examples/typescript-config`
-
-## Frameworks
-
-
-1. **SvelteScanner** - Analyzes Svelte configuration and usage patterns.
-   - Examples: `examples/svelte`
-
-## Linters
-
-1. **ESLintScanner** - Identifies ESLint configuration and rule patterns.
-   - Examples: `examples/eslint`
-   
-2. **StylelintScanner** - Detects Stylelint configuration for CSS/SCSS.
-   - Examples: `examples/stylelint`
-
-## Test Frameworks
-
-1. **VitestScanner** - Detects Vitest configuration and usage patterns.
-   - Examples: `examples/vitest`
-
-2. **TestCoverageScanner** - Identifies test coverage settings and configurations across different testing frameworks.
-
-## Build Tools
-
-1. **WebpackScanner** - Analyzes Webpack configuration patterns in projects.
-   - Examples: `examples/webpack`
-
-2. **ViteScanner** - Identifies Vite configuration and build settings.
-   - Examples: `examples/vite`
-   
-3. **TurborepoScanner** - Identifies Turborepo configuration for monorepos.
-   - Examples: `examples/turborepo`
-
-4. **EsbuildScanner** - Detects ESBuild configurations and optimizations.
-
-## Database
-
-1. **OrmScanner** - Identifies which ORM libraries are used in the project (Prisma, TypeORM, Sequelize, etc.).
-   - Examples: `examples/prisma`, `examples/typeorm`
-
-2. **DatabaseTypeScanner** - Detects which database types are targeted in the project.
-   - Supported databases: PostgreSQL, MySQL, MongoDB, SQLite, etc.
-
-## Security
-
-1. **DependencySecurityScanner** - Identifies security scanning tools used for dependencies.
-   - Examples: `examples/dependency-scanner`
-
-2. **AuthenticationScanner** - Detects authentication libraries and patterns used.
-   - Supported: Auth.js, NextAuth, Firebase Auth, etc.
-
-
-## Accessibility
-
-1. **A11yScanner** - Identifies accessibility scanning tools and configurations.
-   - Examples: `examples/a11y-tools`
-   
-2. **ComponentA11yScanner** - Detects component-level accessibility patterns and issues.
-   - Examples: `examples/component-a11y` 
+| Scanner Name | Description | Category |
+|-------------|-------------|----------|
+| MonorepoScanner | Identifies monorepo structures and tools (Lerna, Nx, pnpm workspaces, etc.) | Package Management |
+| NodeRuntimeScanner | Analyzes runtime settings and flags used in Node.js projects | Node.js Environment |
+| TypeScriptConfigScanner | Identifies TypeScript configuration settings | Node.js Environment |
+| SvelteScanner | Analyzes Svelte configuration and usage patterns | Frameworks |
+| ESLintScanner | Identifies ESLint configuration and rule patterns | Linters |
+| StylelintScanner | Detects Stylelint configuration for CSS/SCSS | Linters |
+| VitestScanner | Detects Vitest configuration and usage patterns | Test Frameworks |
+| TestCoverageScanner | Identifies test coverage settings and configurations across different testing frameworks | Test Frameworks |
+| WebpackScanner | Analyzes Webpack configuration patterns in projects | Build Tools |
+| ViteScanner | Identifies Vite configuration and build settings | Build Tools |
+| TurborepoScanner | Identifies Turborepo configuration for monorepos | Build Tools |
+| EsbuildScanner | Detects ESBuild configurations and optimizations | Build Tools |
+| OrmScanner | Identifies which ORM libraries are used in the project (Prisma, TypeORM, Sequelize, etc.) | Database |
+| DatabaseTypeScanner | Detects which database types are targeted in the project | Database |
+| DependencySecurityScanner | Identifies security scanning tools used for dependencies | Security |
+| AuthenticationScanner | Detects authentication libraries and patterns used | Security |
+| A11yScanner | Identifies accessibility scanning tools and configurations | Accessibility |
+| ComponentA11yScanner | Detects component-level accessibility patterns and issues | Accessibility |
+| DockerScanner | Analyzes Docker configuration and container patterns | DevOps |
+| KubernetesScanner | Detects Kubernetes manifests and deployment configurations | DevOps |
+| CIScanner | Identifies CI/CD pipeline configurations (GitHub Actions, Jenkins, etc.) | DevOps |
+| EnvironmentScanner | Analyzes environment variable usage and configuration patterns | Configuration |
+| GraphQLScanner | Detects GraphQL schema and resolver patterns | API |
+| RestApiScanner | Identifies REST API patterns and OpenAPI specifications | API |
+| StateManagementScanner | Analyzes state management libraries (Redux, Zustand, Pinia, etc.) | Frameworks |
+| UILibraryScanner | Detects UI component libraries (Material-UI, Ant Design, Chakra UI, etc.) | UI/UX |
+| LocalizationScanner | Identifies internationalization and localization patterns | Configuration |
+| PerformanceScanner | Analyzes performance monitoring and optimization tools | Monitoring | 
