@@ -16,10 +16,12 @@ Automatically extract coding conventions and preferences from your project and g
 
 - 🔍 **Zero Configuration**: Just run the CLI and it automatically detects your project's setup
 - 📝 **Generates Instructions**: Creates a markdown file with AI-ready instructions
-- 📦 **Detects Package Managers**: Identifies whether you use npm, yarn, or pnpm
-- 🧹 **Recognizes Linting Tools**: Detects ESLint, XO, and other linting configurations
-- 🧪 **Identifies Testing Frameworks**: Recognizes Jest, Vitest, and other testing setups
-- And more...
+- 🚀 **Editor Integration**: Works seamlessly with GitHub Copilot, Cursor, Windsurf, and other AI assistants
+- 🎯 **Deep Project Analysis**: Detects 14+ different aspects including frameworks (Next.js, Vue), testing tools (Jest, AVA), databases (Prisma), UI libraries (Tailwind), and state management (Zustand)
+- 🔧 **Smart Configuration Detection**: Automatically identifies project conventions from config files, package.json, and code patterns
+- 📁 **Multi-Language Support**: Works with JavaScript, TypeScript, and detects specific build tools, linters, and development workflows
+
+
 
 ## 💡 Why Use psst-ai?
 
