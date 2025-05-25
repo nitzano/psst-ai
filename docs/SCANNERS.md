@@ -1,10 +1,8 @@
-- [List of scanners](#list-of-scanners)
-- [Coming Soon](#coming-soon)
+
 
 
 Total Scanners: 13
 
-# List of scanners
 
 | Scanner Name | Description | Category | Examples |
 |-------------|-------------|----------|----------|
