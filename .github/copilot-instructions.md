@@ -28,12 +28,15 @@
 - When adding a new category, update categoryDisplayTitles in src/utils/category-formatter.ts
 - focus on extracting recommendations based on the configuration files related to the scanner directly.
 - There should a method in the scanner that returns specific rule or rules.
-- If there are 3rd party which can be use to be used to extract information by the scanners, use them.
+- If there are 3rd party which can be use to be used to extract information by the scanners, install them with pnpm
 - Place similar scanners in a folder
 - Update docs/SCANNERS.md
   - with the new scanner information.
   - the number of scanners should be only implemented scanners, not the ones that are coming soon.
-- Create an example codebase for the scanner in the `examples` directory (if possible). don't put too much effort in the example codebase, just enough to demonstrate the scanner's functionality.
+- Examples
+  - Create an example codebase for the scanner in the `examples` directory (if possible).
+  - don't put too much effort in the example codebase, just enough to demonstrate the scanner's functionality.
+  - If there is a specific cli builder for the scanner, use it to create the example codebase.r
 
 ## Examples
 
