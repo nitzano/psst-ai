@@ -68,21 +68,32 @@ That's it! The tool will:
 
 ## 📄 Generated Instructions Format
 
-After running the tool, you'll see instructions printed to your terminal based on your project's conventions:
+After running the tool, you'll see instructions printed to your terminal based on your project's conventions. The output is organized by category and provides specific, actionable guidance:
 
 ```markdown
-## Package Manager
-Use pnpm as the package manager.
+## Linting
+- Use eslint for linting.
+
+## Next.js
+- Use Next.js as the React framework.
+- Use the App Router directory structure in Next.js.
+- Use React strict mode in Next.js.
 
 ## Node Version
-Use the nodejs version specified in the .nvmrc file.
+- Use the nodejs version specified in the .nvmrc file (v22.15.1).
 
-## Linting
-Use xo for linting.
+## Package Manager
+- Use pnpm as the package manager.
+
+## Tailwind CSS
+- Use Tailwind CSS utility classes for styling. Keep custom CSS minimal and prefer utility-first approach.
+- Using @tailwindcss/forms plugin. This provides better default styling for form elements.
 
 ## Testing
-Use vitest testing framework.
+- Use vitest testing framework.
 ```
+
+The instructions are automatically generated based on what psst-ai detects in your project - configuration files, dependencies, file patterns, and coding conventions.
 
 ## 🧩 What's Detected?
 
