@@ -15,6 +15,7 @@ const categoryDisplayTitles: Record<Category, string> = {
 	[Category.Ava]: 'AVA',
 	[Category.Jest]: 'Jest',
 	[Category.Vue]: 'Vue.js',
+	[Category.Prisma]: 'Prisma',
 };
 
 /**

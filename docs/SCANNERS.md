@@ -16,7 +16,7 @@
   - [Accessibility](#accessibility)
 
 
-Total Scanners: 11
+Total Scanners: 12
 
 # List of scanners
 
@@ -66,6 +66,11 @@ Total Scanners: 11
 
 3. **JestScanner** - Analyzes Jest configuration patterns in projects including test environment, setup files, transforms, coverage, and module mapping.
    - Examples: `examples/jest`
+
+## Database
+
+1. **PrismaScanner** - Analyzes Prisma schema and configuration patterns including database providers, relations, enums, indexes, and migration settings.
+   - Examples: `examples/prisma`
 
 # Coming Soon
 
@@ -124,9 +129,6 @@ Total Scanners: 11
 
 2. **DatabaseTypeScanner** - Detects which database types are targeted in the project.
    - Supported databases: PostgreSQL, MySQL, MongoDB, SQLite, etc.
-
-3. **PrismaScanner** - Analyzes Prisma schema and configuration.
-   - Examples: `examples/prisma`
 
 ## Security
 

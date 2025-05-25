@@ -2,6 +2,7 @@ import path from 'node:path';
 import {MarkdownBuilder} from '../builders/markdown-builder.js';
 import {logger} from '../services/logger.js';
 import type {AiRule} from '../types.js';
+import {PrismaScanner} from './database/index.js';
 import {NextjsScanner, VueScanner} from './frameworks/index.js';
 import {LintingScanner, XoScanner} from './linters/index.js';
 import {PrettierScanner} from './linters/prettier-scanner.js';
@@ -78,6 +79,7 @@ export class CodebaseScanner {
 			new PrettierScanner(this.pathToScan),
 			new NextjsScanner(this.pathToScan),
 			new VueScanner(this.pathToScan),
+			new PrismaScanner(this.pathToScan),
 			// Add more scanners here as they are implemented
 		];
 
