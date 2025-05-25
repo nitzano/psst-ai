@@ -25,6 +25,8 @@
 - If there are 3rd party which can be use to be used to extract information by the scanners, use them.
 - Place similar scanners in a folder
 - Update docs/SCANNERS.md with the new scanner information.
+- Create an example codebase for the scanner in the `examples` directory (if possible). don't put too much effort in the example codebase, just enough to demonstrate the scanner's functionality.
+
 
 ## Examples
 
