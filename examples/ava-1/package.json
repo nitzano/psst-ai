@@ -1,0 +1,44 @@
+{
+  "name": "ava-1",
+  "version": "1.0.0",
+  "description": "Example project with AVA configuration in package.json",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava",
+    "test:watch": "ava --watch",
+    "test:verbose": "ava --verbose"
+  },
+  "devDependencies": {
+    "ava": "^6.0.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "ava": {
+    "files": [
+      "tests/**/*.test.js",
+      "!tests/fixtures/**/*"
+    ],
+    "concurrency": 4,
+    "timeout": "30s",
+    "verbose": true,
+    "require": [
+      "./test-setup.js"
+    ],
+    "match": [
+      "*integration*",
+      "!*unit*"
+    ],
+    "typescript": {
+      "rewritePaths": {
+        "src/": "dist/"
+      },
+      "compile": "tsc"
+    },
+    "watchMode": {
+      "ignoreChanges": [
+        "dist/**/*",
+        "coverage/**/*"
+      ]
+    }
+  }
+}

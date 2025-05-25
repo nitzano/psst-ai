@@ -1,0 +1,16 @@
+{
+  "name": "ava-2",
+  "version": "1.0.0",
+  "description": "Example project with AVA configuration in external config file",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava",
+    "test:serial": "ava --serial",
+    "test:match": "ava --match='*unit*'"
+  },
+  "devDependencies": {
+    "ava": "^6.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0"
+  }
+}

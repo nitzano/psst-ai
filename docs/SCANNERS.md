@@ -16,7 +16,7 @@
   - [Accessibility](#accessibility)
 
 
-Total Scanners: 24
+Total Scanners: 25
 
 # List of scanners
 
@@ -52,6 +52,9 @@ Total Scanners: 24
 
 1. **TestingFrameworkScanner** - Identifies testing frameworks used in projects.
    - Supported frameworks: jest, mocha, vitest, ava, jasmine, karma, tape, qunit, cypress, playwright, and more
+
+2. **AvaScanner** - Analyzes AVA test runner configuration patterns including file patterns, concurrency, timeout, TypeScript support, and Babel integration.
+   - Examples: `examples/ava-1`, `examples/ava-2`
 
 # Coming Soon
 
