@@ -7,7 +7,7 @@ import {NextjsScanner} from './frameworks/nextjs-scanner.js';
 import {LintingScanner, XoScanner} from './linters/index.js';
 import {NodeVersionScanner} from './node-version-scanner.js';
 import {PackageManagerScanner} from './package-manager-scanner.js';
-import {PrettierScanner} from './prettier-scanner.js';
+import {PrettierScanner} from './linters/prettier-scanner.js';
 
 /**
  * Scanner class to handle scanning a directory

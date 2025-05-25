@@ -12,44 +12,36 @@ Total Scanners: 8
 
 ## Package Management
 
-1. **PackageManagerScanner** - Detects which package manager is used in the project (npm, yarn, pnpm) by checking lock files and package.json configuration.
-   - Location: `src/scanners/package-manager-scanner.ts`
+1. **PackageManagerScanner** - Detects which package manager is used in the project (npm, yarn, pnpm).
    - Examples: Various project examples using different package managers
 
 ## Node.js Environment
 
-1. **NodeVersionScanner** - Detects which Node.js version is specified in the project by checking both .nvmrc files and package.json engines.
-   - Location: `src/scanners/node-version-scanner.ts`
+1. **NodeVersionScanner** - Identifies Node.js version specifications in the project.
    
-2. **NvmrcScanner** - Specifically checks for .nvmrc file presence and extracts Node.js version information.
-   - Location: `src/scanners/nvmrc-scanner.ts`
+2. **NvmrcScanner** - Extracts Node.js version information from .nvmrc files.
 
 ## Frameworks
 
-1. **NextjsScanner** - Detects if Next.js is used and extracts configuration rules including:
+1. **NextjsScanner** - Analyzes Next.js configuration patterns in projects:
    - App Router vs Pages Router usage
-   - React strict mode configuration
-   - Internationalization settings
-   - Standalone output mode
-   - Location: `src/scanners/frameworks/nextjs-scanner.ts`
+   - React strict mode settings
+   - Internationalization configuration
+   - Output mode settings
    - Examples: `examples/nextjs`, `examples/nextjs-app-router`, `examples/nextjs-pages`, `examples/nextjs-pages-router`,
      `examples/next-app-router`, `examples/next-pages-router`
 
 ## Linters
 
-1. **XoScanner** - Detects XO linting configuration including indentation settings, semicolon usage, and prettier integration.
-   - Location: `src/scanners/linters/xo-scanner.ts`
+1. **XoScanner** - Identifies XO linting configuration patterns including indentation, semicolons, and prettier integration.
    - Examples: `examples/xo-1`, `examples/xo-2`
    
-2. **PrettierScanner** - Detects Prettier configuration in a project by checking for config files and package.json settings.
-   - Location: `src/scanners/prettier-scanner.ts`
+2. **PrettierScanner** - Identifies Prettier configuration in projects.
    - Examples: `examples/prettier`
    
-3. **LintingScanner** - General scanner to detect which linting tool is used in the project.
-   - Location: `src/scanners/linters/linting-scanner.ts`
+3. **LintingScanner** - Determines which linting tools are used in projects.
 
 ## Test Frameworks
 
-1. **TestingFrameworkScanner** - Detects which testing framework is used in the project by checking configuration files, dependencies, and test scripts.
-   - Supported frameworks: jest, mocha, vitest, ava, jasmine, karma, tape, qunit, cypress, playwright, and more
-   - Location: `src/scanners/base/testers/testing-framework-scanner.ts` 
+1. **TestingFrameworkScanner** - Identifies testing frameworks used in projects.
+   - Supported frameworks: jest, mocha, vitest, ava, jasmine, karma, tape, qunit, cypress, playwright, and more 
