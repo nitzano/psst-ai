@@ -16,7 +16,7 @@
   - [Accessibility](#accessibility)
 
 
-Total Scanners: 10
+Total Scanners: 11
 
 # List of scanners
 
@@ -64,6 +64,9 @@ Total Scanners: 10
 2. **AvaScanner** - Analyzes AVA test runner configuration patterns including file patterns, concurrency, timeout, TypeScript support, and Babel integration.
    - Examples: `examples/ava-1`, `examples/ava-2`
 
+3. **JestScanner** - Analyzes Jest configuration patterns in projects including test environment, setup files, transforms, coverage, and module mapping.
+   - Examples: `examples/jest`
+
 # Coming Soon
 
 ## Package Management
@@ -96,13 +99,10 @@ Total Scanners: 10
 
 ## Test Frameworks
 
-1. **JestScanner** - Analyzes Jest configuration patterns in projects.
-   - Examples: `examples/jest`
-   
-2. **VitestScanner** - Detects Vitest configuration and usage patterns.
+1. **VitestScanner** - Detects Vitest configuration and usage patterns.
    - Examples: `examples/vitest`
 
-3. **TestCoverageScanner** - Identifies test coverage settings and configurations across different testing frameworks.
+2. **TestCoverageScanner** - Identifies test coverage settings and configurations across different testing frameworks.
 
 ## Build Tools
 

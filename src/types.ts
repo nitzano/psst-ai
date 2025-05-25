@@ -8,6 +8,7 @@ export enum Category {
 	Prettier = 'prettier',
 	NextJs = 'nextjs',
 	Ava = 'ava',
+	Jest = 'jest',
 	Vue = 'vue',
 }
 

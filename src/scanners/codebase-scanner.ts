@@ -7,7 +7,11 @@ import {LintingScanner, XoScanner} from './linters/index.js';
 import {PrettierScanner} from './linters/prettier-scanner.js';
 import {NodeVersionScanner} from './node/node-version-scanner.js';
 import {PackageManagerScanner} from './node/package-manager-scanner.js';
-import {TestingFrameworkScanner, AvaScanner} from './test/index.js';
+import {
+	TestingFrameworkScanner,
+	AvaScanner,
+	JestScanner,
+} from './test/index.js';
 
 /**
  * Scanner class to handle scanning a directory
@@ -70,6 +74,7 @@ export class CodebaseScanner {
 			new XoScanner(this.pathToScan),
 			new TestingFrameworkScanner(this.pathToScan),
 			new AvaScanner(this.pathToScan),
+			new JestScanner(this.pathToScan),
 			new PrettierScanner(this.pathToScan),
 			new NextjsScanner(this.pathToScan),
 			new VueScanner(this.pathToScan),
