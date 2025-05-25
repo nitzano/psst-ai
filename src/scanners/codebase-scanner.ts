@@ -8,6 +8,7 @@ import {LintingScanner, XoScanner} from './linters/index.js';
 import {PrettierScanner} from './linters/prettier-scanner.js';
 import {NodeVersionScanner} from './node/node-version-scanner.js';
 import {PackageManagerScanner} from './node/package-manager-scanner.js';
+import {ZustandScanner} from './state/index.js';
 import {
 	TestingFrameworkScanner,
 	AvaScanner,
@@ -82,6 +83,7 @@ export class CodebaseScanner {
 			new VueScanner(this.pathToScan),
 			new PrismaScanner(this.pathToScan),
 			new TailwindScanner(this.pathToScan),
+			new ZustandScanner(this.pathToScan),
 			// Add more scanners here as they are implemented
 		];
 

@@ -1,0 +1,12 @@
+{
+  "name": "zustand-vanilla-example",
+  "version": "1.0.0",
+  "description": "Example project showing minimal Zustand usage",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node src/index.js"
+  },
+  "dependencies": {
+    "zustand": "^4.4.7"
+  }
+}

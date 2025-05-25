@@ -5,7 +5,7 @@
 
 This document provides an overview of all available scanners in the PSST AI project and their capabilities.
 
-Total Scanners: 13
+Total Scanners: 14
 
 
 | Scanner Name | Description | Category | Examples |
@@ -23,6 +23,7 @@ Total Scanners: 13
 | JestScanner | Analyzes Jest configuration patterns in projects including test environment, setup files, transforms, coverage, and module mapping | Test Frameworks | `examples/jest` |
 | PrismaScanner | Analyzes Prisma schema and configuration patterns including database providers, relations, enums, indexes, and migration settings | Database | `examples/prisma` |
 | TailwindScanner | Analyzes Tailwind CSS configuration and usage patterns including config customization, plugin usage, theme extensions, and dark mode setup | UI Libraries | `examples/tailwind-1`, `examples/tailwind-2` |
+| ZustandScanner | Detects Zustand store patterns and configurations (store creation, persistence, middleware) | State Management | `examples/zustand-1`, `examples/zustand-2` |
 
 # Coming Soon
 
@@ -56,7 +57,6 @@ Total Scanners: 13
 | GraphQLScanner | Detects GraphQL schema and resolver patterns (SDL definitions, code-first vs schema-first, federation) | API |
 | RestApiScanner | Identifies REST API patterns and OpenAPI specifications (endpoint structure, validation, documentation) | API |
 | ReduxScanner | Analyzes Redux state management patterns (store configuration, middleware, toolkit usage, DevTools) | State Management |
-| ZustandScanner | Detects Zustand store patterns and configurations (store creation, persistence, middleware) | State Management |
 | PiniaScanner | Identifies Pinia store patterns for Vue applications (store definition, composition API usage, plugins) | State Management |
 | MaterialUIScanner | Analyzes Material-UI/MUI usage and theming patterns (theme customization, component overrides, styling approaches) | UI Libraries |
 | AntDesignScanner | Detects Ant Design configuration and customization patterns (theme variables, component modifications, locale) | UI Libraries |

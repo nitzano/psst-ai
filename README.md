@@ -21,7 +21,6 @@ Automatically extract coding conventions and preferences from your project and g
 - 🧪 **Identifies Testing Frameworks**: Recognizes Jest, Vitest, and other testing setups
 - And more...
 
-
 ## 💡 Why Use psst-ai?
 
 - **No More Repetition**: Stop typing the same instructions every time you chat with AI
