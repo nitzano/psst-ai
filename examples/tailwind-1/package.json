@@ -1,0 +1,15 @@
+{
+  "name": "tailwind-example-1",
+  "version": "1.0.0",
+  "description": "Example project with Tailwind CSS configuration",
+  "main": "index.js",
+  "scripts": {
+    "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+    "build:prod": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.10"
+  }
+}

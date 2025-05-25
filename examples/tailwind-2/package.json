@@ -1,0 +1,12 @@
+{
+  "name": "tailwind-example-2",
+  "version": "1.0.0",
+  "description": "Simple Tailwind CSS project with minimal configuration",
+  "main": "index.js",
+  "scripts": {
+    "build": "tailwindcss -i ./src/input.css -o ./dist/output.css"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
+}

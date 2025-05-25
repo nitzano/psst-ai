@@ -2,7 +2,7 @@
 - [Coming Soon](#coming-soon)
 
 
-Total Scanners: 12
+Total Scanners: 13
 
 # List of scanners
 
@@ -20,6 +20,7 @@ Total Scanners: 12
 | AvaScanner | Analyzes AVA test runner configuration patterns including file patterns, concurrency, timeout, TypeScript support, and Babel integration | Test Frameworks | `examples/ava-1`, `examples/ava-2` |
 | JestScanner | Analyzes Jest configuration patterns in projects including test environment, setup files, transforms, coverage, and module mapping | Test Frameworks | `examples/jest` |
 | PrismaScanner | Analyzes Prisma schema and configuration patterns including database providers, relations, enums, indexes, and migration settings | Database | `examples/prisma` |
+| TailwindScanner | Analyzes Tailwind CSS configuration and usage patterns including config customization, plugin usage, theme extensions, and dark mode setup | UI Libraries | `examples/tailwind-1`, `examples/tailwind-2` |
 
 # Coming Soon
 
@@ -58,7 +59,6 @@ Total Scanners: 12
 | MaterialUIScanner | Analyzes Material-UI/MUI usage and theming patterns (theme customization, component overrides, styling approaches) | UI Libraries |
 | AntDesignScanner | Detects Ant Design configuration and customization patterns (theme variables, component modifications, locale) | UI Libraries |
 | ChakraUIScanner | Identifies Chakra UI setup and theming (custom themes, component variants, responsive design patterns) | UI Libraries |
-| TailwindCSSScanner | Analyzes Tailwind CSS configuration and usage patterns (config customization, plugin usage, purging) | UI Libraries |
 | BootstrapScanner | Detects Bootstrap usage and customization (SCSS variables, component overrides, utility classes) | UI Libraries |
 | ReactI18nScanner | Identifies React internationalization patterns (react-i18next configuration, namespace usage, pluralization) | Localization |
 | VueI18nScanner | Detects Vue i18n setup and usage patterns (locale files, lazy loading, composition API integration) | Localization |

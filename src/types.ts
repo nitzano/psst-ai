@@ -11,6 +11,7 @@ export enum Category {
 	Jest = 'jest',
 	Vue = 'vue',
 	Prisma = 'prisma',
+	Tailwind = 'tailwind',
 }
 
 export type AiRule = {

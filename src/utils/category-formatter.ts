@@ -16,6 +16,7 @@ const categoryDisplayTitles: Record<Category, string> = {
 	[Category.Jest]: 'Jest',
 	[Category.Vue]: 'Vue.js',
 	[Category.Prisma]: 'Prisma',
+	[Category.Tailwind]: 'Tailwind CSS',
 };
 
 /**

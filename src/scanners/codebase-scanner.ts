@@ -13,6 +13,7 @@ import {
 	AvaScanner,
 	JestScanner,
 } from './test/index.js';
+import {TailwindScanner} from './ui/index.js';
 
 /**
  * Scanner class to handle scanning a directory
@@ -80,6 +81,7 @@ export class CodebaseScanner {
 			new NextjsScanner(this.pathToScan),
 			new VueScanner(this.pathToScan),
 			new PrismaScanner(this.pathToScan),
+			new TailwindScanner(this.pathToScan),
 			// Add more scanners here as they are implemented
 		];
 
