@@ -141,10 +141,4 @@ npx psst-ai -f ./.windsurf/ai-instructions.md
 ## 🧩 What's Detected?
 
 Currently, psst-ai can detect:
-
-| Category | Examples |
-| -------- | -------- |
-| Package Managers | npm, yarn, pnpm |
-| Node.js Versions | From .nvmrc file |
-| Linting Tools | ESLint, XO, StandardJS |
-| Testing Frameworks | Jest, Vitest, Mocha |
+See [our scanners documentation](./docs/SCANNERS.md) for a complete list of everything psst-ai can detect.
