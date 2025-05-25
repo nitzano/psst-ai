@@ -19,7 +19,7 @@ export {MarkdownBuilder as GithubCopilotOutputBuilder} from './builders/markdown
 export {BaseScanner} from './scanners/base/base-scanner.js';
 export {CodebaseScanner as Scanner} from './scanners/codebase-scanner.js';
 export {LintingScanner} from './scanners/linters/linting-scanner.js';
-export {NodeVersionScanner} from './scanners/node-version-scanner.js';
+
 export {PackageManagerScanner} from './scanners/node/package-manager-scanner.js';
 
 // Export services
