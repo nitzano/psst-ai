@@ -10,7 +10,7 @@ Total Scanners: 13
 
 | Scanner Name | Description | Category | Examples |
 |-------------|-------------|----------|----------|
-| PackageManagerScanner | Detects which package manager is used in the project (npm, yarn, pnpm) | Package Management | Various project examples using different package managers |
+| PackageManagerScanner | Detects which package manager is used in the project (npm, yarn, pnpm) | Package Management | - |
 | NodeVersionScanner | Identifies Node.js version specifications in the project | Node.js Environment | - |
 | NvmrcScanner | Extracts Node.js version information from .nvmrc files | Node.js Environment | - |
 | NextjsScanner | Analyzes Next.js configuration patterns in projects (App Router vs Pages Router usage, React strict mode settings, Internationalization configuration, Output mode settings) | Frameworks | - |
