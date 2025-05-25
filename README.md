@@ -15,12 +15,12 @@ Automatically extract coding conventions and preferences from your project and g
 ## 🌟 Features
 
 - 🔍 **Zero Configuration**: Just run the CLI and it automatically detects your project's setup
+- 📝 **Generates Instructions**: Creates a markdown file with AI-ready instructions
 - 📦 **Detects Package Managers**: Identifies whether you use npm, yarn, or pnpm
-- 🔢 **Finds Node Versions**: Extracts Node.js version requirements from your .nvmrc file
 - 🧹 **Recognizes Linting Tools**: Detects ESLint, XO, and other linting configurations
 - 🧪 **Identifies Testing Frameworks**: Recognizes Jest, Vitest, and other testing setups
-- 📝 **Generates Instructions**: Creates a markdown file with AI-ready instructions
 - And more...
+
 
 ## 💡 Why Use psst-ai?
 
