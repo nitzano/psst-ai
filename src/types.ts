@@ -13,6 +13,7 @@ export enum Category {
 	Prisma = 'prisma',
 	Tailwind = 'tailwind',
 	Zustand = 'zustand',
+	Go = 'go',
 }
 
 export type AiRule = {

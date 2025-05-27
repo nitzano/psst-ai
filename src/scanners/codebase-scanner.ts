@@ -4,6 +4,7 @@ import {logger} from '../services/logger.js';
 import type {AiRule} from '../types.js';
 import {PrismaScanner} from './database/index.js';
 import {NextjsScanner, VueScanner} from './frameworks/index.js';
+import {GoVersionScanner} from './go/index.js';
 import {LintingScanner, XoScanner} from './linters/index.js';
 import {PrettierScanner} from './linters/prettier-scanner.js';
 import {NodeVersionScanner} from './node/node-version-scanner.js';
@@ -73,6 +74,7 @@ export class CodebaseScanner {
 		const scanners = [
 			new PackageManagerScanner(this.pathToScan),
 			new NodeVersionScanner(this.pathToScan),
+			new GoVersionScanner(this.pathToScan),
 			new LintingScanner(this.pathToScan),
 			new XoScanner(this.pathToScan),
 			new TestingFrameworkScanner(this.pathToScan),

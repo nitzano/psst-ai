@@ -5,7 +5,7 @@
 
 This document provides an overview of all available scanners in the PSST AI project and their capabilities.
 
-Total Scanners: 14
+Total Scanners: 15
 
 
 | Scanner Name | Description | Category | Examples |
@@ -24,6 +24,7 @@ Total Scanners: 14
 | PrismaScanner | Analyzes Prisma schema and configuration patterns including database providers, relations, enums, indexes, and migration settings | Database | `examples/prisma` |
 | TailwindScanner | Analyzes Tailwind CSS configuration and usage patterns including config customization, plugin usage, theme extensions, and dark mode setup | UI Libraries | `examples/tailwind-1`, `examples/tailwind-2` |
 | ZustandScanner | Detects Zustand store patterns and configurations (store creation, persistence, middleware) | State Management | `examples/zustand-1`, `examples/zustand-2` |
+| GoVersionScanner | Detects Go version requirements and build constraints (go.mod version, build tags) | Go Environment | `examples/go-1` |
 
 # Coming Soon
 
@@ -65,7 +66,6 @@ Total Scanners: 14
 | DjangoScanner | Analyzes Django project structure and configuration (settings, models, views, URL patterns, middleware) | Python Frameworks |
 | PytestScanner | Identifies pytest testing configuration and patterns (conftest.py, fixtures, markers, plugins) | Python Testing |
 | GoModScanner | Analyzes Go module configuration and dependency management (go.mod, go.sum, module versioning) | Go Environment |
-| GoVersionScanner | Detects Go version requirements and build constraints (go.mod version, build tags) | Go Environment |
 | GinScanner | Identifies Gin web framework patterns (routing, middleware, handlers, templates) | Go Frameworks |
 | GoTestScanner | Analyzes Go testing patterns (test files, benchmarks, examples, table-driven tests) | Go Testing |
 | MaterialUIScanner | Analyzes Material-UI/MUI usage and theming patterns (theme customization, component overrides, styling approaches) | UI Libraries |

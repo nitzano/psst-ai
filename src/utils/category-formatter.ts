@@ -18,6 +18,7 @@ const categoryDisplayTitles: Record<Category, string> = {
 	[Category.Prisma]: 'Prisma',
 	[Category.Tailwind]: 'Tailwind CSS',
 	[Category.Zustand]: 'Zustand',
+	[Category.Go]: 'Go',
 };
 
 /**
